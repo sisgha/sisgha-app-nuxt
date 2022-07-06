@@ -2,7 +2,7 @@
 	<div>
 		<h1>SISGHA - Sistema Gerador de Horário Acadêmico</h1>
 	</div>
-	<!-- <div>
+	<div>
 		<NuxtWelcome />
-	</div> -->
+	</div>
 </template>
