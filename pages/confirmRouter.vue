@@ -1,5 +1,5 @@
 <template>
-  <h1>Rota concluída com sucesso!</h1>
+  <h1>Teste de rota!</h1>
 </template>
 
 <script>

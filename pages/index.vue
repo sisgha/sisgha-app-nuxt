@@ -8,7 +8,7 @@
     <main>
         <div class="container">
             <div class="cadastro">
-                <h2 class="fonte titulo">BEM-VINDO!</h2>
+                <h2 class="fonte titulo">BEM-VINDO</h2>
                 <!-- Matricula -->
                 <input class="fonte inserirMatricula" type="text" placeholder="Matrícula">
 
