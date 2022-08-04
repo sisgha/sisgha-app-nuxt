@@ -17,8 +17,8 @@
                     <input :type="inputType" class="fonte inserirSenha" placeholder="Senha">
                     <!-- Botão de visualizar senha -->
                     <div class="modoDeVisualizarSenha" @click="togglePassword()">
-                        <img class="iconeVisualizarSenha" src="../assets/EyeOn.svg" alt="Mostrar senha" v-if="isPassword">
-                        <img class="iconeEsconderSenha" src="../assets/EyeOff.svg" alt="Esconder senha" v-else>
+                        <img class="iconeVisualizarSenha" src="@/assets/EyeOn.svg" alt="Mostrar senha" v-if="isPassword">
+                        <img class="iconeEsconderSenha" src="@/assets/EyeOff.svg" alt="Esconder senha" v-else>
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
             <!-- Botão de login do aluno -->
             <div class="cartaoDoAluno">
                 <div class="iconeDoAluno">
-                    <img class="iconeDeUsuario" src="../assets/UserIcon.svg" alt="Icone de Usuário">
+                    <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
                 </div>
                 <div class="divider"></div>
                 <div class="descricaoDoCartao">
@@ -46,7 +46,7 @@
 
             <!-- Logo do IFRO -->
             <div class="logoDoIFRO">
-                <img class="logoIFROJipa" src="../assets/LogoIFROJipa.svg" alt="Logotipo do IFRO - Campus Ji-Paraná">
+                <img class="logoIFROJipa" src="@/assets/LogoIFROJipa.svg" alt="Logotipo do IFRO - Campus Ji-Paraná">
             </div>
         </div>
     </main>
