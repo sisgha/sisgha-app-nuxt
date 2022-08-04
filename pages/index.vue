@@ -43,11 +43,6 @@
                     <p class="fonte textoDoCartao">Caso seja um aluno, clique aqui.</p>
                 </div>
             </div>
-
-            <!-- Logo do IFRO -->
-            <div class="logoDoIFRO">
-                <img class="logoIFROJipa" src="@/assets/LogoIFROJipa.svg" alt="Logotipo do IFRO - Campus Ji-Paraná">
-            </div>
         </div>
     </main>
 </template>
@@ -279,18 +274,5 @@ main {
         margin-top: 13px;
         margin-bottom: 13px;
         margin-left: 50px;
-    }
-
-    /* Logo do IFRO */
-    .logoDoIFRO,
-    .logoIFROJipa {
-        display: flex;
-
-        width: 230px;
-        height: 52px;
-
-        position: relative;
-        top: 10px;
-        left: 320px;
     }
 </style>
