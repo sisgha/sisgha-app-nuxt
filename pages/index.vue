@@ -4,49 +4,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Tela de login -->
     <main>
         <div class="container">
-            <div class="cadastro">
-                <h2 class="fonte titulo">BEM-VINDO</h2>
-                <!-- Matricula -->
-                <input class="fonte inserirMatricula" type="text" placeholder="Matrícula">
-
-                <!-- Senha -->
-                <div class="inputDeSenha">
-                    <input :type="inputType" class="fonte inserirSenha" placeholder="Senha">
-                    <!-- Botão de visualizar senha -->
-                    <div class="modoDeVisualizarSenha" @click="togglePassword()">
-                        <img class="iconeVisualizarSenha" src="../assets/EyeOn.svg" alt="Mostrar senha" v-if="isPassword">
-                        <img class="iconeEsconderSenha" src="../assets/EyeOff.svg" alt="Esconder senha" v-else>
+            <div class="conteudo">
+                <!-- Login Professor / DAPE -->
+                <div class="cadastro">
+                    <div class="logo">
+                        <img src="@/assets/SisghaLogo1.svg" alt="SISGHA">
+                    </div>
+                    <!-- Matricula -->
+                    <input class="fonte inserirMatricula" type="text" placeholder="Matrícula">
+    
+                    <!-- Senha -->
+                    <div class="inputDeSenha">
+                        <input :type="inputType" class="fonte inserirSenha" placeholder="Senha">
+                        <!-- Botão de visualizar senha -->
+                        <div class="modoDeVisualizarSenha" @click="togglePassword()">
+                            <img class="iconeVisualizarSenha" src="@/assets/EyeOn.svg" alt="Mostrar senha" v-if="isPassword">
+                            <img class="iconeEsconderSenha" src="@/assets/EyeOff.svg" alt="Esconder senha" v-else>
+                        </div>
+                    </div>
+    
+                    <!-- Botão de login -->
+                    <a href="./curso">
+                        <button class="botaoDeLogin">
+                                <h3 class="fonte">
+                                    Entrar
+                                </h3>
+                        </button>
+                    </a>
+    
+                    <!-- Esqueceu a senha -->
+                    <p class="fonte recuperarSenha">
+                        Esqueceu a senha? <span class="botaoRecuperarSenha">Clique aqui</span>.
+                    </p>
+                </div>
+    
+                <!-- Login Aluno -->
+                <div class="cartaoDoAluno">
+                    <div class="iconeDoAluno">
+                        <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
+                    </div>
+                    <div class="divider"></div>
+                    <div class="descricaoDoCartao">
+                        <p class="fonte textoDoCartao">Caso seja um aluno, clique aqui.</p>
                     </div>
                 </div>
-
-                <!-- Botão de login -->
-                <button class="botaoDeLogin">
-                    <h3 class="fonte">Entrar</h3>
-                </button>
-
-                <!-- Esqueceu a senha -->
-                <p class="fonte recuperarSenha">
-                    Esqueceu a senha? <span class="botaoRecuperarSenha">Clique aqui</span>.
-                </p>
-            </div>
-
-            <!-- Botão de login do aluno -->
-            <div class="cartaoDoAluno">
-                <div class="iconeDoAluno">
-                    <img class="iconeDeUsuario" src="../assets/UserIcon.svg" alt="Icone de Usuário">
-                </div>
-                <div class="divider"></div>
-                <div class="descricaoDoCartao">
-                    <p class="fonte textoDoCartao">Caso seja um aluno, clique aqui.</p>
-                </div>
-            </div>
-
-            <!-- Logo do IFRO -->
-            <div class="logoDoIFRO">
-                <img class="logoIFROJipa" src="../assets/LogoIFROJipa.svg" alt="Logotipo do IFRO - Campus Ji-Paraná">
             </div>
         </div>
     </main>
@@ -85,32 +88,44 @@ main {
     justify-items: center;
 }
 .container {
-    width: auto;
-    height: auto;
-
+    width: 100vw;
+    height: 100vh;
+    
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 /* Definição da fonte */
 .fonte {
         font-family: 'Inter', sans-serif;
 }
 
-/* Caixa de login */
-    .cadastro {
-        display: grid;
-        justify-content: center;
-
-        width: 417px;
-        height: 350px;
-
-        z-index: 1;
-        position: relative;
+/* Cofigurar Conteudo*/
+    .conteudo {
+        display: flex;
+        flex-direction: column;
 
         margin-left: auto;
         margin-right: auto;
-        margin-top: 15%;
-        padding-top: 30px;
+
+        justify-content: center;
+        justify-items: center;
+
+
+
+    }
+
+/* Caixa de login */
+    .cadastro {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        width: 380px;
+        height: 350px;
+
+        padding-top: 10px;
         
         border-radius: 9px;
         box-shadow: 0 0 5px #00000025;
@@ -118,9 +133,26 @@ main {
         background-color: rgb(255, 255, 255);
     }
 
+    /* Logomarca */
+    .logo,
+    .logo img{
+        display: flex;
+
+        width: 200px;
+        height: 70px;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .logo {
+        margin-bottom: 20px;
+    }
+
     /* Matricula e Senha*/
-    .inserirMatricula, .inserirSenha {
+    .inserirMatricula, 
+    .inserirSenha {
         height: 50px;
+        width: 250px;
 
         border-style: none;
         border-radius: 9px;
@@ -133,13 +165,18 @@ main {
         outline: 0;
     }
     .inserirMatricula {
-        width: 250px;
+        margin-bottom: 15px;
     }
-
+    .inputDeSenha {
+        width: 276px;
+    }
+    
     /* Icone de senha */
     .modoDeVisualizarSenha{
         width: 26px;
         height: 18px;
+
+        transform: translate(235px, -50px);
 
         position: relative;
         top: 18px;
@@ -157,22 +194,14 @@ main {
         width: 26px;
         height: 18px;
     }
-    /* Senha Input */
-    .inserirSenha {
-        width: 215px;
-        position: relative;
-        right: 8px;
-    }
-    .inputDeSenha {
-        display: flex;
-        justify-content: center;
-        justify-items: center;
-    }
 
     /* Botao de Login */
     .botaoDeLogin {
-        width: 280px;
+        width: 275px;
         height: 50px;
+
+        margin-top: 5px;
+        margin-bottom: 15px;
 
         border-style: none;
         border-radius: 9px;
@@ -214,28 +243,34 @@ main {
         transition-timing-function: ease-in-out;
         transition: all 500ms;
     }
-        .botaoRecuperarSenha:hover {
+    .botaoRecuperarSenha:hover {
         color: #3AD250;
 
         cursor: pointer;
 
         transition: all 500ms;
     }
+
+    /* Ajustes do Cartao */
+    .inserirMatricula,
+    .inputDeSenha,
+    .cadastro a {
+        margin-left: auto;
+        margin-right: auto;
+    }
     
     /* Cartao do Aluno */
     .cartaoDoAluno {
-        width: 417px;
+        display: flex;
+        width: 380px;
 
-        z-index: 2;
-        position: relative;
-        display: inline-flex;
-
-        margin-top: 50px;
+        margin-top: 40px;
 
         cursor: pointer;
     }
     .iconeDoAluno,
     .descricaoDoCartao {
+        display: flex;
         background-color: #39A048;
 
         transition-timing-function: ease-in-out;
@@ -268,7 +303,7 @@ main {
         background-color: white;
     }
     .descricaoDoCartao {
-        width: 365px;
+        width: 335px;
         height: 45px;
 
         margin-right: 1.5px;
@@ -279,18 +314,5 @@ main {
         margin-top: 13px;
         margin-bottom: 13px;
         margin-left: 50px;
-    }
-
-    /* Logo do IFRO */
-    .logoDoIFRO,
-    .logoIFROJipa {
-        display: flex;
-
-        width: 230px;
-        height: 52px;
-
-        position: relative;
-        top: 10px;
-        left: 320px;
     }
 </style>
