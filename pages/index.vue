@@ -5,7 +5,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     
     <main>
-        <div class="container">
+        <div class="container1">
             <div class="conteudo">
                 <!-- Login Professor / DAPE -->
                 <div class="cadastro">
@@ -87,7 +87,7 @@ main {
     justify-content: center;
     justify-items: center;
 }
-.container {
+.container1 {
     width: 100vw;
     height: 100vh;
     
