@@ -26,7 +26,7 @@
                     </div>
     
                     <!-- Botão de login -->
-                    <a href="./curso">
+                    <a href="">
                         <button class="botaoDeLogin">
                                 <h3 class="fonte">
                                     Entrar
