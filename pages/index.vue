@@ -92,7 +92,7 @@ main {
     height: 100vh;
     
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -284,7 +284,7 @@ main {
     .iconeDoAluno {
         width: 45px;
         height: 45px;
-
+        border-radius: 10px 0 0 10px;
         margin-left: 1.5px;
     }
     .iconeDeUsuario {
@@ -297,7 +297,7 @@ main {
         margin-bottom: 9px;
     }
     .divider {
-        width: 4px;
+        width: 5px;
         height: 45px;
 
         background-color: white;
@@ -305,7 +305,7 @@ main {
     .descricaoDoCartao {
         width: 335px;
         height: 45px;
-
+        border-radius: 0 10px 10px 0;
         margin-right: 1.5px;
     }
     .textoDoCartao {
@@ -314,5 +314,15 @@ main {
         margin-top: 13px;
         margin-bottom: 13px;
         margin-left: 50px;
+    }
+
+    /* LAYOUT MOBILE */
+    @media (max-width: 380px) {
+        .cadastro {
+            width: 90vw;
+        }
+        .cartaoDoAluno {
+            width: 90vw;
+        }
     }
 </style>
