@@ -47,7 +47,7 @@
                     </div>
                     <div class="divider"></div>
                     <div class="descricaoDoCartao">
-                        <p class="fonte textoDoCartao">Caso seja um aluno, clique aqui.</p>
+                        <p class="fonte textoDoCartao">Entrar como aluno.</p>
                     </div>
                 </div>
             </div>
@@ -272,14 +272,17 @@ main {
     .descricaoDoCartao {
         display: flex;
         background-color: #39A048;
+        justify-content: center;
+        justify-items: center;
 
         transition-timing-function: ease-in-out;
         transition: all 500ms;
     }
-    .descricaoDoCartao:hover {
-        background-color: #3AD250;
-
-        transition: all 500ms;
+    .descricaoDoCartao {
+        width: 335px;
+        height: 45px;
+        border-radius: 0 10px 10px 0;
+        margin-right: 1.5px;
     }
     .iconeDoAluno {
         width: 45px;
@@ -302,19 +305,18 @@ main {
 
         background-color: white;
     }
-    .descricaoDoCartao {
-        width: 335px;
-        height: 45px;
-        border-radius: 0 10px 10px 0;
-        margin-right: 1.5px;
-    }
     .textoDoCartao {
         color: white;
-
+        text-align: center;
         margin-top: 13px;
         margin-bottom: 13px;
-        margin-left: 50px;
     }
+    .descricaoDoCartao:hover {
+        background-color: #3AD250;
+
+        transition: all 500ms;
+    }
+    
 
     /* LAYOUT MOBILE */
     @media (max-width: 380px) {
