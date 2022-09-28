@@ -26,7 +26,7 @@
                     </div>
     
                     <!-- Botão de login -->
-                    <a href="">
+                    <a class="loginFuncionario" href="">
                         <button class="botaoDeLogin">
                                 <h3 class="fonte">
                                     Entrar
@@ -41,15 +41,17 @@
                 </div>
     
                 <!-- Login Aluno -->
-                <div class="cartaoDoAluno">
-                    <div class="iconeDoAluno">
-                        <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
+                <a class="loginAluno" href="">
+                    <div class="cartaoDoAluno">
+                        <div class="iconeDoAluno">
+                            <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
+                        </div>
+                        <div class="divider"></div>
+                        <div class="descricaoDoCartao">
+                            <p class="fonte textoDoCartao">Entrar como aluno.</p>
+                        </div>
                     </div>
-                    <div class="divider"></div>
-                    <div class="descricaoDoCartao">
-                        <p class="fonte textoDoCartao">Entrar como aluno.</p>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </main>
@@ -196,6 +198,9 @@ main {
     }
 
     /* Botao de Login */
+    .loginFuncionario {
+        text-decoration: none;
+    }
     .botaoDeLogin {
         width: 275px;
         height: 50px;
@@ -260,6 +265,9 @@ main {
     }
     
     /* Cartao do Aluno */
+    .loginAluno {
+        text-decoration: none;
+    }
     .cartaoDoAluno {
         display: flex;
         width: 380px;
