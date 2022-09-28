@@ -5,7 +5,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     
     <main>
-        <div class="container1">
+        <div class="container">
             <div class="conteudo">
                 <!-- Login Professor / DAPE -->
                 <div class="cadastro">
@@ -26,7 +26,7 @@
                     </div>
     
                     <!-- Botão de login -->
-                    <a href="./curso">
+                    <a class="loginFuncionario" href="">
                         <button class="botaoDeLogin">
                                 <h3 class="fonte">
                                     Entrar
@@ -41,15 +41,17 @@
                 </div>
     
                 <!-- Login Aluno -->
-                <div class="cartaoDoAluno">
-                    <div class="iconeDoAluno">
-                        <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
+                <a class="loginAluno" href="">
+                    <div class="cartaoDoAluno">
+                        <div class="iconeDoAluno">
+                            <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
+                        </div>
+                        <div class="divider"></div>
+                        <div class="descricaoDoCartao">
+                            <p class="fonte textoDoCartao">Entrar como aluno.</p>
+                        </div>
                     </div>
-                    <div class="divider"></div>
-                    <div class="descricaoDoCartao">
-                        <p class="fonte textoDoCartao">Caso seja um aluno, clique aqui.</p>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </main>
@@ -87,12 +89,12 @@ main {
     justify-content: center;
     justify-items: center;
 }
-.container1 {
+.container {
     width: 100vw;
     height: 100vh;
     
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -196,6 +198,9 @@ main {
     }
 
     /* Botao de Login */
+    .loginFuncionario {
+        text-decoration: none;
+    }
     .botaoDeLogin {
         width: 275px;
         height: 50px;
@@ -260,6 +265,9 @@ main {
     }
     
     /* Cartao do Aluno */
+    .loginAluno {
+        text-decoration: none;
+    }
     .cartaoDoAluno {
         display: flex;
         width: 380px;
@@ -272,19 +280,22 @@ main {
     .descricaoDoCartao {
         display: flex;
         background-color: #39A048;
+        justify-content: center;
+        justify-items: center;
 
         transition-timing-function: ease-in-out;
         transition: all 500ms;
     }
-    .descricaoDoCartao:hover {
-        background-color: #3AD250;
-
-        transition: all 500ms;
+    .descricaoDoCartao {
+        width: 335px;
+        height: 45px;
+        border-radius: 0 10px 10px 0;
+        margin-right: 1.5px;
     }
     .iconeDoAluno {
         width: 45px;
         height: 45px;
-
+        border-radius: 10px 0 0 10px;
         margin-left: 1.5px;
     }
     .iconeDeUsuario {
@@ -297,22 +308,31 @@ main {
         margin-bottom: 9px;
     }
     .divider {
-        width: 4px;
+        width: 5px;
         height: 45px;
 
         background-color: white;
     }
-    .descricaoDoCartao {
-        width: 335px;
-        height: 45px;
-
-        margin-right: 1.5px;
-    }
     .textoDoCartao {
         color: white;
-
+        text-align: center;
         margin-top: 13px;
         margin-bottom: 13px;
-        margin-left: 50px;
+    }
+    .descricaoDoCartao:hover {
+        background-color: #3AD250;
+
+        transition: all 500ms;
+    }
+    
+
+    /* LAYOUT MOBILE */
+    @media (max-width: 380px) {
+        .cadastro {
+            width: 90vw;
+        }
+        .cartaoDoAluno {
+            width: 90vw;
+        }
     }
 </style>
