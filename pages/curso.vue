@@ -1,9 +1,9 @@
-    <template>
+<template>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <div class="container2">
+    <div class="containerCurso">
         <!-- -= Tela de Cadastro de Curso =- -->
         <div class="telaDeCadastroDeCurso" id="telaDeCadastroDeCurso">
             <div class="caixaDeCadastro" id="caixaDeCadastro">
@@ -46,6 +46,9 @@
         <!-- -= Tela De Curso =- -->
         <div class="telaDeCurso" id="telaDeCurso">
             <div class="caixaDeCursos" id="caixaDeCursos">
+                <cursoGerado />
+                <cursoGerado />
+                <cursoGerado />
                 <cursoGerado />
             </div>
             <!-- Botoes de novo cadastro e excluir-->
@@ -135,7 +138,7 @@
     }
 
     /* -= Conteudo =- */
-    .container2 {
+    .containerCurso {
         display: flex !important;
         justify-content: center;
         justify-items: center;

@@ -1,11 +1,11 @@
 <template>
-    <div class="container">
+    <div class="containerCursoGerado">
         <div class="dadosDoCurso">
             <div class="topoDaCaixa">
                 <h4 class="fonte nomeDoCurso">Undefined</h4>
                 <div class="opcoesDaCaixa">
-                    <img class="iconeDeEditar" id="editarCurso" src="../assets/EditIcon.svg" alt="Editar dados do curso.">
-                    <span class="checkbox" id="checkbox" v-on:click="checkbox()"></span>
+                    <img class="iconeDeEditar" id="editarCurso" src="@/assets/EditIcon.svg" alt="Editar dados do curso.">
+                    
                     
                 </div>
             </div>
@@ -17,23 +17,7 @@
 
 <script>
     export default {
-        name: 'cursoGerado',
-        data() {
-            return {
-                checkboxAtivo: false
-            }
-        },
-        methods: {
-            checkbox() {
-                if(this.checkboxAtivo == false) {
-                    this.checkboxAtivo = true;
-                    document.getElementById('checkbox').style.backgroundColor = "#57B85F";
-                } else if (this.checkboxAtivo == true) {
-                    this.checkboxAtivo = false;
-                    document.getElementById('checkbox').style.backgroundColor = "#eee";
-                }
-            }
-        }
+        name: 'cursoGerado'
     }
 </script>
 
@@ -102,14 +86,6 @@
     .caixaDeMarcacao {
         width: 20px;
         height: 20px;
-    }
-    .checkbox {
-        display: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 5px;
-        background-color: #eee;
-        position: absolute;
     }
     
     /* Nome abrevidado do curso */
