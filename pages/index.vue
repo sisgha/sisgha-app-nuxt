@@ -1,72 +1,89 @@
 <template>
-    <!-- Fontes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <main>
-        <div class="container">
-            <div class="conteudo">
-                <!-- Login Professor / DAPE -->
-                <div class="cadastro">
-                    <div class="logo">
-                        <img src="@/assets/SisghaLogo1.svg" alt="SISGHA">
-                    </div>
-                    <!-- Matricula -->
-                    <input class="fonte inserirMatricula" type="text" placeholder="Matrícula">
-    
-                    <!-- Senha -->
-                    <div class="inputDeSenha">
-                        <input :type="inputType" class="fonte inserirSenha" placeholder="Senha">
-                        <!-- Botão de visualizar senha -->
-                        <div class="modoDeVisualizarSenha" @click="togglePassword()">
-                            <img class="iconeVisualizarSenha" src="@/assets/EyeOn.svg" alt="Mostrar senha" v-if="isPassword">
-                            <img class="iconeEsconderSenha" src="@/assets/EyeOff.svg" alt="Esconder senha" v-else>
-                        </div>
-                    </div>
-    
-                    <!-- Botão de login -->
-                    <a class="loginFuncionario" href="">
-                        <button class="botaoDeLogin">
-                                <h3 class="fonte">
-                                    Entrar
-                                </h3>
-                        </button>
-                    </a>
-    
-                    <!-- Esqueceu a senha -->
-                    <p class="fonte recuperarSenha">
-                        Esqueceu a senha? <span class="botaoRecuperarSenha">Clique aqui</span>.
-                    </p>
-                </div>
-    
-                <!-- Login Aluno -->
-                <a class="loginAluno" href="">
-                    <div class="cartaoDoAluno">
-                        <div class="iconeDoAluno">
-                            <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
-                        </div>
-                        <div class="divider"></div>
-                        <div class="descricaoDoCartao">
-                            <p class="fonte textoDoCartao">Entrar como aluno.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+    <div class="container">
+        <!-- Fonte -->
+        <div class="fontePadrao">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">        
         </div>
-    </main>
+        <!-- Formulario de Login -->
+        <form id="formularioDeLogin" class="bordaEstilizada" @submit="botaoDeLogin">
+            <!-- SISGHA Logomarca -->
+            <div class="logomarca">
+                <img src="@/assets/SisghaLogo1.svg" alt="SISGHA">
+            </div>
+
+            <!-- Inserir Matricula -->
+            <input id="inserirMatricula" class="inputEstilizado bordaEstilizada" type="text" placeholder="Matrícula">
+
+            <!-- Inserir Senha -->
+            <div class="inputDeSenha">
+                <input id="inserirSenha" class="inputEstilizado bordaEstilizada" :type="visualizarSenha" placeholder="Senha">
+                <!-- Visualizar e Ocultar Senha -->
+                <div class="modoDeVisualizarSenha" @click="alterarInput()">
+                    <img class="iconeVisualizarSenha" src="@/assets/EyeOn.svg" alt="Mostrar senha" v-if="tipoDeSenha">
+                    <img class="iconeEsconderSenha" src="@/assets/EyeOff.svg" alt="Esconder senha" v-else>
+                </div>
+            </div>
+
+            <!-- Botao de Login -->
+            <button id="botaoDeLogin" class="bordaEstilizada" type="submit">
+                <h3>Entrar</h3>
+            </button>
+
+            <!-- Botao de Recuperar Senha -->
+            <p class="recuperarSenha">
+                Esqueceu a senha? <span id="botaoRecuperarSenha">Clique aqui</span>.
+            </p>
+        </form>
+
+        <!-- Login Aluno -->
+        <nuxt-link to="/">
+            <div class="cartaoDoAluno bordaEstilizada">
+                <div class="iconeDoAluno">
+                    <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
+                </div>
+                <div class="divider"></div>
+                <div class="descricaoDoCartao">
+                    <p class="fonte textoDoCartao">Entrar como aluno.</p>
+                </div>
+            </div>
+        </nuxt-link>
+
+        <!-- Detalhes de Fundo -->
+        <div class="mancha1"></div>
+        <div class="mancha2"></div>
+
+    </div>
+
 </template>
 
 <script>
+    import "@/assets/styles/fontePadrao.css"
+    import "@/assets/styles/inputEstilizado.css"
+    import "@/assets/styles/bordaEstilizada.css"
+    import "@/assets/styles/botaoEstilizado.css"
+
     export default {
-        // Exportar para "App"
-        name: 'TelaDeEntrar',
-        // Codigo
+        name: "TelaDeEntrar",
         data() {
             return {
-                inputType: 'password',
+                visualizarSenha: "password"
             }
         },
+        computed: {
+            tipoDeSenha() {
+                return this.visualizarSenha === "password"
+            }
+        },
+        methods: {
+            alterarInput() {
+                this.visualizarSenha = this.tipoDeSenha ? "text" : "password"
+            }
+        }
+
+        
+        /* ,
         computed: {
             isPassword() {
                 return this.inputType === 'password';
@@ -76,263 +93,226 @@
             togglePassword() {
                 this.inputType = this.isPassword ? 'text' : 'password';
             }
-        }
+        }, */
     }
 </script>
 
-<style>
-* {
-    margin: 0;
-}
-main {
-    display: grid;
-    justify-content: center;
-    justify-items: center;
-}
-.container {
-    width: 100vw;
-    height: 100vh;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-/* Definição da fonte */
-.fonte {
-        font-family: 'Inter', sans-serif;
-}
-
-/* Cofigurar Conteudo*/
-    .conteudo {
-        display: flex;
-        flex-direction: column;
-
-        margin-left: auto;
-        margin-right: auto;
-
-        justify-content: center;
-        justify-items: center;
-
-
-
+<style scoped>
+    * {
+        margin: 0;
+        padding: 0;
     }
-
-/* Caixa de login */
-    .cadastro {
+    
+    .container {
         display: flex;
         flex-direction: column;
+
+        width: 100vw !important;
+        height: 100vh !important;
+
         justify-content: center;
+        align-items: center;
+    }
+    /* Formulario */
+    #formularioDeLogin {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        height: 425px;
 
-        width: 380px;
-        height: 350px;
+        transform: translateY(-3vh);
 
-        padding-top: 10px;
-        
-        border-radius: 9px;
-        box-shadow: 0 0 5px #00000025;
+        padding-top: 7.5px;
+        padding-bottom: 7.5px;
 
-        background-color: rgb(255, 255, 255);
+        justify-content: center;
+        align-items: center;
     }
 
     /* Logomarca */
-    .logo,
-    .logo img{
+    .logomarca {
         display: flex;
-
-        width: 200px;
-        height: 70px;
-
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .logo {
-        margin-bottom: 20px;
-    }
-
-    /* Matricula e Senha*/
-    .inserirMatricula, 
-    .inserirSenha {
-        height: 50px;
-        width: 250px;
-
-        border-style: none;
-        border-radius: 9px;
-        box-shadow: 0 0 5px #00000025;
-
-        text-align: left;
-        font-weight: 500;
-
-        padding-left: 25px;
-        outline: 0;
-    }
-    .inserirMatricula {
-        margin-bottom: 15px;
-    }
-    .inputDeSenha {
-        width: 276px;
-    }
-    
-    /* Icone de senha */
-    .modoDeVisualizarSenha{
-        width: 26px;
-        height: 18px;
-
-        transform: translate(235px, -50px);
-
         position: relative;
-        top: 18px;
+
+        width: 50%;
+        height: 18%;
 
         justify-content: center;
-        justify-items: center;
+        align-items: center;
 
-        cursor: pointer;
+        margin-bottom: 5%;
     }
-    .iconeVisualizarSenha {
-        width: 26px;
-        height: 18px;
+    .logomarca img {
+        width: 100%;
+        height: 100%;
     }
-    .iconeEsconderSenha {
-        width: 26px;
-        height: 18px;
+
+    /* Estilizacao de Input */
+    .inputEstilizado {
+        height: 60px !important;
+    }
+    .inputDeSenha {
+        display: flex;
+        flex-direction: row;
+
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 5%;
+    }
+
+    .modoDeVisualizarSenha {
+        display: flex;
+        position: absolute;
+        z-index: 10;
+
+        width: 22px;
+        height: 20px;
     }
 
     /* Botao de Login */
-    .loginFuncionario {
-        text-decoration: none;
-    }
-    .botaoDeLogin {
-        width: 275px;
-        height: 50px;
-
-        margin-top: 5px;
-        margin-bottom: 15px;
-
-        border-style: none;
-        border-radius: 9px;
-        box-shadow: 0 0 5px #00000025;
-
+    #botaoDeLogin {
         background-color: #39A048;
-
-        cursor: pointer;
-
-        transition-timing-function: ease-in-out;
-        transition: all 500ms;
-    }
-    .botaoDeLogin h3 {
-        font-weight: 600;
-        color: white;
-    }
-    .botaoDeLogin:hover {
-        background-color: #3AD250;
-
-        cursor: pointer;
-
-        transition: all 500ms;
+        height: 60px !important;
+        margin-top: 5%;
     }
 
     /* Recuperar Senha */
-    .titulo, .recuperarSenha {
-        text-align: center;
-
-        cursor: default;
-    }
     .recuperarSenha {
-        color: #757575;
+        margin-top: 3%;
+        color: #8ea591;
     }
-    .botaoRecuperarSenha {
+    .recuperarSenha span {
         color: #39A048;
-
-        cursor: pointer;
-
-        transition-timing-function: ease-in-out;
-        transition: all 500ms;
-    }
-    .botaoRecuperarSenha:hover {
-        color: #3AD250;
-
-        cursor: pointer;
-
-        transition: all 500ms;
     }
 
-    /* Ajustes do Cartao */
-    .inserirMatricula,
-    .inputDeSenha,
-    .cadastro a {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    /* Cartao do Aluno */
-    .loginAluno {
-        text-decoration: none;
-    }
+    /* Entrar como Aluno */
     .cartaoDoAluno {
         display: flex;
-        width: 380px;
+        flex-direction: row;
+        background-color: #39A048;
 
-        margin-top: 40px;
+        height: 45px;
 
-        cursor: pointer;
+        align-items: center;
     }
-    .iconeDoAluno,
     .descricaoDoCartao {
         display: flex;
-        background-color: #39A048;
+        width: 100%;
+        height: 100%;
         justify-content: center;
-        justify-items: center;
+        align-items: center;
+    }
+    .cartaoDoAluno p {
+        color: #fff;
+    }
+    .cartaoDoAluno .divider {
+        width: 3px;
+        height: 100%;
+        background-color: #fff;
+    }
+    .cartaoDoAluno .iconeDoAluno {
+        display: flex;
+        width: 13%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    /* Detalhes de Fundo */
+    .mancha1,
+    .mancha2 {
+        display: flex;
+        position: absolute;
+        z-index: -1;
+        
+        width: 25vw;
+        height: 40vh;
 
-        transition-timing-function: ease-in-out;
-        transition: all 500ms;
+        background-color: #D9E5DF;
     }
-    .descricaoDoCartao {
-        width: 335px;
-        height: 45px;
-        border-radius: 0 10px 10px 0;
-        margin-right: 1.5px;
-    }
-    .iconeDoAluno {
-        width: 45px;
-        height: 45px;
-        border-radius: 10px 0 0 10px;
-        margin-left: 1.5px;
-    }
-    .iconeDeUsuario {
-        width: 25px;
-        height: 25px;
 
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 9px;
-        margin-bottom: 9px;
+    .mancha1 {
+        left: 0;
+        top: 0;
     }
-    .divider {
-        width: 5px;
-        height: 45px;
-
-        background-color: white;
-    }
-    .textoDoCartao {
-        color: white;
-        text-align: center;
-        margin-top: 13px;
-        margin-bottom: 13px;
-    }
-    .descricaoDoCartao:hover {
-        background-color: #3AD250;
-
-        transition: all 500ms;
+    .mancha2 {
+        right: 0;
+        bottom: 0;
     }
     
 
-    /* LAYOUT MOBILE */
-    @media (max-width: 380px) {
-        .cadastro {
+    /* --- Versao Desktop --- */
+    @media (min-width: 1000px) {
+        #formularioDeLogin {
+            width: 28vw;
+        }
+
+        /* Estilizacao de Inputs */
+        .inputEstilizado {
+            width: 19vw;
+        }
+        .inputDeSenha {
+            width: 75%;
+        }
+        .modoDeVisualizarSenha {
+            right: 20%;
+        }
+
+        /* Botao de Login */
+        #botaoDeLogin {
+            width: 20.8vw;
+            height: 8vh;
+            background-color: #39A048;
+            margin-top: 5%;
+        }
+
+        /* Entrar como Aluno */
+        .cartaoDoAluno {
+            width: 28vw;
+        }
+        /* Detalhes de Fundo */
+        .mancha1 {
+            border-radius: 0 0 75% 0;
+        }
+        .mancha2 {
+            border-radius: 75% 0 0  0;
+        }
+    }
+
+    /* --- Versao Movel --- */
+    @media (max-width: 992px) {
+        #formularioDeLogin {
             width: 90vw;
         }
+
+        /* Estilizacao de Inputs */
+        .inputEstilizado {
+            width: 70vw;
+        }
+        .inputDeSenha {
+            width: 100%;
+        }
+        .modoDeVisualizarSenha {
+            right: 16%;
+        }
+
+        /* Botao de Login */
+        #botaoDeLogin {
+            width: 75vw;
+        }
+
+        /* Entrar como Aluno */
         .cartaoDoAluno {
             width: 90vw;
+        }
+
+        /* Detalhes de Fundo */
+        .mancha1 {
+            border-radius: 0 0 40% 0;
+        }
+        .mancha2 {
+            border-radius: 40% 0 0  0;
         }
     }
 </style>
