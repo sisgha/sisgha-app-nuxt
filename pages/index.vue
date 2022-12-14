@@ -81,19 +81,6 @@
                 this.visualizarSenha = this.tipoDeSenha ? "text" : "password"
             }
         }
-
-        
-        /* ,
-        computed: {
-            isPassword() {
-                return this.inputType === 'password';
-            }
-        },
-        methods: {
-            togglePassword() {
-                this.inputType = this.isPassword ? 'text' : 'password';
-            }
-        }, */
     }
 </script>
 
