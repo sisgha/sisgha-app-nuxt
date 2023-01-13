@@ -1,31 +1,33 @@
 <template>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <div class="container">
+    <div class="containerNenhumConteudo">
+        <!-- Ilustracao -->
         <div class="ilustracao">
+            <!-- Icone da Ilustracao -->
             <div class="icone">
-                <img src="../assets/EmptyIcon.svg" alt="Nenhum conteúdo">
+                <img src="@/assets/EmptyIcon.svg" alt="Nenhum conteúdo">
             </div>
-            <h1 class="mensagem">Nada foi criado.</h1>
+            <!-- Mensagem da Ilustracao -->
+            <h1 class="mensagem">Nada foi encontrado.</h1>
         </div>
     </div>
 </template>
 
 <script>
+    import "@/assets/styles/fontePadrao.css"
+    
     export default {
         name: 'nenhumConteudo'
     }
 </script>
 
-<style>
+<style scoped>
     * {
         margin: 0;
+        padding: 0;
     }
 
-    /* Conteudo */
-    .container {
+    /* Ilustracao */
+    .containerNenhumConteudo {
         display: flex;
 
         justify-content: center;
@@ -38,21 +40,22 @@
         justify-content: center;
         justify-items: center;
     }
+    /* Icone da Ilustracao */
     .icone {
         margin-left: auto;
         margin-right: auto;
     }
     .icone, 
     .icone img {
-
         width: 100px;
         height: 130px;
     }
     
-    /* Texto da ilustração */
+    /* Texto da ilustracao */
     .mensagem  {
-        color: #adadad;
-        font-family: 'Inter', sans-serif;
+        font-size: 150%;
+
+        transform: translateY(-50%);
 
         justify-content: center;
         justify-items: center;
