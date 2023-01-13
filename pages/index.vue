@@ -1,54 +1,59 @@
 <template>
-    <div class="container">
+    <div id="" class="container darkmodeOff">
         <!-- Fonte -->
         <div class="fontePadrao">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">        
         </div>
-        <!-- Formulario de Login -->
-        <form id="formularioDeLogin" class="bordaEstilizada" @submit="botaoDeLogin">
-            <!-- SISGHA Logomarca -->
-            <div class="logomarca">
-                <img src="@/assets/SisghaLogo1.svg" alt="SISGHA">
-            </div>
-
-            <!-- Inserir Matricula -->
-            <input id="inserirMatricula" class="inputEstilizado bordaEstilizada" type="text" placeholder="Matrícula">
-
-            <!-- Inserir Senha -->
-            <div class="inputDeSenha">
-                <input id="inserirSenha" class="inputEstilizado bordaEstilizada" :type="visualizarSenha" placeholder="Senha">
-                <!-- Visualizar e Ocultar Senha -->
-                <div class="modoDeVisualizarSenha" @click="alterarInput()">
-                    <img class="iconeVisualizarSenha" src="@/assets/EyeOn.svg" alt="Mostrar senha" v-if="tipoDeSenha">
-                    <img class="iconeEsconderSenha" src="@/assets/EyeOff.svg" alt="Esconder senha" v-else>
+        
+        <!-- Conteudo da Pagina -->
+        <div class="content">
+            <!-- Formulario de Login -->
+            <form id="formularioDeLogin" class="bordaEstilizada" @submit="botaoDeLogin">
+    
+                <!-- SISGHA Logomarca -->
+                <div class="logomarca">
+                    <img src="@/assets/SisghaLogo1.svg" alt="SISGHA">
                 </div>
-            </div>
-
-            <!-- Botao de Login -->
-            <button id="botaoDeLogin" class="bordaEstilizada" type="submit">
-                <h3>Entrar</h3>
-            </button>
-
-            <!-- Botao de Recuperar Senha -->
-            <p class="recuperarSenha">
-                Esqueceu a senha? <span id="botaoRecuperarSenha">Clique aqui</span>.
-            </p>
-        </form>
-
-        <!-- Login Aluno -->
-        <nuxt-link to="/">
-            <div class="cartaoDoAluno bordaEstilizada">
-                <div class="iconeDoAluno">
-                    <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
+    
+                <!-- Inserir Matricula -->
+                <input id="inserirMatricula" class="inputEstilizado bordaEstilizada" type="text" placeholder="Matrícula">
+    
+                <!-- Inserir Senha -->
+                <div class="inputDeSenha">
+                    <input id="inserirSenha" class="inputEstilizado bordaEstilizada" :type="visualizarSenha" placeholder="Senha">
+                    <!-- Visualizar e Ocultar Senha -->
+                    <div class="modoDeVisualizarSenha" @click="alterarInput()">
+                        <img class="iconeVisualizarSenha" src="@/assets/EyeOn.svg" alt="Mostrar senha" v-if="tipoDeSenha">
+                        <img class="iconeEsconderSenha" src="@/assets/EyeOff.svg" alt="Esconder senha" v-else>
+                    </div>
                 </div>
-                <div class="divider"></div>
-                <div class="descricaoDoCartao">
-                    <p class="fonte textoDoCartao">Entrar como aluno.</p>
+    
+                <!-- Botao de Login -->
+                <button id="botaoDeLogin" class="bordaEstilizada" type="submit">
+                    <h3>Entrar</h3>
+                </button>
+    
+                <!-- Botao de Recuperar Senha -->
+                <p class="recuperarSenha textoDescritivo">
+                    Esqueceu a senha? <span id="botaoRecuperarSenha">Clique aqui</span>.
+                </p>
+            </form>
+    
+            <!-- Login Aluno -->
+            <nuxt-link to="/">
+                <div class="cartaoDoAluno bordaEstilizada">
+                    <div class="iconeDoAluno">
+                        <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
+                    </div>
+                    <div class="dividerLogin"></div>
+                    <div class="descricaoDoCartao">
+                        <p class="fonte textoDoCartao">Entrar como aluno.</p>
+                    </div>
                 </div>
-            </div>
-        </nuxt-link>
+            </nuxt-link>
+        </div>
 
         <!-- Detalhes de Fundo -->
         <div class="mancha1"></div>
@@ -63,12 +68,17 @@
     import "@/assets/styles/inputEstilizado.css"
     import "@/assets/styles/bordaEstilizada.css"
     import "@/assets/styles/botaoEstilizado.css"
+    import "@/assets/styles/darkmodeStyle.css"
 
     export default {
+        head: {
+            title: "SISGHA - Login"
+        },
         name: "TelaDeEntrar",
         data() {
             return {
-                visualizarSenha: "password"
+                visualizarSenha: "password",
+                darkmodeActive: false
             }
         },
         computed: {
@@ -79,7 +89,19 @@
         methods: {
             alterarInput() {
                 this.visualizarSenha = this.tipoDeSenha ? "text" : "password"
+            },
+            async darkmode() {
+                if (this.darkmodeActive == true) {
+                    document.getElementById("pagina").classList.remove("darkmodeOff")
+                    document.getElementById("pagina").classList.add("darkmodeOn")
+                } else {
+                    document.getElementById("pagina").classList.remove("darkmodeOn")
+                    document.getElementById("pagina").classList.add("darkmodeOff") 
+                }
             }
+        },
+        mounted() {
+            this.darkmode()
         }
     }
 </script>
@@ -100,11 +122,18 @@
         justify-content: center;
         align-items: center;
     }
+    /* Ajustes */
+    .content {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        z-index: 1;
+    }
+
     /* Formulario */
     #formularioDeLogin {
         display: flex;
         flex-direction: column;
-        background-color: #fff;
         height: 425px;
 
         transform: translateY(-3vh);
@@ -159,7 +188,7 @@
 
     /* Botao de Login */
     #botaoDeLogin {
-        background-color: #39A048;
+        background-color: #39A048 !important;
         height: 60px !important;
         margin-top: 5%;
     }
@@ -167,17 +196,16 @@
     /* Recuperar Senha */
     .recuperarSenha {
         margin-top: 3%;
-        color: #8ea591;
     }
     .recuperarSenha span {
-        color: #39A048;
+        color: #39A048 !important;
     }
 
     /* Entrar como Aluno */
     .cartaoDoAluno {
         display: flex;
         flex-direction: row;
-        background-color: #39A048;
+        background-color: #39A048 !important;
 
         height: 45px;
 
@@ -193,10 +221,9 @@
     .cartaoDoAluno p {
         color: #fff;
     }
-    .cartaoDoAluno .divider {
+    .cartaoDoAluno .dividerLogin {
         width: 3px;
         height: 100%;
-        background-color: #fff;
     }
     .cartaoDoAluno .iconeDoAluno {
         display: flex;
@@ -205,18 +232,19 @@
         justify-content: center;
         align-items: center;
     }
-    
+    .cartaoDoAluno .iconeDeUsuario {
+        filter: invert(0) !important;
+    }
+
     /* Detalhes de Fundo */
     .mancha1,
     .mancha2 {
         display: flex;
         position: absolute;
-        z-index: -1;
+        z-index: 0;
         
         width: 25vw;
         height: 40vh;
-
-        background-color: #D9E5DF;
     }
 
     .mancha1 {
@@ -250,7 +278,6 @@
         #botaoDeLogin {
             width: 20.8vw;
             height: 8vh;
-            background-color: #39A048;
             margin-top: 5%;
         }
 

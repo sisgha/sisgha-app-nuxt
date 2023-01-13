@@ -1,7 +1,5 @@
 .inputEstilizado {
   display: flex;
-  background-color: #fff;
-  color: #000;
 
   font-weight: medium;
   padding-left: 25px !important;
@@ -9,11 +7,9 @@
   outline: 0;
   border-style: none;
 }
-
-.inputEstilizado::placeholder {
-  color: #8ea591;
+select {
+  display: flex;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
-
-/* .inputEstilizado:valid {
-  border: 2px solid green;
-} */

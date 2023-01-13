@@ -1,0 +1,67 @@
+/* Darkmode Inativo*/
+.darkmodeOff,
+.darkmodeOff form,
+.darkmodeOff .dividerLogin,
+.darkmodeOff .inputEstilizado {
+  background-color: #fff;
+}
+.darkmodeOff img {
+  filter: invert(0);
+}
+.darkmodeOn .ilustracao img {
+  filter: contrast(5);
+}
+
+.darkmodeOff .inputEstilizado,
+.darkmodeOff p, .darkmodeOff a,
+.darkmodeOff h1, .darkmodeOff h2,
+.darkmodeOff h3, .darkmodeOff h4,
+.darkmodeOff h5, .darkmodeOff h6,
+.darkmodeOff select {
+  color: #000;
+}
+.darkmodeOff .ilustracao .mensagem {
+  color: #adadad !important;
+}
+.darkmodeOff .textoDescritivo,
+.darkmodeOff input::placeholder {
+  color: #8ea591 !important;
+}
+.darkmodeOff .mancha1,
+.darkmodeOff .mancha2 {
+  background-color: #d9e5df;
+}
+
+
+/* Darkmode Ativo */
+.darkmodeOn,
+.darkmodeOn form,
+.darkmodeOn .dividerLogin,
+.darkmodeOn .inputEstilizado {
+  background-color: #25282e;
+}
+.darkmodeOn img {
+  filter: invert(1);
+}
+
+.darkmodeOn .ilustracao img {
+  filter: contrast(5);
+}
+
+.darkmodeOn .inputEstilizado,
+.darkmodeOn p, .darkmodeOn a,
+.darkmodeOn h1, .darkmodeOn h2,
+.darkmodeOn h3, .darkmodeOn h4,
+.darkmodeOn h5, .darkmodeOn h6,
+.darkmodeOn .ilustracao .mensagem,
+.darkmodeOff select {
+  color: #fff;
+}
+.darkmodeOn .textoDescritivo,
+.darkmodeOn input::placeholder {
+  color: #acb6ae !important;
+}
+.darkmodeOn .mancha1,
+.darkmodeOn .mancha2 {
+  background-color: #465f52;
+}
