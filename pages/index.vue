@@ -1,12 +1,5 @@
 <template>
-    <div id="" class="container darkmodeOff">
-        <!-- Fonte -->
-        <div class="fontePadrao">
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">        
-        </div>
-        
+    <div id="" class="container">
         <!-- Conteudo da Pagina -->
         <div class="content">
             <!-- Formulario de Login -->
@@ -64,11 +57,9 @@
 </template>
 
 <script>
-    import "@/assets/styles/fontePadrao.css"
     import "@/assets/styles/inputEstilizado.css"
     import "@/assets/styles/bordaEstilizada.css"
     import "@/assets/styles/botaoEstilizado.css"
-    import "@/assets/styles/darkmodeStyle.css"
 
     export default {
         head: {
@@ -78,7 +69,6 @@
         data() {
             return {
                 visualizarSenha: "password",
-                darkmodeActive: false
             }
         },
         computed: {
@@ -90,39 +80,12 @@
             alterarInput() {
                 this.visualizarSenha = this.tipoDeSenha ? "text" : "password"
             },
-            async darkmode() {
-                if (this.darkmodeActive == true) {
-                    document.getElementById("pagina").classList.remove("darkmodeOff")
-                    document.getElementById("pagina").classList.add("darkmodeOn")
-                } else {
-                    document.getElementById("pagina").classList.remove("darkmodeOn")
-                    document.getElementById("pagina").classList.add("darkmodeOff") 
-                }
-            }
-        },
-        mounted() {
-            this.darkmode()
         }
     }
 </script>
 
 <style scoped>
-    * {
-        margin: 0;
-        padding: 0;
-    }
-    
-    .container {
-        display: flex;
-        flex-direction: column;
-
-        width: 100vw !important;
-        height: 100vh !important;
-
-        justify-content: center;
-        align-items: center;
-    }
-    /* Ajustes */
+    /* Ajustes da Pagina */
     .content {
         display: flex;
         flex-direction: column;
