@@ -55,7 +55,92 @@
 .darkmodeOn h5, .darkmodeOn h6,
 .darkmodeOn .ilustracao .mensagem,
 .darkmodeOff select {
-  color: #fff;
+  color: #fff;/* ---- Darkmode Inativo ---- */
+
+  /* Background */
+  .darkmodeOff,
+  .darkmodeOff form,
+  .darkmodeOff .header,
+  .darkmodeOff .container,
+  .darkmodeOff .dividerLogin,
+  .darkmodeOff .inputEstilizado {
+    background-color: #fff;
+    animation: toggleLightTheme 500ms ease-in-out;
+  }
+  
+  /* Imagem */
+  .darkmodeOff img {
+    filter: invert(0);
+  }
+  .darkmodeOn .ilustracao img {
+    filter: contrast(5);
+  }
+  
+  /* Textos e Inputs */
+  .darkmodeOff .inputEstilizado,
+  .darkmodeOff p, .darkmodeOff a,
+  .darkmodeOff h1, .darkmodeOff h2,
+  .darkmodeOff h3, .darkmodeOff h4,
+  .darkmodeOff h5, .darkmodeOff h6,
+  .darkmodeOff select {
+    color: #000;
+  }
+  .darkmodeOff .ilustracao .mensagem {
+    color: #adadad !important;
+  }
+  .darkmodeOff .textoDescritivo,
+  .darkmodeOff input::placeholder {
+    color: #8ea591 !important;
+  }
+  
+  /* Detalhes Extras */
+  .darkmodeOff .mancha1,
+  .darkmodeOff .mancha2 {
+    background-color: #d9e5df;
+  }
+  
+  
+  /* ---- Darkmode Ativo ---- */
+  
+  /* Background */
+  .darkmodeOn,
+  .darkmodeOn form,
+  .darkmodeOn .header,
+  .darkmodeOn .container,
+  .darkmodeOn .dividerLogin,
+  .darkmodeOn .inputEstilizado {
+    background-color: #25282e;
+    animation: toggleDarkTheme 500ms;
+  }
+  
+  /* Imagem */
+  .darkmodeOn img {
+    filter: invert(1);
+  }
+  .darkmodeOn .ilustracao img {
+    filter: contrast(5);
+  }
+  
+  /* Textos e Inputs */
+  .darkmodeOn .inputEstilizado,
+  .darkmodeOn p, .darkmodeOn a,
+  .darkmodeOn h1, .darkmodeOn h2,
+  .darkmodeOn h3, .darkmodeOn h4,
+  .darkmodeOn h5, .darkmodeOn h6,
+  .darkmodeOn .ilustracao .mensagem,
+  .darkmodeOff select {
+    color: #fff;
+  }
+  .darkmodeOn .textoDescritivo,
+  .darkmodeOn input::placeholder {
+    color: #acb6ae !important;
+  }
+  
+  /* Detalhes Extras */
+  .darkmodeOn .mancha1,
+  .darkmodeOn .mancha2 {
+    background-color: #465f52;
+  }
 }
 .darkmodeOn .textoDescritivo,
 .darkmodeOn input::placeholder {
