@@ -33,7 +33,8 @@
 <script lang="ts">
 import "@/assets/styles/bordaEstilizada.css"
 
-import dayjs from 'dayjs'
+import dayjs from "dayjs/esm";
+import relativeTime from "dayjs/esm/plugin/relativeTime";
 
 import nomeDoMes from "@/components/calendarioComponentes/nomeDoMes.vue"
 import dia from "@/components/calendarioComponentes/dia.vue"
