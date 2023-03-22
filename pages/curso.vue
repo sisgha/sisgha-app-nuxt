@@ -11,13 +11,13 @@
         <div class="cursoIndex">
             <caixaDeCursos></caixaDeCursos>
             <!-- Botao de Cadastrar e Excluir Curso -->
-            <div class="botoes">
-                <button id="botaoDeCadastro" class="botao botaoDeCadastro bordaEstilizada" @click="cadastrarNovoCurso">
-                    <h3>Cadastrar Curso</h3>
+            <div class="botoesDeCadastro">
+                <button id="botaoDeCadastro" class="botao botaoVerde dimensao1 bordaEstilizada" @click="cadastrarNovoCurso">
+                    <h3 class="corDaFonte">Cadastrar Curso</h3>
                 </button>
                 <div class="dividerBotoes"></div>
-                <button id="botaoDeExcluir" class="botao botaoDeExcluir bordaEstilizada">
-                    <h3>Excluir Curso</h3>
+                <button id="botaoDeExcluir" class="botao botaoVerde dimensao2 bordaEstilizada">
+                    <h3 class="corDaFonte">Excluir Curso</h3>
                 </button>
             </div>
         </div>
@@ -90,7 +90,7 @@
         align-items: center;
     }
 
-    /* ----> Curso Index <----- */
+    /* - Curso Index - */
     .cursoIndex {
         display: flex;
         flex-direction: column;
@@ -105,13 +105,7 @@
         align-items: center;
     }
 
-    /* Botao de Cadastro e Excluir */
-    .botoes {
-        position: absolute;
-        bottom: 2vh;
-    }
-
-    /* -----> Curso Cadastro <----- */
+    /* - Curso Cadastro - */
     .cursoCadastro {
         display: flex;
         flex-direction: column;
@@ -128,7 +122,7 @@
         backdrop-filter: blur(2px);
     }
 
-    /* -----> Curso Edicao <----- */
+    /* - Curso Edicao - */
     .cursoEdicao {
         display: flex;
         flex-direction: column;

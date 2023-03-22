@@ -21,6 +21,7 @@ export default {
 
     width: 90%;
     height: 10%;
+    margin-bottom: 2%;
     
     background-color: #90bda5;
 

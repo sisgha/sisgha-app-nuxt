@@ -25,13 +25,13 @@
       </div>
 
       <!-- Botao de Cadastrar e Cancelar Cadastro de Curso -->
-      <div class="botoesDeCadastro">
-        <button id="botaoDeCadastrar" class="botao botaoDeCadastro bordaEstilizada" type="submit">
-            <h3>Cadastrar</h3>
+      <div class="botoes">
+        <button id="botaoDeCadastrar" class="botao botaoVerde dimensao1 bordaEstilizada" type="submit">
+            <h3 class="corDaFonte">Cadastrar</h3>
         </button>
         <div class="dividerBotoes"></div>
-        <button id="botaoDeCancelar" class="botao botaoDeExcluir bordaEstilizada">
-            <h3>Cancelar</h3>
+        <button id="botaoDeCancelar" class="botao botaoVermelho dimensao1 bordaEstilizada">
+            <h3 class="corDaFonte">Cancelar</h3>
         </button>
      </div>
     </form>
@@ -60,7 +60,7 @@
   .tituloDoFormulario {
     margin-bottom: 5% !important;
   }
-  .botoesDeCadastro {
+  .botoes {
     margin-top: 5% !important;
     width: 75%;
   }

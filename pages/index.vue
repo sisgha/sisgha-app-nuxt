@@ -24,8 +24,8 @@
                 </div>
     
                 <!-- Botao de Login -->
-                <button id="botaoDeLogin" class="bordaEstilizada" type="submit">
-                    <h3>Entrar</h3>
+                <button id="botaoDeLogin" class="botao botaoVerde bordaEstilizada" type="submit">
+                    <h3 class="corDaFonte">Entrar</h3>
                 </button>
     
                 <!-- Botao de Recuperar Senha -->
@@ -57,6 +57,7 @@
 </template>
 
 <script>
+    /* Estilo */
     import "@/assets/styles/inputEstilizado.css"
     import "@/assets/styles/bordaEstilizada.css"
     import "@/assets/styles/botaoEstilizado.css"
@@ -151,7 +152,6 @@
 
     /* Botao de Login */
     #botaoDeLogin {
-        background-color: #39A048 !important;
         height: 60px !important;
         margin-top: 5%;
     }
