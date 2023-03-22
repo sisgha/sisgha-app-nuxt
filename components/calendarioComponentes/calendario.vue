@@ -31,14 +31,18 @@
 </template>
 
 <script lang="ts">
-import "@/assets/styles/bordaEstilizada.css"
-
+/* DayJS */
 import dayjs from "dayjs/esm";
 import relativeTime from "dayjs/esm/plugin/relativeTime";
 
+/* Estilo */
+import "@/assets/styles/bordaEstilizada.css"
+
+/* Componentes */
 import nomeDoMes from "@/components/calendarioComponentes/nomeDoMes.vue"
 import dia from "@/components/calendarioComponentes/dia.vue"
 
+/* Exportacao */
 export default {
   name: "calendario",
   components: {
@@ -73,12 +77,8 @@ export default {
       let diasNoMes = dayjs(`${checarMesAtual}`).daysInMonth()
       this.diasNoMesAtual.shift()
       for(let i = 1; i < (diasNoMes + 1); i++) {
-        this.diasNoMesAtual.push({id: `${i}`, nomeDoItem: `itemN${i}`})
+        this.diasNoMesAtual.push({id: `${i}`, nomeDoItem: `Dia${i}-Mes${dayjs(dataAtual).format("MM")}-Ano${dayjs(dataAtual).format("YYYY")}`})
       }
-      /* Renderizar itens */
-      document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById(`itemN${parseInt(dayjs(dataAtual).format("DD"))}`)?.classList.add("numeroDoDiaAtual")
-      })
     },
 
     /* Setar mes anterior */
@@ -87,11 +87,14 @@ export default {
       const mesAtual = dayjs().startOf("month").toDate()
       const formatarMes = dayjs(mesAtual).format("MM")
       let mesAnterior
+
+      /* Dias no mes anterior */
       if(parseInt(formatarMes) == 1) {
         mesAnterior = dayjs(dataAtual).format(`YYYY-${12}-${2}`)
       } else {
         mesAnterior = dayjs(dataAtual).format(`YYYY-${parseInt(formatarMes) - 1}-${2}`)
       }
+
       const pegarDiasAnteriores = dayjs(mesAnterior).daysInMonth()
       let calcMesAnterior = this.diasNoMesAtual.length - pegarDiasAnteriores
 
@@ -137,12 +140,12 @@ export default {
     flex-direction: column;
     align-items: center;
 
-    width: 425px;
-    height: 350px;
+    width: 400px;
+    height: 325px;
     /* width: 30vw;
     height: 60vh; */
 
-    padding-top: 1%;
+    padding-top: 5%;
     padding-bottom: 1%;
   }
 
@@ -161,18 +164,14 @@ export default {
   /* Dias vazios */
   .diaEmBranco {
       display: flex;
-
       
       min-width: 45px !important;
-      
       min-height: 45px !important;
-
-      gap: 5% 5%;
 
       justify-content: center;
       align-items: center;
 
-      padding: 0.3%;
+      margin: 5%;
       border-radius: 100%;
 
       background-color: #D9E5DF;
@@ -184,9 +183,9 @@ export default {
     flex-direction: row;
 
     width: 95%;
-    height: 8%;
+    height: 10%;
 
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
   }
 </style>
