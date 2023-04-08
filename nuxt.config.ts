@@ -14,7 +14,8 @@ export default defineNuxtConfig({
   },
 
   auth: {
-    defaultProvider: "keycloak",
+    enableSessionRefreshPeriodically: 3 * 60 * 1000,
+    // defaultProvider: "sso-jipalab",
   },
 
   "graphql-client": {

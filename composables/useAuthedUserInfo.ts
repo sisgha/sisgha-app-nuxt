@@ -8,7 +8,7 @@ export const useAuthedUserInfo = async () => {
 
   const isLoading = computed(() => unref(pending));
 
-  const usuario = computed(() => unref(data)?.usuario);
+  const usuario = computed(() => unref(data)?.usuario!);
 
   const verifyUsuarioHasCargo = (cargoSlug: string) => unref(usuario)?.cargos.some((cargo) => cargo.slug === cargoSlug);
 

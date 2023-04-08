@@ -1,8 +1,9 @@
 <template>
   <div>
-    dape
+    <h1>DAPE</h1>
 
-    <pre><code>{{ JSON.stringify({ usuario }, null, 2) }}</code></pre>
+
+    <p>ID do Usuário: {{ usuario?.id }}</p>
   </div>
 </template>
 
