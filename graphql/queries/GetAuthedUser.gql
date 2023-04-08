@@ -1,0 +1,14 @@
+query GetAuthedUser {
+  usuario: getAuthedUser {
+    id
+
+    email
+    keycloakId
+    matriculaSiape
+
+    cargos {
+      id
+      slug
+    }
+  }
+}
