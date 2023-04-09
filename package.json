@@ -8,9 +8,12 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@mdi/font": "^7.2.96",
+    "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/dayjs": "^1.4.1",
     "@sidebase/nuxt-auth": "^0.5.0-rc.0",
     "nuxt": "^3.3.1",
-    "nuxt-graphql-client": "^0.2.27"
+    "nuxt-graphql-client": "^0.2.27",
+    "vuetify": "^3.1.13"
   }
 }

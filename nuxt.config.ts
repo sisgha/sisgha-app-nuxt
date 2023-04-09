@@ -5,7 +5,20 @@ export default defineNuxtConfig({
     //
     "nuxt-graphql-client",
     "@sidebase/nuxt-auth",
+    "@nuxtjs/color-mode",
   ],
+
+  
+
+  css: [
+    // ...
+    "@mdi/font/css/materialdesignicons.min.css",
+    "vuetify/lib/styles/main.css",
+  ],
+
+  build: {
+    transpile: ["vuetify"],
+  },
 
   vite: {
     define: {
