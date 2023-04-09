@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isLoading">
+  <div v-if="isFetching">
     <p>Carregando...</p>
   </div>
 
@@ -11,11 +11,11 @@
 </template>
 
 <script lang="ts" setup>
-const { isLoading, verifyUsuarioHasCargo } = await useAuthedUserInfo();
+const { isFetching, verifyUsuarioHasCargo } = await useAuthedUserInfo();
 
 const usuarioHasCargoDape = verifyUsuarioHasCargo("dape");
 
-const showContent = computed(() => !unref(isLoading) && unref(usuarioHasCargoDape));
-const showNotAllowed = computed(() => !unref(isLoading) && !unref(usuarioHasCargoDape));
+const showContent = computed(() => !unref(isFetching) && unref(usuarioHasCargoDape));
+const showNotAllowed = computed(() => !unref(isFetching) && !unref(usuarioHasCargoDape));
 
 </script>

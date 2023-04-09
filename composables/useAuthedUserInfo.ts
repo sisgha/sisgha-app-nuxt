@@ -6,7 +6,7 @@ export const useAuthedUserInfo = async () => {
 
   const { data, pending } = getAuthedUserQuery;
 
-  const isLoading = computed(() => unref(pending));
+  const isFetching = computed(() => unref(pending) && !unref(data));
 
   const usuario = computed(() => unref(data)?.usuario!);
 
@@ -14,8 +14,7 @@ export const useAuthedUserInfo = async () => {
 
   return {
     //
-
-    isLoading,
+    isFetching,
     getAuthedUserQuery,
 
     //

@@ -1,62 +1,31 @@
 <template>
-  <div class="container">
-    <!-- Conteudo da Pagina -->
+  <form @submit.prevent="entrarComCredenciais" class="parent-card h-full">
+    <v-container class="parent-card py-6">
+      <v-row class="parent-card justify-center align-center">
+        <v-col cols="12" sm="7" md="6" lg="5">
+          <v-card :loading="isBusy" rounded="lg" elevation="1" class="px-8 py-8">
 
-    <div class="content">
-      <!-- Formulario de Login -->
-      <form id="formularioDeLogin" class="bordaEstilizada" @submit.prevent="entrarComCredenciais">
+            <LogoSisgha class="logo" />
 
-        <!-- SISGHA Logomarca -->
-        <div class="logomarca">
-          <img src="@/assets/SisghaLogo1.svg" alt="SISGHA">
-        </div>
+            <v-divider class="my-4"></v-divider>
 
-        <!-- Inserir Matricula -->
-        <input :disabled="isBusy" v-model="credentials.username" class="inputEstilizado bordaEstilizada" type="text"
-          placeholder="Matrícula">
+            <v-text-field :disabled="isBusy" v-model="credentials.username" type="text" required
+              label="Matrícula"></v-text-field>
 
-        <!-- Inserir Senha -->
-        <div class="inputDeSenha">
-          <input :disabled="isBusy" v-model="credentials.password" id="inserirSenha"
-            class="inputEstilizado bordaEstilizada" :type="visualizarSenha" placeholder="Senha">
+            <v-text-field :disabled="isBusy" v-model="credentials.password" type="password" required
+              label="Senha"></v-text-field>
 
-          <!-- Visualizar e Ocultar Senha -->
-          <div class="modoDeVisualizarSenha" @click="alterarInput()">
-            <img class="iconeVisualizarSenha" src="@/assets/EyeOn.svg" alt="Mostrar senha" v-if="tipoDeSenha">
-            <img class="iconeEsconderSenha" src="@/assets/EyeOff.svg" alt="Esconder senha" v-else>
-          </div>
-        </div>
+            <v-btn type="submit" :disabled="canSubmit" block color="green-darken-3">Entrar</v-btn>
 
-        <!-- Botao de Login -->
-        <button :disabled="isBusy" id="botaoDeLogin" class="botao botaoVerde bordaEstilizada" type="submit">
-          <h3 class="corDaFonte">Entrar</h3>
-        </button>
-
-        <!-- Botao de Recuperar Senha -->
-        <p class="recuperarSenha textoDescritivo">
-          Esqueceu a senha? <span id="botaoRecuperarSenha">Clique aqui</span>.
-        </p>
-      </form>
-
-      <!-- Login Aluno -->
-      <nuxt-link to="/">
-        <div class="cartaoDoAluno bordaEstilizada">
-          <div class="iconeDoAluno">
-            <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
-          </div>
-          <div class="dividerLogin"></div>
-          <div class="descricaoDoCartao">
-            <p class="fonte textoDoCartao">Entrar como aluno.</p>
-          </div>
-        </div>
-      </nuxt-link>
-    </div>
-
-    <!-- Detalhes de Fundo -->
-    <div class="mancha1"></div>
-    <div class="mancha2"></div>
-
-  </div>
+            <div v-if="isError">
+              <v-divider class="my-4"></v-divider>
+              <v-alert v-model="isError" closable text="Não foi possível realizar o login." type="error"></v-alert>
+            </div>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </form>
 </template>
 
 <script lang="ts" setup>
@@ -69,12 +38,18 @@ definePageMeta({
   }
 })
 
+useHead({
+  title: "SISGHA - Login"
+})
+
 const { status } = useAuthState()
 
 const useCallbackUrl = () => {
   const route = useRoute();
+
   const callbackUrlParam = route.query.callbackUrl;
   const callbackUrl = typeof callbackUrlParam === "string" ? callbackUrlParam : "/"
+
   return callbackUrl;
 }
 
@@ -98,15 +73,11 @@ const credentials = reactive({
   password: '',
 })
 
-
-const visualizarSenha = ref('password')
-const tipoDeSenha = computed(() => visualizarSenha.value === 'password')
-const alterarInput = () => {
-  visualizarSenha.value = tipoDeSenha.value ? 'text' : 'password'
-}
-
 const isLoading = ref(false);
+const isError = ref(false);
+
 const isBusy = computed(() => unref(isLoading));
+const canSubmit = computed(() => unref(isBusy));
 
 const entrarComCredenciais = async () => {
   if (isLoading.value) {
@@ -114,6 +85,7 @@ const entrarComCredenciais = async () => {
   }
 
   isLoading.value = true;
+  isError.value = false;
 
   const { error, url } = await signIn('credentials', {
     callbackUrl,
@@ -124,11 +96,8 @@ const entrarComCredenciais = async () => {
     password: credentials.password,
   });
 
-
-
   if (error) {
-    // Do your custom error handling here
-    alert('Não foi possível realizar o login.')
+    isError.value = true;
     isLoading.value = false;
   } else {
     // No error, continue with the sign in, e.g., by following the returned redirect:
@@ -139,241 +108,13 @@ const entrarComCredenciais = async () => {
 
 </script>
 
-<script lang="ts">
-/* Estilo */
-import "@/assets/styles/bordaEstilizada.css";
-import "@/assets/styles/botaoEstilizado.css";
-import "@/assets/styles/inputEstilizado.css";
-
-export default {
-  head: {
-    title: "SISGHA - Login"
-  },
-  name: "TelaDeEntrar",
-}
-</script>
-
 <style scoped>
-/* Ajustes da Pagina */
-.content {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  z-index: 1;
-}
-
-/* Formulario */
-#formularioDeLogin {
-  display: flex;
-  flex-direction: column;
-  height: 425px;
-
-  transform: translateY(-3vh);
-
-  padding-top: 7.5px;
-  padding-bottom: 7.5px;
-
-  justify-content: center;
-  align-items: center;
-}
-
-/* Logomarca */
-.logomarca {
-  display: flex;
-  position: relative;
-
-  width: 50%;
-  height: 18%;
-
-  justify-content: center;
-  align-items: center;
-
-  margin-bottom: 5%;
-}
-
-.logomarca img {
-  width: 100%;
+.parent-card {
   height: 100%;
 }
 
-/* Estilizacao de Input */
-.inputEstilizado {
-  height: 60px !important;
-}
-
-.inputDeSenha {
-  display: flex;
-  flex-direction: row;
-
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 5%;
-}
-
-.modoDeVisualizarSenha {
-  display: flex;
-  position: absolute;
-  z-index: 10;
-
-  width: 22px;
-  height: 20px;
-}
-
-/* Botao de Login */
-#botaoDeLogin {
-  height: 60px !important;
-  margin-top: 5%;
-}
-
-/* Recuperar Senha */
-.recuperarSenha {
-  margin-top: 3%;
-}
-
-.recuperarSenha span {
-  color: #39A048 !important;
-}
-
-/* Entrar como Aluno */
-.cartaoDoAluno {
-  display: flex;
-  flex-direction: row;
-  background-color: #39A048 !important;
-
-  height: 45px;
-
-  align-items: center;
-}
-
-.descricaoDoCartao {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.cartaoDoAluno p {
-  color: #fff;
-}
-
-.cartaoDoAluno .dividerLogin {
-  width: 3px;
-  height: 100%;
-}
-
-.cartaoDoAluno .iconeDoAluno {
-  display: flex;
-  width: 13%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.cartaoDoAluno .iconeDeUsuario {
-  filter: invert(0) !important;
-}
-
-/* Detalhes de Fundo */
-.mancha1,
-.mancha2 {
-  display: flex;
-  position: absolute;
-  z-index: 0;
-
-  width: 25vw;
-  height: 40vh;
-}
-
-.mancha1 {
-  left: 0;
-  top: 0;
-}
-
-.mancha2 {
-  right: 0;
-  bottom: 0;
-}
-
-
-/* --- Versao Desktop --- */
-@media (min-width: 1000px) {
-  #formularioDeLogin {
-    width: 28vw;
-  }
-
-  /* Estilizacao de Inputs */
-  .inputEstilizado {
-    width: 19vw;
-  }
-
-  .inputDeSenha {
-    width: 75%;
-  }
-
-  .modoDeVisualizarSenha {
-    right: 20%;
-  }
-
-  /* Botao de Login */
-  #botaoDeLogin {
-    width: 20.8vw;
-    height: 8vh;
-    margin-top: 5%;
-  }
-
-  /* Entrar como Aluno */
-  .cartaoDoAluno {
-    width: 28vw;
-  }
-
-  /* Detalhes de Fundo */
-  .mancha1 {
-    border-radius: 0 0 75% 0;
-  }
-
-  .mancha2 {
-    border-radius: 75% 0 0 0;
-  }
-}
-
-/* --- Versao Movel --- */
-@media (max-width: 992px) {
-  #formularioDeLogin {
-    width: 90vw;
-  }
-
-  /* Estilizacao de Inputs */
-  .inputEstilizado {
-    width: 70vw;
-  }
-
-  .inputDeSenha {
-    width: 100%;
-  }
-
-  .modoDeVisualizarSenha {
-    right: 16%;
-  }
-
-  /* Botao de Login */
-  #botaoDeLogin {
-    width: 75vw;
-  }
-
-  /* Entrar como Aluno */
-  .cartaoDoAluno {
-    width: 90vw;
-  }
-
-  /* Detalhes de Fundo */
-  .mancha1 {
-    border-radius: 0 0 40% 0;
-  }
-
-  .mancha2 {
-    border-radius: 40% 0 0 0;
-  }
+.logo {
+  max-width: 18rem;
+  margin: 0 auto;
 }
 </style>
