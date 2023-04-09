@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-layout>
+    <v-layout class="layout">
       <v-app-bar :elevation="1" color="surface">
         <div class="px-4">
           <NuxtLink to="/">
@@ -20,7 +20,7 @@
         </template>
       </v-app-bar>
 
-      <v-main>
+      <v-main class="main">
         <slot></slot>
       </v-main>
     </v-layout>
@@ -33,5 +33,15 @@
   height: auto;
   display: flex;
   align-items: center;
+}
+
+.layout {
+  display: flex;
+  max-height: 100vh;
+}
+
+.main {
+  height: 100%;
+  overflow: auto;
 }
 </style>
