@@ -5,7 +5,8 @@
 <script lang="ts" setup>
 const { signOut } = useAuth();
 
-await signOut({ redirect: false });
-
-navigateTo("/")
+onMounted(async () => {
+  await signOut({ redirect: false });
+  navigateTo("/")
+})
 </script>
