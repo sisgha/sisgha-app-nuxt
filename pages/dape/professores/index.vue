@@ -1,12 +1,12 @@
 <template>
   <div>
     <v-container class="py-5=6">
-      <h1>Início</h1>
+      <h1>Professores</h1>
     </v-container>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 definePageMeta({
   layout: "dape",
   middleware: 'auth'
