@@ -17,7 +17,11 @@ const CredentialsProvider: typeof ICredentialsProvider = CredentialsProviderModu
 
 const keycloakConfig = getKeycloakCredentials();
 
+const secret = process.env.AUTH_SECRET;
+
 export default NuxtAuthHandler({
+  secret,
+
   pages: {
     // Change the default behavior to use `/login` as the path for the sign-in page
     signIn: "/login",
