@@ -34,15 +34,15 @@
  
     <!-- Paginas -->
     <div class="contentLayout">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
-import "@/assets/styles/fontePadrao.css"
 import "@/assets/styles/bordaEstilizada.css"
 import "@/assets/styles/darkmodeStyle.css"
+import "@/assets/styles/fontePadrao.css"
 
 export default {
   data() {

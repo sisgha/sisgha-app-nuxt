@@ -4,12 +4,11 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "3.2.3"
-  },
-  "dependencies": {
-    "@nuxtjs/dayjs": "^1.4.1"
+    "@nuxtjs/dayjs": "^1.4.1",
+    "nuxt": "^3.3.1"
   }
 }
