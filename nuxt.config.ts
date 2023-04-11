@@ -1,5 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+const AUTH_ORIGIN = process.env.NUXT_ENV_VERCEL_URL ?? process.env.VERCEL_URL ?? process.env.AUTH_ORIGIN;
+
+const GQL_HOST = process.env.GQL_HOST ?? "https://sisgha.jipalab.dev/endpoint/graphql";
+
 export default defineNuxtConfig({
   modules: [
     //
@@ -7,8 +11,6 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-auth",
     "@nuxtjs/color-mode",
   ],
-
-  
 
   css: [
     // ...
@@ -29,6 +31,7 @@ export default defineNuxtConfig({
   auth: {
     enableSessionRefreshPeriodically: 3 * 60 * 1000,
     // defaultProvider: "sso-jipalab",
+    origin: AUTH_ORIGIN,
   },
 
   "graphql-client": {
@@ -49,7 +52,7 @@ export default defineNuxtConfig({
 
     clients: {
       default: {
-        host: process.env.GQL_HOST ?? "https://sisgha.jipalab.dev/endpoint/graphql",
+        host: GQL_HOST,
 
         retainToken: true,
 
