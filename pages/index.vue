@@ -29,8 +29,6 @@ if (unref(status) === "authenticated") {
       }
     }
   }, { immediate: true })
-
-
 }
 
 </script>

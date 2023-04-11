@@ -1,6 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-const AUTH_ORIGIN = process.env.NUXT_ENV_VERCEL_URL ?? process.env.VERCEL_URL ?? process.env.AUTH_ORIGIN;
+import { withHttps } from "ufo";
+
+const RUNTIME_AUTH_ORIGIN_RAW = process.env.NUXT_ENV_VERCEL_URL ?? process.env.VERCEL_URL;
+const RUNTIME_AUTH_ORIGIN = RUNTIME_AUTH_ORIGIN_RAW ? withHttps(RUNTIME_AUTH_ORIGIN_RAW) : null;
+
+const AUTH_ORIGIN = RUNTIME_AUTH_ORIGIN ?? process.env.AUTH_ORIGIN;
 
 const GQL_HOST = process.env.GQL_HOST ?? "https://sisgha.jipalab.dev/endpoint/graphql";
 
@@ -29,7 +34,6 @@ export default defineNuxtConfig({
   },
 
   auth: {
-    enableSessionRefreshPeriodically: 3 * 60 * 1000,
     // defaultProvider: "sso-jipalab",
     origin: AUTH_ORIGIN,
   },
