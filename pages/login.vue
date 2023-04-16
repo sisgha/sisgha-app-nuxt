@@ -28,7 +28,7 @@
 
     <div>
       <NuxtLink class="login-alternative-link" to="/">
-        <UIButton class="login-alternative-button">
+        <UIButton type="button" class="login-alternative-button">
           <template #start-icon>
             <div class="user-icon" v-html="UserIcon"></div>
           </template>
@@ -83,6 +83,12 @@ const {
   flex-direction: column;
 
   padding-bottom: 3rem;
+}
+
+@media screen and (max-width: 1070px) {
+  .login {
+    background-size: 18vmax;
+  }
 }
 
 
@@ -178,6 +184,8 @@ const {
 .login-alternative-button {
   max-width: 100%;
   width: 21.3125rem;
+
+  box-shadow: 0 0 0 3px rgb(var(--sisgha-theme-primary-text), 0.5);
 }
 
 .login-alternative-button .user-icon {
