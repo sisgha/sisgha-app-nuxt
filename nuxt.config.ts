@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import { withHttps } from "ufo";
+import svgLoader from "vite-svg-loader";
 
 const RUNTIME_AUTH_ORIGIN_RAW = process.env.NUXT_ENV_VERCEL_URL ?? process.env.VERCEL_URL;
 const RUNTIME_AUTH_ORIGIN = RUNTIME_AUTH_ORIGIN_RAW ? withHttps(RUNTIME_AUTH_ORIGIN_RAW) : null;
@@ -16,6 +17,10 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-auth",
     "@nuxtjs/color-mode",
   ],
+
+  vite: {
+    plugins: [svgLoader({})],
+  },
 
   css: [
     // ...

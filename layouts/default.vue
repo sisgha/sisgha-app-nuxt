@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="app">
     <v-layout class="layout">
       <v-app-bar :elevation="1" color="surface">
         <div class="px-4">
@@ -7,10 +7,6 @@
             <LogoSisgha class="logo" />
           </NuxtLink>
         </div>
-
-        <v-btn href="https://suap.ifro.edu.br/accounts/login/" target="_blank"> SUAP</v-btn>
-        <v-btn href="https://virtual.ifro.edu.br/" target="_blank">AVA</v-btn>
-        <v-btn href="https://portal.ifro.edu.br/" target="_blank">PORTAL</v-btn>
 
         <v-spacer></v-spacer>
 
@@ -37,6 +33,7 @@
 
 .layout {
   display: flex;
+
   max-height: 100vh;
 }
 

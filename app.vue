@@ -6,31 +6,15 @@
       rel="stylesheet" />
   </Head>
 
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div :class="`app ${appColorMode === 'dark' ? 'dark' : 'light'}`">
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { useTheme } from 'vuetify';
-
-const colorMode = useColorMode()
-
-const theme = useTheme()
-
-watch(
-  colorMode,
-  () => {
-    theme.global.name.value = colorMode.value === "dark" ? 'dark' : 'light';
-  },
-  {
-    immediate: true
-  }
-)
-</script>
-
-<script lang="ts">
-import "@/assets/styles/fontePadrao.css";
+const { appColorMode } = useAppColorMode();
 </script>
 
 <style>
@@ -38,4 +22,23 @@ img {
   display: block;
   max-width: 100%;
 }
+
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.svg-fill-text path {
+  fill: var(--sisgha-theme-text)
+}
+
+html {
+  overflow: auto;
+}
+</style>
+
+<style>
+@import "@/assets/styles/themes/theme.css";
+@import "@/assets/styles/fontePadrao.css";
 </style>
