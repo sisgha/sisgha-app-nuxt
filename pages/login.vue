@@ -72,8 +72,6 @@ const {
   background-image: url("@/assets/decorations/login-bloom-1.svg"), url("@/assets/decorations/login-bloom-2.svg");
   background-position: left top, right bottom;
 
-
-
   min-height: 100dvh;
 
   overflow-x: hidden;
@@ -84,7 +82,7 @@ const {
 
   flex-direction: column;
 
-
+  padding-bottom: 3rem;
 }
 
 
