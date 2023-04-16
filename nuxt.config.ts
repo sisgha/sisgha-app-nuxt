@@ -1,16 +1,25 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import { withHttps } from "ufo";
+import { withHttps, withTrailingSlash } from "ufo";
 import svgLoader from "vite-svg-loader";
 
-const RUNTIME_AUTH_ORIGIN_RAW = process.env.NUXT_ENV_VERCEL_URL ?? process.env.VERCEL_URL;
-const RUNTIME_AUTH_ORIGIN = RUNTIME_AUTH_ORIGIN_RAW ? withHttps(RUNTIME_AUTH_ORIGIN_RAW) : null;
+const RUNTIME_VERCEL_URL_RAW = process.env.NUXT_ENV_VERCEL_URL ?? process.env.VERCEL_URL;
+const RUNTIME_VERCEL_URL = RUNTIME_VERCEL_URL_RAW ? withHttps(RUNTIME_VERCEL_URL_RAW) : null;
 
-const AUTH_ORIGIN = RUNTIME_AUTH_ORIGIN ?? process.env.AUTH_ORIGIN;
+const RUNTIME_URL_RAW = process.env.RUNTIME_URL ?? RUNTIME_VERCEL_URL;
+const RUNTIME_URL = RUNTIME_URL_RAW && withTrailingSlash(RUNTIME_URL_RAW);
+
+const AUTH_ORIGIN = RUNTIME_URL ?? process.env.AUTH_ORIGIN;
 
 const GQL_HOST = process.env.GQL_HOST ?? "https://sisgha.jipalab.dev/endpoint/graphql";
 
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      runtime: RUNTIME_URL ?? undefined,
+    },
+  },
+
   modules: [
     //
     "nuxt-graphql-client",
@@ -20,6 +29,10 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [svgLoader({})],
+
+    define: {
+      "process.env.DEBUG": false,
+    },
   },
 
   css: [
@@ -30,12 +43,6 @@ export default defineNuxtConfig({
 
   build: {
     transpile: ["vuetify"],
-  },
-
-  vite: {
-    define: {
-      "process.env.DEBUG": false,
-    },
   },
 
   auth: {
