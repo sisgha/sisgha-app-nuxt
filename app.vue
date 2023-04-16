@@ -14,26 +14,7 @@
 </template>
 
 <script lang="ts" setup>
-import { isEqual } from 'ufo';
 const { appColorMode } = useAppColorMode();
-
-const runtimeConfig = useRuntimeConfig()
-
-const ensureRuntimeURL = () => {
-  if ("window" in globalThis && 'location' in window) {
-    const location = window.location;
-    const runtime = runtimeConfig.public.runtime;
-
-    if (runtime && !isEqual(location.origin, runtime)) {
-      window.location.href = runtime;
-    }
-  }
-}
-
-onBeforeMount(() => {
-  ensureRuntimeURL();
-})
-
 </script>
 
 <style>
