@@ -8,8 +8,9 @@
         <LogoSisgha class="logo" />
 
         <div class="fields">
-          <UITextField class="field" type="text" placeholder="Matrícula" :disabled="isBusy" v-model="credentials.username"
-            required :input-props="{ autocomplete: 'off', autocapitalize: 'none', autocorrect: 'off', }" />
+          <UITextField class="field" type="text" placeholder="Matrícula ou e-mail" :disabled="isBusy"
+            v-model="credentials.username" required
+            :input-props="{ autocomplete: 'off', autocapitalize: 'none', autocorrect: 'off', }" />
 
           <UITextField class="field" type="password" placeholder="Senha" :disabled="isBusy" v-model="credentials.password"
             required />
@@ -21,14 +22,15 @@
 
         <div v-if="isError">
           <v-divider class="my-4"></v-divider>
-          <v-alert v-model="isError" closable text="Não foi possível realizar o login." type="error"></v-alert>
+          <v-alert class="error-feedback" v-model="isError" closable text="Não foi possível realizar o login."
+            type="error"></v-alert>
         </div>
       </div>
     </form>
 
     <div>
       <NuxtLink class="login-alternative-link" to="/">
-        <UIButton type="button" class="login-alternative-button">
+        <UIButton :disabled="isBusy" type="button" class="login-alternative-button">
           <template #start-icon>
             <div class="user-icon" v-html="UserIcon"></div>
           </template>
@@ -209,5 +211,11 @@ const {
 
 .login-alternative-button .user-icon :global(path) {
   fill: rgb(var(--sisgha-theme-primary-text));
+}
+
+.error-feedback {
+  width: 16.9375rem;
+  max-width: 100%;
+  min-width: 100%;
 }
 </style>
