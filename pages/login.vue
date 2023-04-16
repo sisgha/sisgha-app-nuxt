@@ -100,7 +100,7 @@ const {
   grid-row: 2 / 3;
   grid-column: 2 / 3;
 
-  background: var(--sisgha-theme-surface);
+  background: rgb(var(--sisgha-theme-surface));
   box-shadow: 0px 0px 1px rgba(13, 92, 25, 0.25);
 
   border: 1px solid #D6D6D6;
@@ -154,7 +154,7 @@ const {
   width: 6.4375rem;
   height: 0.125rem;
 
-  background: var(--sisgha-theme-divider)
+  background: rgb(var(--sisgha-theme-divider))
 }
 
 .fields {
@@ -196,10 +196,10 @@ const {
   width: 0.125rem;
   height: 2rem;
 
-  background-color: var(--sisgha-theme-primary-text);
+  background-color: rgb(var(--sisgha-theme-primary-text));
 }
 
 .login-alternative-button .user-icon :global(path) {
-  fill: var(--sisgha-theme-primary-text);
+  fill: rgb(var(--sisgha-theme-primary-text));
 }
 </style>

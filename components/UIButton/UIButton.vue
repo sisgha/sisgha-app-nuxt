@@ -22,8 +22,8 @@
   padding: 0.875rem 1.25rem;
   border-radius: 0.5625rem;
 
-  background-color: var(--sisgha-theme-primary);
-  color: var(--sisgha-theme-primary-text);
+  background-color: rgb(var(--sisgha-theme-primary));
+  color: rgb(var(--sisgha-theme-primary-text));
 
 
   font-size: 1rem;

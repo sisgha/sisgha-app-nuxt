@@ -33,7 +33,7 @@ svg {
 }
 
 .svg-fill-text path {
-  fill: var(--sisgha-theme-text)
+  fill: rgb(var(--sisgha-theme-text))
 }
 
 html {
