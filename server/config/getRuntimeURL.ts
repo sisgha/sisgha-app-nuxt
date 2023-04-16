@@ -10,10 +10,11 @@ const getRuntimeVercelCommitURL = () => {
 const getRuntimeVercelURL = () => {
   const vercelCommitURL = getRuntimeVercelCommitURL();
 
-  // const vercelEnv = process.env.VERCEL_ENV;
+  const vercelEnv = process.env.VERCEL_ENV;
 
-  // if (vercelEnv === "production") {
-  // }
+  if (vercelEnv === "production") {
+    return null;
+  }
 
   return vercelCommitURL;
 };
