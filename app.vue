@@ -1,6 +1,42 @@
 <template>
-  <NuxtLayout>
-    <!-- w-1/2 mx-auto my-20 -->
-    <NuxtPage />
-  </NuxtLayout>
+  <Head>
+    <Link rel="preconnect" href="https://fonts.googleapis.com" />
+    <Link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <Link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+  </Head>
+
+  <div :class="`app ${appColorMode === 'dark' ? 'dark' : 'light'}`">
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
+
+<script lang="ts" setup>
+const { appColorMode } = useAppColorMode();
+</script>
+
+<style>
+@import "@/assets/styles/themes/theme.css";
+@import "@/assets/styles/fontePadrao.css";
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.svg-fill-text path {
+  fill: var(--sisgha-theme-text)
+}
+
+html {
+  overflow: auto;
+}
+</style>

@@ -1,295 +1,34 @@
 <template>
-    <div id="" class="container">
-        <!-- Conteudo da Pagina -->
-        <div class="content">
-            <!-- Formulario de Login -->
-            <form id="formularioDeLogin" class="bordaEstilizada" @submit="botaoDeLogin">
-    
-                <!-- SISGHA Logomarca -->
-                <div class="logomarca">
-                    <img src="@/assets/SisghaLogo1.svg" alt="SISGHA">
-                </div>
-    
-                <!-- Inserir Matricula -->
-                <input id="inserirMatricula" class="inputEstilizado bordaEstilizada" type="text" placeholder="Matrícula">
-    
-                <!-- Inserir Senha -->
-                <div class="inputDeSenha">
-                    <input id="inserirSenha" class="inputEstilizado bordaEstilizada" :type="visualizarSenha" placeholder="Senha">
-                    <!-- Visualizar e Ocultar Senha -->
-                    <div class="modoDeVisualizarSenha" @click="alterarInput()">
-                        <img class="iconeVisualizarSenha" src="@/assets/EyeOn.svg" alt="Mostrar senha" v-if="tipoDeSenha">
-                        <img class="iconeEsconderSenha" src="@/assets/EyeOff.svg" alt="Esconder senha" v-else>
-                    </div>
-                </div>
-    
-                <!-- Botao de Login -->
-                <button id="botaoDeLogin" class="botao botaoVerde bordaEstilizada" type="submit">
-                    <h3 class="corDaFonte">Entrar</h3>
-                </button>
-    
-                <!-- Botao de Recuperar Senha -->
-                <p class="recuperarSenha textoDescritivo">
-                    Esqueceu a senha? <span id="botaoRecuperarSenha">Clique aqui</span>.
-                </p>
-            </form>
-    
-            <!-- Login Aluno -->
-            <nuxt-link to="/">
-                <div class="cartaoDoAluno bordaEstilizada">
-                    <div class="iconeDoAluno">
-                        <img class="iconeDeUsuario" src="@/assets/UserIcon.svg" alt="Icone de Usuário">
-                    </div>
-                    <div class="dividerLogin"></div>
-                    <div class="descricaoDoCartao">
-                        <p class="fonte textoDoCartao">Entrar como aluno.</p>
-                    </div>
-                </div>
-            </nuxt-link>
-        </div>
+  <div>
+    <v-sheet class="px-4 py-4">
+      <h1>Início</h1>
 
-        <!-- Detalhes de Fundo -->
-        <div class="mancha1"></div>
-        <div class="mancha2"></div>
+      <p v-if="status === 'authenticated'">
+        Autenticado. ID do Usuário: {{ data!.user.id }}
+      </p>
 
-    </div>
-
+      <p v-if="status === 'unauthenticated'">
+        Não autenticado.
+      </p>
+    </v-sheet>
+  </div>
 </template>
 
-<script>
-    /* Estilo */
-    import "@/assets/styles/inputEstilizado.css"
-    import "@/assets/styles/bordaEstilizada.css"
-    import "@/assets/styles/botaoEstilizado.css"
+<script lang="ts" setup>
+const { status, data } = useAuthState();
 
-    export default {
-        head: {
-            title: "SISGHA - Login"
-        },
-        name: "TelaDeEntrar",
-        data() {
-            return {
-                visualizarSenha: "password",
-            }
-        },
-        computed: {
-            tipoDeSenha() {
-                return this.visualizarSenha === "password"
-            }
-        },
-        methods: {
-            alterarInput() {
-                this.visualizarSenha = this.tipoDeSenha ? "text" : "password"
-            },
-        }
+if (unref(status) === "authenticated") {
+  const { usuario, verifyUsuarioHasCargo } = await useAuthedUserInfo();
+
+  watch([usuario], () => {
+    if (unref(usuario)) {
+      const hasCargoDape = verifyUsuarioHasCargo("dape");
+
+      if (hasCargoDape) {
+        return navigateTo("/dape");
+      }
     }
+  }, { immediate: true })
+}
+
 </script>
-
-<style scoped>
-    /* Ajustes da Pagina */
-    .content {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        z-index: 1;
-    }
-
-    /* Formulario */
-    #formularioDeLogin {
-        display: flex;
-        flex-direction: column;
-        height: 425px;
-
-        transform: translateY(-3vh);
-
-        padding-top: 7.5px;
-        padding-bottom: 7.5px;
-
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* Logomarca */
-    .logomarca {
-        display: flex;
-        position: relative;
-
-        width: 50%;
-        height: 18%;
-
-        justify-content: center;
-        align-items: center;
-
-        margin-bottom: 5%;
-    }
-    .logomarca img {
-        width: 100%;
-        height: 100%;
-    }
-
-    /* Estilizacao de Input */
-    .inputEstilizado {
-        height: 60px !important;
-    }
-    .inputDeSenha {
-        display: flex;
-        flex-direction: row;
-
-        justify-content: center;
-        align-items: center;
-
-        margin-top: 5%;
-    }
-
-    .modoDeVisualizarSenha {
-        display: flex;
-        position: absolute;
-        z-index: 10;
-
-        width: 22px;
-        height: 20px;
-    }
-
-    /* Botao de Login */
-    #botaoDeLogin {
-        height: 60px !important;
-        margin-top: 5%;
-    }
-
-    /* Recuperar Senha */
-    .recuperarSenha {
-        margin-top: 3%;
-    }
-    .recuperarSenha span {
-        color: #39A048 !important;
-    }
-
-    /* Entrar como Aluno */
-    .cartaoDoAluno {
-        display: flex;
-        flex-direction: row;
-        background-color: #39A048 !important;
-
-        height: 45px;
-
-        align-items: center;
-    }
-    .descricaoDoCartao {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-    .cartaoDoAluno p {
-        color: #fff;
-    }
-    .cartaoDoAluno .dividerLogin {
-        width: 3px;
-        height: 100%;
-    }
-    .cartaoDoAluno .iconeDoAluno {
-        display: flex;
-        width: 13%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-    .cartaoDoAluno .iconeDeUsuario {
-        filter: invert(0) !important;
-    }
-
-    /* Detalhes de Fundo */
-    .mancha1,
-    .mancha2 {
-        display: flex;
-        position: absolute;
-        z-index: 0;
-        
-        width: 25vw;
-        height: 40vh;
-    }
-
-    .mancha1 {
-        left: 0;
-        top: 0;
-    }
-    .mancha2 {
-        right: 0;
-        bottom: 0;
-    }
-    
-
-    /* --- Versao Desktop --- */
-    @media (min-width: 1000px) {
-        #formularioDeLogin {
-            width: 28vw;
-        }
-
-        /* Estilizacao de Inputs */
-        .inputEstilizado {
-            width: 19vw;
-        }
-        .inputDeSenha {
-            width: 75%;
-        }
-        .modoDeVisualizarSenha {
-            right: 20%;
-        }
-
-        /* Botao de Login */
-        #botaoDeLogin {
-            width: 20.8vw;
-            height: 8vh;
-            margin-top: 5%;
-        }
-
-        /* Entrar como Aluno */
-        .cartaoDoAluno {
-            width: 28vw;
-        }
-        /* Detalhes de Fundo */
-        .mancha1 {
-            border-radius: 0 0 75% 0;
-        }
-        .mancha2 {
-            border-radius: 75% 0 0  0;
-        }
-    }
-
-    /* --- Versao Movel --- */
-    @media (max-width: 992px) {
-        #formularioDeLogin {
-            width: 90vw;
-        }
-
-        /* Estilizacao de Inputs */
-        .inputEstilizado {
-            width: 70vw;
-        }
-        .inputDeSenha {
-            width: 100%;
-        }
-        .modoDeVisualizarSenha {
-            right: 16%;
-        }
-
-        /* Botao de Login */
-        #botaoDeLogin {
-            width: 75vw;
-        }
-
-        /* Entrar como Aluno */
-        .cartaoDoAluno {
-            width: 90vw;
-        }
-
-        /* Detalhes de Fundo */
-        .mancha1 {
-            border-radius: 0 0 40% 0;
-        }
-        .mancha2 {
-            border-radius: 40% 0 0  0;
-        }
-    }
-</style>

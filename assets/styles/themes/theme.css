@@ -1,0 +1,32 @@
+.light {
+  --sisgha-theme-text: #000000;
+
+  --sisgha-theme-surface: #ffffff;
+  --sisgha-theme-background: #ffffff;
+
+  --sisgha-theme-primary: #39a048;
+  --sisgha-theme-primary-text: #ffffff;
+
+  --sisgha-theme-divider: #000000;
+}
+
+.dark {
+  --sisgha-theme-text: #ffffff;
+
+  --sisgha-theme-background: #121212;
+  --sisgha-theme-surface: rgb(33, 33, 33);
+
+  --sisgha-theme-primary: #39a048;
+  --sisgha-theme-primary-text: #ffffff;
+
+  --sisgha-theme-divider: #ffffff;
+}
+
+.app {
+  background-color: var(--sisgha-theme-background);
+  color: var(--sisgha-theme-text);
+}
+
+input {
+  color: inherit;
+}
