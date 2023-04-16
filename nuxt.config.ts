@@ -1,13 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import { withHttps, withTrailingSlash } from "ufo";
 import svgLoader from "vite-svg-loader";
+import { getRuntimeURL } from "./server/config/getRuntimeURL";
 
-const RUNTIME_VERCEL_URL_RAW = process.env.NUXT_ENV_VERCEL_URL ?? process.env.VERCEL_URL;
-const RUNTIME_VERCEL_URL = RUNTIME_VERCEL_URL_RAW ? withHttps(RUNTIME_VERCEL_URL_RAW) : null;
-
-const RUNTIME_URL_RAW = process.env.RUNTIME_URL ?? RUNTIME_VERCEL_URL;
-const RUNTIME_URL = RUNTIME_URL_RAW && withTrailingSlash(RUNTIME_URL_RAW);
+const RUNTIME_URL = getRuntimeURL();
 
 const AUTH_ORIGIN = RUNTIME_URL ?? process.env.AUTH_ORIGIN;
 
