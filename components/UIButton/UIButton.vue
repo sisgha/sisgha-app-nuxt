@@ -30,6 +30,11 @@
   font-weight: 600;
 }
 
+.ui-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .content {
   flex: 1;
   text-align: center;
