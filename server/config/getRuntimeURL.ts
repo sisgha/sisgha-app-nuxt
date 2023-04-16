@@ -1,28 +1,29 @@
 import { withHttps, withoutTrailingSlash } from "ufo";
+import { VERCEL_PRODUCTION_URL } from "../../fixtures";
 
-const getRuntimeVercelCommitURL = () => {
+const getVercelCommitURL = () => {
   const vercelCommitURLRaw = process.env.VERCEL_URL;
   const vercelCommitURL = vercelCommitURLRaw ? withHttps(vercelCommitURLRaw) : null;
 
   return vercelCommitURL;
 };
 
-const getRuntimeVercelURL = () => {
-  const vercelCommitURL = getRuntimeVercelCommitURL();
+const getVercelURL = () => {
+  const vercelCommitURL = getVercelCommitURL();
 
   const vercelEnv = process.env.VERCEL_ENV;
 
   if (vercelEnv === "production") {
-    return null;
+    return VERCEL_PRODUCTION_URL;
   }
 
   return vercelCommitURL;
 };
 
 export const getRuntimeURL = () => {
-  const runtimeVercelURL = getRuntimeVercelURL();
+  const vercelURL = getVercelURL();
 
-  const runtimeURLRaw = process.env.RUNTIME_URL ?? runtimeVercelURL;
+  const runtimeURLRaw = process.env.RUNTIME_URL ?? vercelURL;
 
   const runtimeURL = runtimeURLRaw && withoutTrailingSlash(runtimeURLRaw);
 
