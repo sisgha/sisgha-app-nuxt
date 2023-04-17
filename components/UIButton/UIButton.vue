@@ -35,6 +35,16 @@
   cursor: not-allowed;
 }
 
+.ui-button:focus {
+  outline: none;
+}
+
+.ui-button:focus,
+.ui-button:focus-within {
+  border-color: #39A048;
+  box-shadow: 0px 0px 0.5px 5px #59c16958;
+}
+
 .content {
   flex: 1;
   text-align: center;

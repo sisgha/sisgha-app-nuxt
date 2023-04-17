@@ -29,7 +29,7 @@
     </form>
 
     <div>
-      <NuxtLink class="login-alternative-link" to="/">
+      <NuxtLink tabindex="-1" class="login-alternative-link" to="/">
         <UIButton :disabled="isBusy" type="button" class="login-alternative-button">
           <template #start-icon>
             <div class="user-icon" v-html="UserIcon"></div>
