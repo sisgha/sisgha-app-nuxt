@@ -8,9 +8,8 @@
         <LogoSisgha class="logo" />
 
         <div class="fields">
-          <UITextField class="field" type="text" placeholder="Matrícula ou e-mail" :disabled="isBusy"
-            v-model="credentials.username" required
-            :input-props="{ autocomplete: 'off', autocapitalize: 'none', autocorrect: 'off', }" />
+          <UITextField class="field" type="text" placeholder="Matrícula" :disabled="isBusy" v-model="credentials.username"
+            required :input-props="{ autocomplete: 'off', autocapitalize: 'none', autocorrect: 'off', }" />
 
           <UITextField class="field" type="password" placeholder="Senha" :disabled="isBusy" v-model="credentials.password"
             required />
@@ -22,6 +21,7 @@
 
         <div v-if="isError">
           <v-divider class="my-4"></v-divider>
+
           <v-alert class="error-feedback" v-model="isError" closable text="Não foi possível realizar o login."
             type="error"></v-alert>
         </div>
