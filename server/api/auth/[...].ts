@@ -4,8 +4,8 @@ import CredentialsProviderModule from "next-auth/providers/credentials";
 import type IKeycloakProvider from "next-auth/providers/keycloak";
 import KeycloakProviderModule from "next-auth/providers/keycloak";
 import { EnvironmentConfigService } from "../../infrastructure/config/environment-config";
-import { getOpenIDClient } from "~/server/oidc/getOpenIDClient";
-import { refreshAccessToken } from "~/server/oidc/refreshAccessToken";
+import { OIDCClientService } from "../../infrastructure/oidc-client/oidc-client.service";
+import { OIDCClientProvider } from "../../infrastructure/oidc-client/providers/oidc-client.provider";
 
 /// @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
 const KeyCloakProvider: typeof IKeycloakProvider = KeycloakProviderModule.default;
@@ -14,6 +14,9 @@ const KeyCloakProvider: typeof IKeycloakProvider = KeycloakProviderModule.defaul
 const CredentialsProvider: typeof ICredentialsProvider = CredentialsProviderModule.default;
 
 const environmentConfigService = new EnvironmentConfigService();
+
+const oidcClientProvider = new OIDCClientProvider(environmentConfigService);
+const oidcClientService = new OIDCClientService(oidcClientProvider);
 
 const keycloakConfig = environmentConfigService.getKeycloakCredentials();
 
@@ -40,7 +43,7 @@ export default NuxtAuthHandler({
         if (credentials) {
           const { username, password } = credentials;
 
-          const openidClient = await getOpenIDClient();
+          const openidClient = await oidcClientProvider.getOpenIDClient();
 
           try {
             const token = await openidClient.grant({
@@ -109,7 +112,7 @@ export default NuxtAuthHandler({
       }
 
       // Access token has expired, try to update it
-      return refreshAccessToken(token);
+      return oidcClientService.refreshAccessToken(token);
     },
 
     async session({ session, token }) {
