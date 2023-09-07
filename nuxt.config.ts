@@ -1,9 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 import svgLoader from "vite-svg-loader";
-import { getRuntimeURL } from "./server/config/getRuntimeURL";
+import { EnvironmentConfigService } from "./server/infrastructure/config/environment-config";
 
-const RUNTIME_URL = getRuntimeURL();
+const environmentConfigService = new EnvironmentConfigService();
+
+const RUNTIME_URL = environmentConfigService.getRuntimeURL();
 
 const AUTH_ORIGIN = RUNTIME_URL ?? process.env.AUTH_ORIGIN;
 
@@ -42,7 +44,7 @@ export default defineNuxtConfig({
   },
 
   auth: {
-    // defaultProvider: "sso-jipalab",
+    // defaultProvider: "sisgha-sso",
     origin: AUTH_ORIGIN,
   },
 

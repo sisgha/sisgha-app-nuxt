@@ -1,11 +1,9 @@
-// file: ~/server/api/auth/[...].ts
 import { NuxtAuthHandler } from "#auth";
-
 import type ICredentialsProvider from "next-auth/providers/credentials";
 import CredentialsProviderModule from "next-auth/providers/credentials";
 import type IKeycloakProvider from "next-auth/providers/keycloak";
 import KeycloakProviderModule from "next-auth/providers/keycloak";
-import { getKeycloakCredentials } from "~/server/config/getKeycloadCredentials";
+import { EnvironmentConfigService } from "../../infrastructure/config/environment-config";
 import { getOpenIDClient } from "~/server/oidc/getOpenIDClient";
 import { refreshAccessToken } from "~/server/oidc/refreshAccessToken";
 
@@ -15,12 +13,12 @@ const KeyCloakProvider: typeof IKeycloakProvider = KeycloakProviderModule.defaul
 /// @ts-expect-error You need to use .default here for it to work during SSR. May be fixed via Vite at some point
 const CredentialsProvider: typeof ICredentialsProvider = CredentialsProviderModule.default;
 
-const keycloakConfig = getKeycloakCredentials();
+const environmentConfigService = new EnvironmentConfigService();
 
-const secret = process.env.AUTH_SECRET;
+const keycloakConfig = environmentConfigService.getKeycloakCredentials();
 
 export default NuxtAuthHandler({
-  secret,
+  secret: environmentConfigService.getNuxtAuthSecret(),
 
   pages: {
     // Change the default behavior to use `/login` as the path for the sign-in page
@@ -73,6 +71,7 @@ export default NuxtAuthHandler({
       clientSecret: keycloakConfig.clientSecret,
     }),
   ],
+
   callbacks: {
     async jwt({ token, user, account }) {
       // Initial sign in
