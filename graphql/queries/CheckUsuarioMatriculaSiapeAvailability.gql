@@ -1,0 +1,3 @@
+query CheckUsuarioMatriculaSiapeAvailability($matriculaSiape: String!, $usuarioId: Int) {
+  result: checkUsuarioMatriculaSiapeAvailability(dto: { matriculaSiape: $matriculaSiape, usuarioId: $usuarioId })
+}

@@ -1,0 +1,5 @@
+mutation AddCargoToUsuario($dto: AddCargoToUsuarioInput!) {
+  addCargoToUsuario(dto: $dto) {
+    id
+  }
+}

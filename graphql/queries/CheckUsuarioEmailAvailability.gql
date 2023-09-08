@@ -1,0 +1,3 @@
+query CheckUsuarioEmailAvailability($email: String!, $usuarioId: Int) {
+  result: checkUsuarioEmailAvailability(dto: { email: $email, usuarioId: $usuarioId })
+}

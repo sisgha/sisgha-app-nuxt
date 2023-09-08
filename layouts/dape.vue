@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import LogoIfroUrl from "@/assets/logos/ifro.svg?url";
+import { HeadTitleContext } from "../infrastructure/utils/buildHeadTitle";
 
 useAppHeadTitle("Início", HeadTitleContext.DAPE);
 

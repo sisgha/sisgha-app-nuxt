@@ -1,0 +1,20 @@
+query ListCargo($dto: GenericListInput!) {
+  listCargo(dto: $dto) {
+    total
+
+    offset
+
+    limit
+
+    items {
+      id
+
+      slug
+
+      dateCreated
+      dateUpdated
+      dateDeleted
+      dateSearchSync
+    }
+  }
+}

@@ -1,0 +1,5 @@
+mutation CreateUsuario($dto: CreateUsuarioInput!) {
+  createUsuario(dto: $dto) {
+    id
+  }
+}
