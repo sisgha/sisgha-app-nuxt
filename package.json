@@ -9,6 +9,8 @@
   },
   "devDependencies": {
     "@mdi/font": "^7.2.96",
+    "@vorms/core": "^1.1.0",
+    "@vorms/resolvers": "^1.1.0",
     "@nuxtjs/color-mode": "^3.2.0",
     "@nuxtjs/dayjs": "^1.4.1",
     "@sidebase/nuxt-auth": "^0.5.0-rc.0",
@@ -16,6 +18,7 @@
     "nuxt-graphql-client": "^0.2.27",
     "ufo": "^1.1.1",
     "vite-svg-loader": "^4.0.0",
-    "vuetify": "^3.1.13"
+    "vuetify": "^3.1.13",
+    "zod": "^3.22.2"
   }
 }
