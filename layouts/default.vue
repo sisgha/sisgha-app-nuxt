@@ -11,8 +11,8 @@
         <v-spacer></v-spacer>
 
         <template v-slot:append>
-          <MenuThemeStyleButton />
-          <MenuAccountButton />
+          <UIMenuThemeStyleButton />
+          <UIMenuAccountButton />
         </template>
       </v-app-bar>
 

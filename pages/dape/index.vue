@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="py-5=6">
+    <v-container class="py-5">
       <h1>Início</h1>
     </v-container>
   </div>

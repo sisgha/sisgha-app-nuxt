@@ -1,32 +1,7 @@
-<template>
-  <div ref="containerRef" role="textbox" class="ui-text-field" @click="handleContainerClick">
-    <input ref="inputRef" v-model="value" :placeholder="placeholder" :type="type" :disabled="disabled"
-      :required="required" v-bind="inputAttributes">
-
-    <div class="toggle-password-visibility" v-if="isTogglePasswordEnabled">
-      <button :disabled="disabled" title="Alterar visibilidade deste campo." @click="togglePasswordVisibility"
-        type="button">
-        <div class="visibility-icon svg-fill-text" v-html="showPassword ? EyeOff : EyeOn"></div>
-      </button>
-    </div>
-  </div>
-</template>
-
-<script lang="ts">
-
-export default {
-  // inheritAttrs: false
-}
-</script>
-
-
 <script lang="ts" setup>
-import EyeOff from "@/assets/icons/eye-off.svg?raw";
-import EyeOn from "@/assets/icons/eye-on.svg?raw";
-
-
 interface Props {
   type?: string;
+
   placeholder?: string,
   required?: boolean
   disabled?: boolean;
@@ -79,12 +54,31 @@ const inputAttributes = computed(() => {
 
 const handleContainerClick = () => {
   const input = unref(inputRef);
+
   if (input) {
     input.focus();
   }
 }
 
 </script>
+
+
+<template>
+  <div ref="containerRef" role="textbox" class="ui-text-field" @click="handleContainerClick">
+    <input ref="inputRef" v-model="value" :placeholder="placeholder" :type="type" :disabled="disabled"
+      :required="required" v-bind="inputAttributes">
+
+    <div class="toggle-password-visibility" v-if="isTogglePasswordEnabled">
+      <button :disabled="disabled" title="Alterar visibilidade deste campo." @click="togglePasswordVisibility"
+        type="button">
+
+        <IconEyeOff v-if="showPassword" class="visibility-icon svg-fill-text" />
+        <IconEyeOn v-if="!showPassword" class="visibility-icon svg-fill-text" />
+      </button>
+    </div>
+  </div>
+</template>
+
 
 <style scoped>
 .ui-text-field {
@@ -101,7 +95,7 @@ const handleContainerClick = () => {
 
   cursor: text;
 
-  transition: box-shadow .05s ease-in-out border .085s ease-in-out;
+  transition: box-shadow .05s ease-in-out, border .085s ease-in-out;
 }
 
 .ui-text-field input {

@@ -1,20 +1,13 @@
-const useAuthSignInCallbackUrl = () => {
-  const route = useRoute();
-
-  const callbackUrlParam = route.query.callbackUrl;
-  const callbackUrl = typeof callbackUrlParam === "string" ? callbackUrlParam : "/";
-
-  return callbackUrl;
-};
+import { useAuthSignInCallbackUrl } from "./useAuthSignInCallbackUrl";
 
 export const useAuthSignIn = () => {
   const { status } = useAuthState();
 
-  const callbackUrl = useAuthSignInCallbackUrl();
+  const callbackUrlRef = useAuthSignInCallbackUrl();
 
   watch(
-    [status],
-    ([status]) => {
+    [status, callbackUrlRef],
+    ([status, callbackUrl]) => {
       if (status === "authenticated") {
         return navigateTo(callbackUrl, { external: true });
       }
@@ -33,9 +26,10 @@ export const useAuthSignIn = () => {
   const isError = ref(false);
 
   const isBusy = computed(() => unref(isLoading));
+
   const canSubmit = computed(() => unref(isBusy));
 
-  const entrarComCredenciais = async () => {
+  const signInWithCredentials = async () => {
     if (isLoading.value) {
       return;
     }
@@ -44,7 +38,7 @@ export const useAuthSignIn = () => {
     isError.value = false;
 
     const { error, url } = await signIn("credentials", {
-      callbackUrl,
+      callbackUrl: unref(callbackUrlRef),
 
       redirect: false,
 
@@ -62,13 +56,17 @@ export const useAuthSignIn = () => {
   };
 
   return {
-    entrarComCredenciais,
-    
     isBusy,
     canSubmit,
     isLoading,
     isError,
 
+    // ...
+
     credentials,
+
+    //
+
+    signInWithCredentials,
   };
 };

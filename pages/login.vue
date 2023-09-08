@@ -1,50 +1,5 @@
-<template>
-  <div class="login">
-    <form @submit.prevent="entrarComCredenciais" class="login-form">
-      <div class="light-1"></div>
-      <div class="light-2"></div>
-
-      <div class="login-card">
-        <LogoSisgha class="logo" />
-
-        <div class="fields">
-          <UITextField class="field" type="text" placeholder="Matrícula" :disabled="isBusy" v-model="credentials.username"
-            required :input-props="{ autocomplete: 'off', autocapitalize: 'none', autocorrect: 'off', }" />
-
-          <UITextField class="field" type="password" placeholder="Senha" :disabled="isBusy" v-model="credentials.password"
-            required />
-        </div>
-
-        <UIButton class="login-form-submit" type="submit" :disabled="canSubmit">
-          Entrar
-        </UIButton>
-
-        <div v-if="isError">
-          <v-divider class="my-4"></v-divider>
-
-          <v-alert class="error-feedback" v-model="isError" closable text="Não foi possível realizar o login."
-            type="error"></v-alert>
-        </div>
-      </div>
-    </form>
-
-    <div>
-      <NuxtLink tabindex="-1" class="login-alternative-link" to="/">
-        <UIButton :disabled="isBusy" type="button" class="login-alternative-button">
-          <template #start-icon>
-            <div class="user-icon" v-html="UserIcon"></div>
-          </template>
-
-          Entrar como Aluno.
-        </UIButton>
-      </NuxtLink>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
 import UserIcon from "@/assets/icons/user.svg?raw";
-
 
 definePageMeta({
   layout: "empty",
@@ -55,19 +10,62 @@ definePageMeta({
   }
 })
 
-useHead({
-  title: "SISGHA - Login"
-})
+useAppHeadTitle("Login");
 
 const {
   isBusy,
   isError,
   canSubmit,
   credentials,
-  entrarComCredenciais,
+  signInWithCredentials,
 } = useAuthSignIn();
 
 </script>
+
+<template>
+  <div class="login">
+    <form @submit.prevent="signInWithCredentials" class="login-form">
+      <div class="light-1"></div>
+      <div class="light-2"></div>
+
+      <div class="login-card">
+        <LogoSisgha class="logo" />
+
+        <div class="fields">
+          <UITextField required class="field" type="text" placeholder="Matrícula" :disabled="isBusy"
+            v-model="credentials.username" :input-props="{ autocapitalize: 'none', autocorrect: 'off', }" />
+
+          <UITextField required class="field" type="password" placeholder="Senha" :disabled="isBusy"
+            v-model="credentials.password" />
+        </div>
+
+        <UIButton class="login-form-submit" type="submit" :disabled="canSubmit">
+          Entrar
+        </UIButton>
+
+        <div v-if="isError">
+          <v-divider class="my-4"></v-divider>
+
+          <v-alert class="error-feedback" v-model="isError" closable text="Não foi possível realizar o login."
+            type="error">
+          </v-alert>
+        </div>
+      </div>
+    </form>
+
+    <div>
+      <NuxtLink tabindex="-1" class="login-alternative-link" to="/aluno">
+        <UIButton :disabled="isBusy" type="button" class="login-alternative-button">
+          <template #start-icon>
+            <div class="user-icon" v-html="UserIcon"></div>
+          </template>
+
+          Entrar como Aluno
+        </UIButton>
+      </NuxtLink>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .login {

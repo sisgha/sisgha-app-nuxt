@@ -1,34 +1,46 @@
 <template>
-  <div>
-    <v-sheet class="px-4 py-4">
-      <h1>Início</h1>
-
-      <p v-if="status === 'authenticated'">
-        Autenticado. ID do Usuário: {{ data!.user.id }}
-      </p>
-
-      <p v-if="status === 'unauthenticated'">
-        Não autenticado.
-      </p>
-    </v-sheet>
-  </div>
+  <UILoading />
 </template>
 
 <script lang="ts" setup>
-const { status, data } = useAuthState();
+const authState = useAuthState();
 
-if (unref(status) === "authenticated") {
-  const { usuario, verifyUsuarioHasCargo } = await useAuthedUserInfo();
+const { status } = authState;
 
-  watch([usuario], () => {
-    if (unref(usuario)) {
-      const hasCargoDape = verifyUsuarioHasCargo("dape");
+const authedUserInfo = await useAuthedUsuarioInfo()
+
+const handleStatus = async () => {
+  const status_value = unref(status)
+
+  switch (status_value) {
+    case "authenticated": {
+      const hasCargoDape = await authedUserInfo.checkCargo("dape");
 
       if (hasCargoDape) {
-        return navigateTo("/dape");
+        navigateTo("/dape");
       }
+
+      break;
     }
-  }, { immediate: true })
+
+    case "unauthenticated": {
+      navigateTo("/login");
+      break;
+    }
+
+    default: {
+      break;
+    }
+  }
 }
 
+watch(
+  [status],
+  handleStatus,
+  { immediate: true }
+);
+
+// 
+
 </script>
+
