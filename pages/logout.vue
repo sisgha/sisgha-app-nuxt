@@ -1,7 +1,3 @@
-<template>
-  <UILoading />
-</template>
-
 <script lang="ts" setup>
 const { signOut, status } = useAuth();
 
@@ -23,3 +19,7 @@ watch(
   { immediate: true }
 )
 </script>
+
+<template>
+  <UILoading />
+</template>

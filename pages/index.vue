@@ -1,7 +1,3 @@
-<template>
-  <UILoading />
-</template>
-
 <script lang="ts" setup>
 const authState = useAuthState();
 
@@ -44,3 +40,6 @@ watch(
 
 </script>
 
+<template>
+  <UILoading />
+</template>

@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+const { appColorMode } = useAppColorMode();
+</script>
+
 <template>
   <Head>
     <Link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,10 +16,6 @@
     </NuxtLayout>
   </div>
 </template>
-
-<script lang="ts" setup>
-const { appColorMode } = useAppColorMode();
-</script>
 
 <style>
 @import "@/assets/styles/themes/theme.css";

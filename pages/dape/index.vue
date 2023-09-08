@@ -1,3 +1,10 @@
+<script lang="ts" setup>
+definePageMeta({
+  layout: "dape",
+  middleware: 'auth'
+})
+</script>
+
 <template>
   <div>
     <v-container class="py-5">
@@ -5,10 +12,3 @@
     </v-container>
   </div>
 </template>
-
-<script lang="ts" setup>
-definePageMeta({
-  layout: "dape",
-  middleware: 'auth'
-})
-</script>
