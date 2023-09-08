@@ -1,0 +1,13 @@
+query ChecarUsuarioPossuiCargoByUsuarioIdAndCargoSlug(
+  #
+  $usuarioId: Int!
+  $cargoSlug: String!
+) {
+  resultado: checarUsuarioPossuiCargoByUsuarioIdAndCargoSlug(
+    dto: {
+      #
+      usuarioId: $usuarioId
+      cargoSlug: $cargoSlug
+    }
+  )
+}
