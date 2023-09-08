@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import UserIcon from "@/assets/icons/user.svg?raw";
-
 definePageMeta({
   layout: "empty",
 
@@ -57,7 +55,7 @@ const {
       <NuxtLink tabindex="-1" class="login-alternative-link" to="/aluno">
         <UIButton :disabled="isBusy" type="button" class="login-alternative-button">
           <template #start-icon>
-            <div class="user-icon" v-html="UserIcon"></div>
+            <IconUser class="user-icon" />
           </template>
 
           Entrar como Aluno

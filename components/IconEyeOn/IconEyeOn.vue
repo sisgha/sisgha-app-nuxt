@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import EyeOn from "./eye-on.svg?raw";
+import EyeOn from "@/assets/icons/eye-on.svg?raw";
 </script>
 
 <template>
