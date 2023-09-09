@@ -1,13 +1,18 @@
 import { createVuetify } from "vuetify";
-import * as components from "vuetify/components";
+import * as coreComponents from "vuetify/components";
 import * as directives from "vuetify/directives";
+import { VDataTableServer } from "vuetify/labs/VDataTable";
 import { pt } from "vuetify/locale";
 
 export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     ssr: true,
 
-    components,
+    components: {
+      ...coreComponents,
+      VDataTableServer,
+    },
+
     directives,
 
     locale: {

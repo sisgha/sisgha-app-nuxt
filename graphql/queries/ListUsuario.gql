@@ -1,0 +1,27 @@
+query ListUsuario($dto: GenericListInput!) {
+  listUsuario(dto: $dto) {
+    total
+
+    offset
+
+    limit
+
+    items {
+      id
+
+      nome
+      email
+      matriculaSiape
+
+      cargos {
+        id
+        slug
+      }
+
+      dateCreated
+      dateUpdated
+      dateDeleted
+      dateSearchSync
+    }
+  }
+}
