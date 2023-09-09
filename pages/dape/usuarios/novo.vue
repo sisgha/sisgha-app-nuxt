@@ -84,7 +84,6 @@ const cargosSelectItems = computed(() => cargos.value.map(cargo => {
 
       <div class="my-8"></div>
 
-
       <div>
         <form @submit="handleSubmit" @reset="handleReset">
           <div class="my-3">
