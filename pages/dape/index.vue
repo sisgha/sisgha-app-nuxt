@@ -3,12 +3,18 @@ definePageMeta({
   layout: "dape",
   middleware: 'auth'
 })
+
+const breadcrumbItems = ref([
+  {
+    title: 'Painel DAPE',
+    disabled: true,
+    to: '/dape',
+  },
+])
 </script>
 
 <template>
-  <div>
-    <v-container class="py-5">
-      <h1>Início</h1>
-    </v-container>
-  </div>
+  <layout-dape-page :breadcrumbItems="breadcrumbItems">
+    <h1>Início</h1>
+  </layout-dape-page>
 </template>
