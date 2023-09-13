@@ -1,5 +1,35 @@
 <script lang="ts" setup>
-const { appColorMode } = useAppColorMode();
+import { useTheme } from "vuetify";
+
+const appThemePallete = ref("dark");
+
+//
+
+const theme = useTheme();
+
+const applyAppThemePalleteToVuetify = () => {
+  theme.global.name.value = appThemePallete.value;
+};
+
+watch(appThemePallete, applyAppThemePalleteToVuetify, { immediate: true });
+onMounted(applyAppThemePalleteToVuetify);
+
+//
+
+const colorMode = useColorMode();
+
+const loadAppThemePalleteFromColorMode = () => {
+  appThemePallete.value = colorMode.value;
+};
+
+watch(colorMode, loadAppThemePalleteFromColorMode);
+onMounted(loadAppThemePalleteFromColorMode);
+
+//
+
+const appThemePalleteGetter = computed(() => appThemePallete.value)
+
+provide("appThemePalleteGetter", appThemePalleteGetter);
 </script>
 
 <template>
@@ -10,7 +40,7 @@ const { appColorMode } = useAppColorMode();
       rel="stylesheet" />
   </Head>
 
-  <div :class="`app ${appColorMode === 'dark' ? 'dark' : 'light'}`">
+  <div :class="`app ${appThemePallete === 'dark' ? 'dark' : 'light'}`">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
