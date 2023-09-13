@@ -4,9 +4,15 @@ export default defineNuxtPlugin(async (_nuxtApp) => {
 
   const session = await getSession();
 
-  const accessToken = session?.accessToken;
+  const accessToken = computed(() => session?.accessToken);
 
-  if (accessToken) {
-    useGqlToken(accessToken);
-  }
+  watch(
+    [accessToken],
+    ([accessToken]) => {
+      if (accessToken) {
+        useGqlToken(accessToken);
+      }
+    },
+    { immediate: true }
+  );
 });
