@@ -69,8 +69,8 @@ const blocks = reactive([
             <div v-for="block in blocks" :key="block.key">
               <v-list-subheader v-if="block.header" class="my-2">{{ block.header }}</v-list-subheader>
 
-              <v-list-item v-for="link in block.items" :title="link.label" :to="link.href" :exact="link.exact ?? false"
-                :prepend-icon="link.icon" class="px-4 py-3" style="border-radius: 0.75rem;">
+              <v-list-item v-for="link in block.items" :ripple="false" :title="link.label" :to="link.href"
+                :exact="link.exact ?? false" :prepend-icon="link.icon" class="px-4 py-3" style="border-radius: 0.75rem;">
               </v-list-item>
             </div>
           </v-list>
