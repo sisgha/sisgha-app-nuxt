@@ -1,9 +1,9 @@
-query ChecarUsuarioPossuiCargoByUsuarioIdAndCargoSlug(
+query CheckUsuarioHasCargoByUsuarioIdAndCargoSlug(
   #
   $usuarioId: Int!
   $cargoSlug: String!
 ) {
-  resultado: checarUsuarioPossuiCargoByUsuarioIdAndCargoSlug(
+  resultado: checkUsuarioHasCargoByUsuarioIdAndCargoSlug(
     dto: {
       #
       usuarioId: $usuarioId

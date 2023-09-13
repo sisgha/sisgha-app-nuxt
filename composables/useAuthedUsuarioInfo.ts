@@ -77,7 +77,7 @@ export const useAuthedUsuarioInfo = async () => {
   const checkCargo = async (cargoSlug: string) => {
     const usuario = await waitForUsuario();
 
-    const data = await GqlInstance("ChecarUsuarioPossuiCargoByUsuarioIdAndCargoSlug", {
+    const data = await GqlInstance("CheckUsuarioHasCargoByUsuarioIdAndCargoSlug", {
       cargoSlug,
       usuarioId: usuario.id,
     });
