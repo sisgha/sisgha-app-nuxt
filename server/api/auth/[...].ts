@@ -68,7 +68,7 @@ export default NuxtAuthHandler({
       },
     }),
     KeyCloakProvider({
-      id: "sso-jipalab",
+      id: "sisgha-sso",
       issuer: keycloakConfig.issuer,
       clientId: keycloakConfig.clientId,
       clientSecret: keycloakConfig.clientSecret,
