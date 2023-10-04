@@ -1,16 +1,12 @@
 export default defineNuxtPlugin(async (_nuxtApp) => {
-  // access cookie for auth
-  const { getSession } = useAuth();
-
-  const session = await getSession();
-
-  const accessToken = computed(() => session?.accessToken);
+  const { data } = useAuthState();
+  const accessToken = computed(() => data.value?.accessToken ?? null);
 
   watch(
     [accessToken],
-    ([accessToken]) => {
-      if (accessToken) {
-        useGqlToken(accessToken);
+    ([token]) => {
+      if (token) {
+        useGqlToken(token);
       }
     },
     { immediate: true }
