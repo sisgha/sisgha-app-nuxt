@@ -37,7 +37,7 @@ const {
             v-model="credentials.password" />
         </div>
 
-        <UIButton class="login-form-submit" type="submit" :disabled="canSubmit">
+        <UIButton class="login-form-submit" type="submit" :disabled="!canSubmit">
           Entrar
         </UIButton>
 

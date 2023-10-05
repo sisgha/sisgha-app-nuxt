@@ -11,7 +11,8 @@ const applyAppThemePalleteToVuetify = () => {
   theme.global.name.value = appThemePallete.value;
 };
 
-watch(appThemePallete, applyAppThemePalleteToVuetify, { immediate: true });
+applyAppThemePalleteToVuetify();
+watch(appThemePallete, applyAppThemePalleteToVuetify);
 onMounted(applyAppThemePalleteToVuetify);
 
 //

@@ -4,12 +4,11 @@ import { HeadTitleContext } from '../../../infrastructure/utils/buildHeadTitle';
 import { getCargoLabelBySlug } from '../../../infrastructure/utils/getCargoLabelBySlug';
 
 definePageMeta({
-  layout: "dape",
+  layout: "dashboard",
   middleware: 'auth'
 })
 
-useAppHeadTitle("Usuários", HeadTitleContext.DAPE);
-
+useAppHeadTitle("Usuários", HeadTitleContext.DASHBOARD);
 
 const headers = reactive([
   {
@@ -32,6 +31,7 @@ const headers = reactive([
     align: 'start',
     sortable: false,
   },
+
   {
     key: 'v-acoes',
     title: 'Ações',
@@ -39,7 +39,6 @@ const headers = reactive([
     sortable: false,
   },
 ]);
-
 
 const apiListUsuario = useAPIListUsuario();
 
@@ -95,28 +94,27 @@ const isLoading = computed(() => apiListUsuario.isLoading.value || isLoadingDebo
 
 const breadcrumbItems = ref([
   {
-    title: 'Painel DAPE',
+    title: 'Painel',
     disabled: false,
-    to: '/dape',
+    to: '/dashboard',
   },
 
   {
     title: 'Usuários',
     disabled: true,
-    to: '/dape',
+    to: '/dashboard',
   },
 ])
-
 </script>
 
 <template>
-  <layout-dape-page :breadcrumbItems="breadcrumbItems">
+  <layout-dashboard-page :breadcrumbItems="breadcrumbItems">
     <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 1rem">
       <h1>Usuários</h1>
 
       <div style="flex:1;"></div>
 
-      <v-btn to="/dape/usuarios/novo" icon="mdi-plus" color="success"></v-btn>
+      <v-btn to="/dashboard/usuarios/novo" icon="mdi-plus" color="success"></v-btn>
     </div>
 
     <div class="my-8"></div>
@@ -154,6 +152,7 @@ const breadcrumbItems = ref([
           </template>
 
           <template v-slot:item.v-acoes="{ item }">
+            <v-btn icon="mdi-eye" variant="plain" class="my-1" :to="`/dashboard/usuarios/${item.raw.id}`"></v-btn>
           </template>
 
           <template v-slot:tfoot>
@@ -168,5 +167,5 @@ const breadcrumbItems = ref([
         <v-divider color="info"></v-divider>
       </v-card>
     </div>
-  </layout-dape-page>
+  </layout-dashboard-page>
 </template>

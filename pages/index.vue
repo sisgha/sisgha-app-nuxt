@@ -1,26 +1,33 @@
 <script lang="ts" setup>
+import { callWithNuxt } from 'nuxt/app';
+
 const authState = useAuthState();
 
-const { status } = authState;
+const authedUsuarioInfo = await useAuthedUsuarioInfo()
 
-const authedUserInfo = await useAuthedUsuarioInfo()
+const { status } = authState;
+const app = useNuxtApp()
 
 const handleStatus = async () => {
   const status_value = unref(status)
 
   switch (status_value) {
     case "authenticated": {
-      const hasCargoDape = await authedUserInfo.checkCargo("dape");
+      const canViewPageDashboard = await authedUsuarioInfo.checkAuthorization({
+        verbo: "view",
+        recurso: "pages.dashboard",
+        entityId: null
+      })
 
-      if (hasCargoDape) {
-        navigateTo("/dape");
+      if (canViewPageDashboard) {
+        callWithNuxt(app, () => navigateTo("/dashboard"))
       }
 
       break;
     }
 
     case "unauthenticated": {
-      navigateTo("/login");
+      callWithNuxt(app, () => navigateTo("/login"))
       break;
     }
 
@@ -33,8 +40,10 @@ const handleStatus = async () => {
 watch(
   [status],
   handleStatus,
-  { immediate: true }
+  { immediate: false }
 );
+
+await handleStatus();
 
 // 
 

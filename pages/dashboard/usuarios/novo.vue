@@ -6,11 +6,11 @@ import { zodResolver } from '../../../infrastructure/utils/fixtures';
 import { getCargoLabelBySlug } from '../../../infrastructure/utils/getCargoLabelBySlug';
 
 definePageMeta({
-  layout: "dape",
+  layout: "dashboard",
   middleware: 'auth'
 })
 
-useAppHeadTitle("Novo Usuário", HeadTitleContext.DAPE);
+useAppHeadTitle("Novo Usuário", HeadTitleContext.DASHBOARD);
 
 const gql = useGql();
 
@@ -20,7 +20,7 @@ const schema = api.buildCreateUsuarioZodSchema(context)
 
 const form = useForm<api.IAPICreateUsuarioDto>({
   validateMode: 'submit',
-  reValidateMode: 'input',
+  reValidateMode: 'blur',
 
   initialValues: {
     nome: '',
@@ -37,7 +37,7 @@ const form = useForm<api.IAPICreateUsuarioDto>({
 
       await api.createUsuario(context, data);
 
-      await navigateTo("/dape/usuarios")
+      await navigateTo("/dashboard/usuarios")
 
       setSubmitting(false);
 
@@ -117,7 +117,7 @@ const cargosSelectItems = computed(() => cargos.value.map(cargo => {
           </div>
 
           <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 1rem">
-            <v-btn :disabled="isBusy" prepend-icon="mdi-cancel" to="/dape/usuarios" type="button"
+            <v-btn :disabled="isBusy" prepend-icon="mdi-cancel" to="/dashboard/usuarios" type="button"
               variant="tonal">Cancelar</v-btn>
 
             <div style="flex: 1"></div>

@@ -1,5 +1,5 @@
-query GetAuthedUser {
-  usuario: authedUser {
+query GetAuthedUsuario {
+  usuario: authedUsuario {
     id
 
     email

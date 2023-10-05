@@ -1,0 +1,10 @@
+query CheckUsuarioAuthorizations($dto: CheckUsuarioAuthorizationsInput!) {
+  checkUsuarioAuthorizations(dto: $dto) {
+    checks {
+      usuarioId
+      verbo
+      recurso
+      can
+    }
+  }
+}

@@ -1,20 +1,20 @@
 <script lang="ts" setup>
 definePageMeta({
-  layout: "dape",
+  layout: "dashboard",
   middleware: 'auth'
 })
 
 const breadcrumbItems = ref([
   {
-    title: 'Painel DAPE',
+    title: 'Painel',
     disabled: true,
-    to: '/dape',
+    to: '/dashboard',
   },
 ])
 </script>
 
 <template>
-  <layout-dape-page :breadcrumbItems="breadcrumbItems">
+  <layout-dashboard-page :breadcrumbItems="breadcrumbItems">
     <h1>Início</h1>
-  </layout-dape-page>
+  </layout-dashboard-page>
 </template>

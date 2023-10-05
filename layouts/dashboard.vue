@@ -2,7 +2,7 @@
 import LogoIfroUrl from "@/assets/logos/ifro.svg?url";
 import { HeadTitleContext } from "../infrastructure/utils/buildHeadTitle";
 
-useAppHeadTitle("Início", HeadTitleContext.DAPE);
+useAppHeadTitle("Início", HeadTitleContext.DASHBOARD);
 
 const drawer = ref(true);
 
@@ -13,7 +13,7 @@ const blocks = reactive([
     items: [
       {
         label: "Início",
-        href: "/dape",
+        href: "/dashboard",
         icon: "mdi-home",
         exact: true,
       }
@@ -27,7 +27,7 @@ const blocks = reactive([
     items: [
       {
         label: "Usuários",
-        href: "/dape/usuarios",
+        href: "/dashboard/usuarios",
         icon: "mdi-account-hard-hat",
         exact: false,
       },
@@ -38,7 +38,7 @@ const blocks = reactive([
 </script>
 
 <template>
-  <dape-guard>
+  <dashboard-guard>
     <v-app>
       <v-layout>
         <v-app-bar color="surface">
@@ -50,7 +50,7 @@ const blocks = reactive([
 
               <div class="brand-system-info">
                 <span>IFRO</span>
-                <span>DAPE</span>
+                <span>DASHBOARD</span>
               </div>
             </div>
           </v-toolbar-title>
@@ -82,7 +82,7 @@ const blocks = reactive([
         </v-main>
       </v-layout>
     </v-app>
-  </dape-guard>
+  </dashboard-guard>
 </template>
 
 

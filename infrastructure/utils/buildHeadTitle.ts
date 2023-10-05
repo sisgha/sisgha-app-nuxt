@@ -1,5 +1,5 @@
 export enum HeadTitleContext {
-  DAPE,
+  DASHBOARD,
 }
 
 export const buildHeadTitle = (title: string, context: HeadTitleContext | null = null): string => {
@@ -9,8 +9,8 @@ export const buildHeadTitle = (title: string, context: HeadTitleContext | null =
       return `${title} | SISGHA`;
     }
 
-    case HeadTitleContext.DAPE: {
-      return `${title} | ${buildHeadTitle("Painel DAPE")}`;
+    case HeadTitleContext.DASHBOARD: {
+      return `${title} | ${buildHeadTitle("Painel")}`;
     }
   }
 };

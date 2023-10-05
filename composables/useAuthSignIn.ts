@@ -27,7 +27,7 @@ export const useAuthSignIn = () => {
 
   const isBusy = computed(() => unref(isLoading));
 
-  const canSubmit = computed(() => unref(isBusy));
+  const canSubmit = computed(() => !unref(isBusy));
 
   const signInWithCredentials = async () => {
     if (isLoading.value) {
