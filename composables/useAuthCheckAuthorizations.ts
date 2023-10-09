@@ -19,7 +19,7 @@ export const useAuthCheckAuthorizations = async (checks: CheckUsuarioAuthorizati
         const result_value = unref(result);
 
         if (!isBusy_value && result_value !== null) {
-          resolve(result_value);
+          resolve(result_value); 
           unwatch();
         }
       };

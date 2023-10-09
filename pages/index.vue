@@ -3,7 +3,7 @@ import { callWithNuxt } from 'nuxt/app';
 
 const authState = useAuthState();
 
-const authedUsuarioInfo = await useAuthedUsuarioInfo()
+const appContextAuth = await useAppContextAuth()
 
 const { status } = authState;
 const app = useNuxtApp()
@@ -13,11 +13,11 @@ const handleStatus = async () => {
 
   switch (status_value) {
     case "authenticated": {
-      const canViewPageDashboard = await authedUsuarioInfo.checkAuthorization({
+      const canViewPageDashboard = await appContextAuth.checkAuthorization({
         verbo: "view",
         recurso: "pages.dashboard",
         entityId: null
-      })
+      });
 
       if (canViewPageDashboard) {
         callWithNuxt(app, () => navigateTo("/dashboard"))

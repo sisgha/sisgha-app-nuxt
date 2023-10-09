@@ -29,8 +29,14 @@ onMounted(loadAppThemePalleteFromColorMode);
 //
 
 const appThemePalleteGetter = computed(() => appThemePallete.value)
-
 provide("appThemePalleteGetter", appThemePalleteGetter);
+
+//
+
+const appContextAuth = await createAppContextAuth();
+provide(APP_CONTEXT_AUTH, appContextAuth);
+
+//
 </script>
 
 <template>

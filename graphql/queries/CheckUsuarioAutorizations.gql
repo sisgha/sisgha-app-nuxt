@@ -4,6 +4,7 @@ query CheckUsuarioAuthorizations($dto: CheckUsuarioAuthorizationsInput!) {
       usuarioId
       verbo
       recurso
+      entityId
       can
     }
   }

@@ -1,0 +1,18 @@
+query FindUsuarioById($id: Int!) {
+  usuario: findUsuarioById(dto: { id: $id }) {
+    id
+
+    nome
+    email
+    matriculaSiape
+
+    dateCreated
+    dateUpdated
+    dateDeleted
+
+    cargos {
+      id
+      slug
+    }
+  }
+}

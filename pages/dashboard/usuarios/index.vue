@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import debounce from "lodash-es/debounce";
+import { getPageDashboardUsuariosBreadcrumbItems } from "../../../components/PageDashboardUsuarios/hooks/getPageDashboardUsuariosBreadcrumbItems";
 import { HeadTitleContext } from '../../../infrastructure/utils/buildHeadTitle';
 import { getCargoLabelBySlug } from '../../../infrastructure/utils/getCargoLabelBySlug';
 
@@ -92,80 +93,70 @@ watch([apiListUsuario.listUsuarioQuery.data], ([data]) => {
 
 const isLoading = computed(() => apiListUsuario.isLoading.value || isLoadingDebounced.value);
 
-const breadcrumbItems = ref([
-  {
-    title: 'Painel',
-    disabled: false,
-    to: '/dashboard',
-  },
-
-  {
-    title: 'Usuários',
-    disabled: true,
-    to: '/dashboard',
-  },
-])
+const breadcrumbItems = getPageDashboardUsuariosBreadcrumbItems();
 </script>
 
 <template>
-  <layout-dashboard-page :breadcrumbItems="breadcrumbItems">
-    <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 1rem">
-      <h1>Usuários</h1>
+  <LayoutDashboardPage :breadcrumbItems="breadcrumbItems">
+    <DashboardContainer class="my-8">
+      <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 1rem">
+        <h1>Usuários</h1>
 
-      <div style="flex:1;"></div>
+        <div style="flex:1;"></div>
 
-      <v-btn to="/dashboard/usuarios/novo" icon="mdi-plus" color="success"></v-btn>
-    </div>
-
-    <div class="my-8"></div>
-
-    <div>
-
-      <div class="py-3">
-        <v-text-field v-model="search" label="Pesquisar" placeholder="Procurar por um usuário..." variant="outlined" />
+        <VBtn to="/dashboard/usuarios/novo" icon="mdi-plus" color="success"></VBtn>
       </div>
 
-      <v-card>
+      <div class="my-8"></div>
+
+      <div>
+
+        <div class="py-3">
+          <VTextField v-model="search" label="Pesquisar" placeholder="Procurar por um usuário..." variant="outlined" />
+        </div>
+
+        <VCard>
 
 
-        <v-data-table-server v-model:items-per-page="itemsPerPage" v-model:page="page" v-model:sort-by="sortBy"
-          density="comfortable" :headers="headers" :items-length="total" :items="items" :loading="isLoading"
-          :search="search" item-value="id">
+          <VDataTableServer v-model:items-per-page="itemsPerPage" v-model:page="page" v-model:sort-by="sortBy"
+            density="comfortable" :headers="headers" :items-length="total" :items="items" :loading="isLoading"
+            :search="search" item-value="id">
 
 
-          <template v-slot:item.matriculaSiape="{ item }">
-            <v-chip variant="outlined">
-              {{ item.raw.matriculaSiape }}
-            </v-chip>
-          </template>
+            <template v-slot:item.matriculaSiape="{ item }">
+              <VChip variant="outlined">
+                {{ item.raw.matriculaSiape }}
+              </VChip>
+            </template>
 
-          <template v-slot:item.v-cargos="{ item }">
+            <template v-slot:item.v-cargos="{ item }">
 
-            <v-chip v-for="cargo in item.raw.cargos" :key="cargo.id" class="ma-1" variant="elevated">
-              {{ getCargoLabelBySlug(cargo.slug) }}
-            </v-chip>
+              <VChip v-for="cargo in item.raw.cargos" :key="cargo.id" class="ma-1" variant="elevated">
+                {{ getCargoLabelBySlug(cargo.slug) }}
+              </VChip>
 
-            <v-chip v-if="item.raw.cargos.length === 0" class="ma-1">
-              Sem atribuições
-            </v-chip>
+              <VChip v-if="item.raw.cargos.length === 0" class="ma-1">
+                Sem atribuições
+              </VChip>
 
-          </template>
+            </template>
 
-          <template v-slot:item.v-acoes="{ item }">
-            <v-btn icon="mdi-eye" variant="plain" class="my-1" :to="`/dashboard/usuarios/${item.raw.id}`"></v-btn>
-          </template>
+            <template v-slot:item.v-acoes="{ item }">
+              <VBtn icon="mdi-eye" variant="plain" class="my-1" :to="`/dashboard/usuarios/${item.raw.id}`"></VBtn>
+            </template>
 
-          <template v-slot:tfoot>
-            <tr>
-              <td colspan="4">
-                <v-divider />
-              </td>
-            </tr>
-          </template>
-        </v-data-table-server>
+            <template v-slot:tfoot>
+              <tr>
+                <td colspan="4">
+                  <VDivider />
+                </td>
+              </tr>
+            </template>
+          </VDataTableServer>
 
-        <v-divider color="info"></v-divider>
-      </v-card>
-    </div>
-  </layout-dashboard-page>
+          <VDivider color="info"></VDivider>
+        </VCard>
+      </div>
+    </DashboardContainer>
+  </LayoutDashboardPage>
 </template>
