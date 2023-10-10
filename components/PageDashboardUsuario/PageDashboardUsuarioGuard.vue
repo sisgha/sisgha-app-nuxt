@@ -3,9 +3,7 @@ const idUsuarioRef = inject<ComputedRef<number>>("id_usuario")!;
 </script>
 
 <template>
-  <div v-if="idUsuarioRef === -1">
-    <p>O identificador do usuário é inválido</p>
-  </div>
+  <PageDashboardUsuarioGuardFallbackInvalidIdentifier v-if="idUsuarioRef === -1" />
 
   <AppAuthorizationGuard v-else verbo="read" recurso="usuario" :entity-id="idUsuarioRef">
     <template #allowed>
@@ -13,11 +11,7 @@ const idUsuarioRef = inject<ComputedRef<number>>("id_usuario")!;
     </template>
 
     <template #forbidden>
-      <DashboardContainer class="my-8">
-        <VAlert type="error">
-          Você não tem permissão para visualizar este usuário.
-        </VAlert>
-      </DashboardContainer>
+      <PageDashboardUsuarioGuardFallbackNotAllowed />
     </template>
   </AppAuthorizationGuard>
 </template>

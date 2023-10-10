@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+import { HeadTitleContext } from '../../infrastructure/utils';
+
+useAppHeadTitle("Usuário", HeadTitleContext.DASHBOARD);
+
 const route = useRoute();
 
 const idUsuarioParam = route.params.id_usuario;

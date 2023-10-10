@@ -6,10 +6,10 @@ const { status } = useAuthState();
   <div v-if="status === 'loading'"></div>
 
   <div v-if="status === 'authenticated'">
-    <v-btn icon="mdi-account" to="/logout" />
+    <VBtn icon="mdi-account" to="/logout" />
   </div>
 
   <div v-if="status === 'unauthenticated'">
-    <v-btn icon="mdi-account" to="/login" />
+    <VBtn icon="mdi-account" to="/login" />
   </div>
 </template>

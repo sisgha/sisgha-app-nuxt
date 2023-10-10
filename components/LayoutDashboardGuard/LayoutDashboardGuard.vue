@@ -5,11 +5,11 @@
     </template>
 
     <template #forbidden>
-      <DashboardContainer class="my-8">
+      <LayoutDashboardContainer class="my-8">
         <VAlert type="error">
           Você não tem permissão para acessar o painel.
         </VAlert>
-      </DashboardContainer>
+      </LayoutDashboardContainer>
     </template>
   </AppAuthorizationGuard>
 </template>

@@ -6,17 +6,17 @@ const { breadcrumbItems } = defineProps<{
 
 <template>
   <div v-if="breadcrumbItems && breadcrumbItems?.length > 0">
-    <v-divider />
+    <VDivider />
 
-    <dashboard-container>
-      <v-breadcrumbs class="my-1" :items="breadcrumbItems">
+    <LayoutDashboardContainer>
+      <VBreadcrumbs class="my-1" :items="breadcrumbItems">
         <template v-slot:divider>
-          <v-icon icon="mdi-chevron-right"></v-icon>
+          <VIcon icon="mdi-chevron-right"></VIcon>
         </template>
 
-      </v-breadcrumbs>
-    </dashboard-container>
+      </VBreadcrumbs>
+    </LayoutDashboardContainer>
 
-    <v-divider />
+    <VDivider />
   </div>
 </template>

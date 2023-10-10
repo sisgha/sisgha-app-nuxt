@@ -12,25 +12,16 @@ provide(APP_CONTEXT_PAGE_DASHBOARD_USUARIO_CONTENT, appContextPageDashboardUsuar
 //
 
 const { result, isErrorNotFound } = appContextPageDashboardUsuarioContent.apiUsuarioInfo;
-
-// const visualizacao = ref("informacoes");
-
 const breadcrumbItems = getPageDashboardUsuarioBreadcrumbItems();
 
 //
 </script>
 
 <template>
-  <LayoutDashboardPage v-if="isErrorNotFound" :breadcrumbItems="breadcrumbItems">
-    <DashboardContainer class="my-8">
-      <VAlert type="error">
-        O usuário não foi encontrado.
-      </VAlert>
-    </DashboardContainer>
-  </LayoutDashboardPage>
+  <PageDashboardUsuarioFallbackNotFound v-if="isErrorNotFound" />
 
   <LayoutDashboardPage v-else-if="result" :breadcrumbItems="breadcrumbItems">
-    <DashboardContainer class="my-8">
+    <LayoutDashboardContainer class="my-8">
       <!-- <VBtnToggle v-model="visualizacao" class="visualizacoes" variant="outlined" divided>
         <VBtn class="visualizacao-item" value="informacoes">
           Informações
@@ -93,8 +84,7 @@ const breadcrumbItems = getPageDashboardUsuarioBreadcrumbItems();
           </div>
         </dl>
       </section>
-    </DashboardContainer>
-
+    </LayoutDashboardContainer>
   </LayoutDashboardPage>
 </template>
 

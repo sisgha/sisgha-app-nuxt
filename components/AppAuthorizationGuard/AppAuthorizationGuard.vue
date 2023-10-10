@@ -2,20 +2,25 @@
 import { CheckUsuarioAuthorizationsInputCheck } from '../../.nuxt/gql/default';
 
 const props = defineProps({
-  recurso: String,
-  verbo: String,
-  entityId: Number
+  recurso: {
+    type: String,
+    required: true
+  },
+  verbo: {
+    type: String,
+    required: true
+  },
+  entityId: {
+    type: Number,
+    required: false
+  }
 });
 
 const appContextAuth = await useAppContextAuth();
 
-const verbo = props.verbo ?? null;
-const recurso = props.recurso ?? null;
+const verbo = props.verbo;
+const recurso = props.recurso;
 const entityId = props.entityId ?? null;
-
-if (!verbo || !recurso) {
-  throw new Error("verbo e recurso devem ser passados");
-}
 
 const check: Omit<CheckUsuarioAuthorizationsInputCheck, "usuarioId"> = {
   verbo,

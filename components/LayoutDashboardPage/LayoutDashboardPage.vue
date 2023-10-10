@@ -6,10 +6,10 @@ const { breadcrumbItems = [] } = defineProps<{
 
 <template>
   <div>
-    <v-container class="py-8 px-8">
-      <layout-dashboard-page-breadcrumb :breadcrumbItems="breadcrumbItems" />
+    <VContainer class="py-8 px-8">
+      <LayoutDashboardPageBreadcrumb :breadcrumbItems="breadcrumbItems" />
 
       <slot></slot>
-    </v-container>
+    </VContainer>
   </div>
 </template>

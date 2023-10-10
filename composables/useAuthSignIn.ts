@@ -1,6 +1,8 @@
+import { callWithNuxt } from "nuxt/app";
 import { useAuthSignInCallbackUrl } from "./useAuthSignInCallbackUrl";
 
 export const useAuthSignIn = () => {
+  const app = useNuxtApp();
   const { status } = useAuthState();
 
   const callbackUrlRef = useAuthSignInCallbackUrl();
@@ -9,7 +11,7 @@ export const useAuthSignIn = () => {
     [status, callbackUrlRef],
     ([status, callbackUrl]) => {
       if (status === "authenticated") {
-        return navigateTo(callbackUrl, { external: true });
+        callWithNuxt(app, () => navigateTo(callbackUrl, { external: true }));
       }
     },
     { immediate: true }
@@ -50,8 +52,7 @@ export const useAuthSignIn = () => {
       isError.value = true;
       isLoading.value = false;
     } else {
-      // No error, continue with the sign in, e.g., by following the returned redirect:
-      return navigateTo(url, { external: true });
+      callWithNuxt(app, () => navigateTo(url, { external: true }));
     }
   };
 

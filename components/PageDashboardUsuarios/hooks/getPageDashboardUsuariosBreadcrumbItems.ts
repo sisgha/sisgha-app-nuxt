@@ -1,4 +1,4 @@
-import { getPageDashboardBreadcrumbItems } from "../../PageDashboard/getPageDashboardBreadcrumbItems";
+import { getPageDashboardBreadcrumbItems } from "../../PageDashboard/hooks/getPageDashboardBreadcrumbItems";
 
 export const getPageDashboardUsuariosBreadcrumbItems = () => {
   const route = useRoute();

@@ -73,7 +73,7 @@ const breadcrumbItems = getPageDashboardUsuariosNovoBreadcrumbItems();
 <template>
   <div>
     <LayoutDashboardPage :breadcrumbItems="breadcrumbItems">
-      <DashboardContainer class="my-8">
+      <LayoutDashboardContainer class="my-8">
         <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center;">
           <h1>Cadastrar Usuário</h1>
         </div>
@@ -112,7 +112,7 @@ const breadcrumbItems = getPageDashboardUsuariosNovoBreadcrumbItems();
               <v-alert v-if="errors.cargoIds" class="mb-7" type="error" variant="tonal" :text="errors.cargoIds" />
             </div>
 
-            <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 1rem">
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 0.5rem">
               <v-btn :disabled="isBusy" prepend-icon="mdi-cancel" to="/dashboard/usuarios" type="button"
                 variant="tonal">Cancelar</v-btn>
 
@@ -123,7 +123,7 @@ const breadcrumbItems = getPageDashboardUsuariosNovoBreadcrumbItems();
             </div>
           </form>
         </div>
-      </DashboardContainer>
+      </LayoutDashboardContainer>
     </LayoutDashboardPage>
   </div>
 </template>
