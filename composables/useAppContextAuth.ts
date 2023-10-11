@@ -1,6 +1,7 @@
-import { IAppContextAuth } from "./createAppContextAuth";
+import { APP_CONTEXT_AUTH } from "./hooks/APP_CONTEXT_AUTH";
+import { IAppContextAuth } from "./hooks/createAppContextAuth";
 
 export const useAppContextAuth = async () => {
-  const appAuthContext = inject<IAppContextAuth>(APP_CONTEXT_AUTH)!;
-  return appAuthContext;
+  const appContextAuth = inject<IAppContextAuth>(APP_CONTEXT_AUTH)!;
+  return appContextAuth;
 };

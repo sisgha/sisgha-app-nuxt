@@ -1,3 +1,5 @@
+import { useAPIUsuarioInfoById } from "../../../infrastructure/api/api-service/app-hooks/useAPIUsuarioInfoById";
+
 export type IPageDashboardUsuarioContentContext = Awaited<ReturnType<typeof createAppContextPageDashboardUsuarioContent>>;
 
 export const createAppContextPageDashboardUsuarioContent = async () => {

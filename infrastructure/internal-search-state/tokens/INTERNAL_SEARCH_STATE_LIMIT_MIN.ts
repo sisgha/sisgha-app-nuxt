@@ -1,0 +1,1 @@
+export const INTERNAL_SEARCH_STATE_LIMIT_MIN = 10;

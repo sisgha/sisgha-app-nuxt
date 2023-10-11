@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { useForm } from '@vorms/core';
 import { api } from '../../infrastructure';
-import { getCargoLabelBySlug } from '../../infrastructure/utils';
-import { zodResolver } from '../../infrastructure/utils/fixtures';
+import { getCargoLabelBySlug } from '../../infrastructure/app-utils';
+import { zodResolver } from '../../infrastructure/app-utils/fixtures';
 import { getPageDashboardUsuariosNovoBreadcrumbItems } from './hooks/getPageDashboardUsuariosBreadcrumbItems';
 
 const gql = useGql();
@@ -51,7 +51,7 @@ const isBusy = computed(() => form.isSubmitting.value);
 const canSubmit = computed(() => form.dirty.value && !form.isValidating.value && !isBusy.value);
 
 const cargosQuery = useAsyncData('cargos', async () => {
-  const cargos = await api.getAllCargos(context);
+  const cargos = await api.getAllCargosActives(context);
   return cargos;
 })
 

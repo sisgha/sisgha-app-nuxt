@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     "nuxt-graphql-client",
     "@sidebase/nuxt-auth",
     "@nuxtjs/color-mode",
+    "@vueuse/nuxt",
   ],
 
   vite: {
@@ -54,7 +55,7 @@ export default defineNuxtConfig({
     watch: true,
     autoImport: true,
     functionPrefix: "Gql",
-    documentPaths: ["./graphql"],
+    documentPaths: ["./infrastructure/api/graphql"],
     preferGETQueries: false,
 
     codegen: {
@@ -69,7 +70,6 @@ export default defineNuxtConfig({
     clients: {
       default: {
         host: GQL_HOST,
-
         retainToken: true,
 
         //     // Basic

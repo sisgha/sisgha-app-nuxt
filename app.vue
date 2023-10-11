@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import { useTheme } from "vuetify";
+import { APP_CONTEXT_API } from "./composables/hooks/APP_CONTEXT_API";
+import { APP_CONTEXT_AUTH } from "./composables/hooks/APP_CONTEXT_AUTH";
+import { createAppContextAPI } from "./composables/hooks/createAppContextAPI";
+import { createAppContextAuth } from "./composables/hooks/createAppContextAuth";
 
 const appThemePallete = ref("dark");
 
@@ -30,6 +34,11 @@ onMounted(loadAppThemePalleteFromColorMode);
 
 const appThemePalleteGetter = computed(() => appThemePallete.value)
 provide("appThemePalleteGetter", appThemePalleteGetter);
+
+//
+
+const appContextAPI = createAppContextAPI();
+provide(APP_CONTEXT_API, appContextAPI);
 
 //
 
