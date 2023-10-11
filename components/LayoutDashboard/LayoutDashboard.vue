@@ -83,8 +83,6 @@ const blocks = reactive([
             </div>
           </VToolbarTitle>
 
-          <VSpacer></VSpacer>
-
           <template v-slot:append>
             <UIMenuThemeStyleButton />
             <UIMenuAccountButton />
