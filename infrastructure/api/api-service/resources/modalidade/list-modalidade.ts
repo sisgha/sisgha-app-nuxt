@@ -12,5 +12,5 @@ export const listModalidade = async (context: IAPIServiceInvokeContext, rawDto: 
     },
   });
 
-  return response.listModalidade;
+  return response.list;
 };

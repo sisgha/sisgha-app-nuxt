@@ -1,0 +1,20 @@
+query ListModalidade($dto: GenericListInput!) {
+  list: listModalidade(dto: $dto) {
+    total
+
+    offset
+
+    limit
+
+    items {
+      id
+
+      slug
+
+      dateCreated
+      dateUpdated
+      dateDeleted
+      dateSearchSync
+    }
+  }
+}

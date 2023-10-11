@@ -2,13 +2,17 @@ import { useQuery } from "@tanstack/vue-query";
 import { IAPIServiceInvokeActionGenericList } from "../infrastructure/api";
 import { getGenericListInputFromInternalSearchState } from "../infrastructure/internal-search-state";
 
-export const useAPISearch = async <Result>(actionList: IAPIServiceInvokeActionGenericList<Result>, shouldSuspense = true) => {
+export const useAPISearch = async <Result>(
+  actionList: IAPIServiceInvokeActionGenericList<Result>,
+  shouldSuspense = true,
+  searchKeyPrefix = actionList.name
+) => {
   const appContextAPI = useAppContextAPI();
 
   const { searchState, debouncedSearchState, isDebouncePending } = useAppSearchState();
 
   const dtoRef = computed(() => getGenericListInputFromInternalSearchState(debouncedSearchState));
-  const searchKey = computed(() => JSON.stringify(dtoRef.value));
+  const searchKey = computed(() => `${searchKeyPrefix}::${JSON.stringify(dtoRef.value)}`);
 
   const searchQuery = useQuery(
     [searchKey],
