@@ -4,7 +4,7 @@ import { listModalidade } from "../../../infrastructure/api/api-service/resource
 export type IPageDashboardModalidadesContentContext = Awaited<ReturnType<typeof createAppContextPageDashboardModalidadesContent>>;
 
 export const createAppContextPageDashboardModalidadesContent = async () => {
-  const apiSearchModalidades = await useAPISearch(listModalidade, true);
+  const apiSearchModalidades = await useAPISearch(listModalidade, true, "modalidades");
 
   return {
     apiSearchModalidades,

@@ -12,10 +12,10 @@ export const useAPISearch = async <Result>(
   const { searchState, debouncedSearchState, isDebouncePending } = useAppSearchState();
 
   const dtoRef = computed(() => getGenericListInputFromInternalSearchState(debouncedSearchState));
-  const searchKey = computed(() => `${searchKeyPrefix}::${JSON.stringify(dtoRef.value)}`);
+  const searchKey = computed(() => `${searchKeyPrefix}::dto::${JSON.stringify(dtoRef.value)}`);
 
   const searchQuery = useQuery(
-    [searchKey],
+    [searchKeyPrefix, searchKey],
     async () => {
       const dto = dtoRef.value;
       return appContextAPI.invoke(actionList, dto);

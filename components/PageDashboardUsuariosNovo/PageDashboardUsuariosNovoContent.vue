@@ -1,11 +1,14 @@
 <script lang="ts" setup>
+import { useQueryClient } from "@tanstack/vue-query";
 import { useForm } from '@vorms/core';
 import { api } from '../../infrastructure';
-import { getCargoLabelBySlug } from '../../infrastructure/app-utils';
+import { useAPIAllCargos } from '../../infrastructure/api/api-service/resources/cargo/useAPIAllCargos';
+import { getCargoLabelBySlug } from '../../infrastructure/app-resources/cargo/getCargoLabelBySlug';
 import { zodResolver } from '../../infrastructure/app-utils/fixtures';
 import { getPageDashboardUsuariosNovoBreadcrumbItems } from './hooks/getPageDashboardUsuariosBreadcrumbItems';
 
 const gql = useGql();
+const queryClient = useQueryClient()
 
 const context: api.IAPIServiceInvokeContext = { gql }
 
@@ -30,6 +33,8 @@ const form = useForm<api.IAPICreateUsuarioDto>({
 
       await api.createUsuario(context, data);
 
+      await queryClient.invalidateQueries({ queryKey: ["usuarios"] })
+
       await navigateTo("/dashboard/usuarios")
 
       setSubmitting(false);
@@ -50,14 +55,8 @@ const isBusy = computed(() => form.isSubmitting.value);
 
 const canSubmit = computed(() => form.dirty.value && !form.isValidating.value && !isBusy.value);
 
-const cargosQuery = useAsyncData('cargos', async () => {
-  const cargos = await api.getAllCargosActives(context);
-  return cargos;
-})
+const { isLoading: cargosQueryPending, items: cargos } = useAPIAllCargos();
 
-const { pending: cargosQueryPending } = cargosQuery;
-
-const cargos = computed(() => cargosQuery.data.value ?? [])
 
 const cargosSelectItems = computed(() => cargos.value.map(cargo => {
   return {

@@ -4,7 +4,14 @@
 
     <div class="view-header-spacer"></div>
 
-    <VBtn to="/dashboard/usuarios/novo" icon="mdi-plus" color="success"></VBtn>
+    <AppAuthorizationGuard verbo="create" recurso="usuario">
+      <template #allowed>
+        <VBtn to="/dashboard/usuarios/novo" icon="mdi-plus" color="success"></VBtn>
+      </template>
+      <template #forbidden>
+      </template>
+    </AppAuthorizationGuard>
+
   </div>
 
   <div class="my-8"></div>

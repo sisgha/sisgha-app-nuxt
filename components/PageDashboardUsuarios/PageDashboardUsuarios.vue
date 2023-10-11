@@ -5,5 +5,7 @@ useAppHeadTitle("Usuários", HeadTitleContext.DASHBOARD);
 </script>
 
 <template>
-  <PageDashboardUsuariosContent />
+  <PageDashboardUsuariosGuard>
+    <PageDashboardUsuariosContent />
+  </PageDashboardUsuariosGuard>
 </template>

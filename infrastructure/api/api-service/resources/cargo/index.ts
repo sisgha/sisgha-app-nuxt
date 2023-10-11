@@ -1,1 +1,1 @@
-export * from "./get-all-cargos";
+export * from "./get-all-cargos-actives";
