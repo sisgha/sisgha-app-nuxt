@@ -1,9 +1,7 @@
-import { GenericListInput } from "../../../../../.nuxt/gql/default";
-import { IAPIServiceInvokeContext } from "../../domain";
+import { ListModalidadeQuery } from "../../../../../.nuxt/gql/default";
+import { IAPIServiceInvokeActionGenericList } from "../../domain";
 
-export interface IAPIListModalidadeDto extends GenericListInput {}
-
-export const listModalidade = async (context: IAPIServiceInvokeContext, rawDto: IAPIListModalidadeDto) => {
+export const listModalidade: IAPIServiceInvokeActionGenericList<ListModalidadeQuery["list"]> = async (context, rawDto) => {
   const dto = rawDto;
 
   const response = await context.gql("ListModalidade", {

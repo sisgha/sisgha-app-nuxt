@@ -10,6 +10,7 @@ query ListModalidade($dto: GenericListInput!) {
       id
 
       slug
+      nome
 
       dateCreated
       dateUpdated

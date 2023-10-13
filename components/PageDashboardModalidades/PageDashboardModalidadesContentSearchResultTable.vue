@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { getModalidadeNameBySlug } from "../../infrastructure/app-resources/modalidade/getModalidadeNameBySlug";
 import { useAppContextPageDashboardModalidadesContent } from './hooks/useAppContextPageDashboardModalidadesContent';
 
 const appContextPageDashboardModalidadesContent = await useAppContextPageDashboardModalidadesContent();
@@ -7,15 +6,14 @@ const appContextPageDashboardModalidadesContent = await useAppContextPageDashboa
 const { apiSearchModalidades } = appContextPageDashboardModalidadesContent;
 const { searchState, items, total, isLoading } = apiSearchModalidades;
 
-const headers = reactive([
+const headers = [
   {
-    key: 'v-nome',
+    key: 'nome',
     title: 'Nome',
     align: 'start',
-    sortable: false,
+    sortable: true,
   },
-]);
-
+] as const;
 
 const isLoadingDebounced = refDebounced(isLoading, 130);
 
@@ -27,10 +25,6 @@ const isLoadingSmooth = computed(() => isLoading.value && isLoadingDebounced.val
     <VDataTableServer class="view-table" v-model:items-per-page="searchState.itemsPerPage" v-model:page="searchState.page"
       v-model:sort-by="searchState.sortBy" density="comfortable" :headers="headers" :items-length="total" :items="items"
       :loading="isLoadingSmooth" item-value="id">
-
-      <template v-slot:item.v-nome="{ item }">
-        {{ getModalidadeNameBySlug(item.raw.slug) }}
-      </template>
 
       <template v-slot:tfoot>
         <tr>

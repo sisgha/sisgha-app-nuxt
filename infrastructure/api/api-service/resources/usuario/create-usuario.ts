@@ -14,7 +14,7 @@ export interface IAPICreateUsuarioDto {
   cargoIds?: number[];
 }
 
-export const buildCreateUsuarioZodSchema = (context: IAPIServiceInvokeContext) => {
+export const buildCreateUsuarioZodSchema = (contextRef: Ref<IAPIServiceInvokeContext>) => {
   return z.object({
     nome: z.string().trim().min(1, "O nome do usuário deve ser informado.").max(300, "O nome pode conter até 300 caractéres."),
 

@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/vue-query";
 import { IAPIServiceInvokeActionGenericList } from "../infrastructure/api";
 import { getGenericListInputFromInternalSearchState } from "../infrastructure/internal-search-state";
 
-export const useAPISearch = async <Result>(
-  actionList: IAPIServiceInvokeActionGenericList<Result>,
+export const useAPISearch = async <Result extends { items: any[] }>(
+  listAction: IAPIServiceInvokeActionGenericList<Result>,
   shouldSuspense = true,
-  searchKeyPrefix = actionList.name
+  searchKeyPrefix = listAction.name
 ) => {
   const appContextAPI = useAppContextAPI();
 
@@ -18,11 +18,9 @@ export const useAPISearch = async <Result>(
     [searchKeyPrefix, searchKey],
     async () => {
       const dto = dtoRef.value;
-      return appContextAPI.invoke(actionList, dto);
+      return appContextAPI.invoke(listAction, dto);
     },
-    {
-      keepPreviousData: true,
-    }
+    { keepPreviousData: true }
   );
 
   if (shouldSuspense) {
@@ -32,8 +30,7 @@ export const useAPISearch = async <Result>(
   }
 
   const data = computed(() => searchQuery.data.value);
-
-  const items = computed(() => data.value?.items ?? []);
+  const items = computed((): Result["items"] => data.value?.items ?? []);
   const total = computed(() => data.value?.total ?? 0);
 
   const isLoading = computed(() => searchQuery.isLoading.value || isDebouncePending.value);

@@ -1,9 +1,9 @@
 import { GenericListInput } from "../../.nuxt/gql/default";
 import { ISlideMode, getOffsetFromSlide } from "../api/api-service/search-slide";
 import { minmax } from "../app-utils/minmax";
+import { IInternalSearchState } from "./domain/IInternalSearchState";
 import { INTERNAL_SEARCH_STATE_LIMIT_MAX } from "./tokens/INTERNAL_SEARCH_STATE_LIMIT_MAX";
 import { INTERNAL_SEARCH_STATE_LIMIT_MIN } from "./tokens/INTERNAL_SEARCH_STATE_LIMIT_MIN";
-import { IInternalSearchState } from "./domain/IInternalSearchState";
 
 export const getGenericListInputFromInternalSearchState = (searchState: IInternalSearchState) => {
   const dto: GenericListInput = {};
@@ -21,7 +21,7 @@ export const getGenericListInputFromInternalSearchState = (searchState: IInterna
   }
 
   //
-  dto.sort = searchState.sortBy.map(({ key, order }) => `${key}:${order}`);
+  dto.sort = searchState.sortBy.filter((i) => typeof i.order === "string").map(({ key, order }) => `${key}:${order}`);
 
   if (dto.sort.length === 0) {
     delete dto.sort;

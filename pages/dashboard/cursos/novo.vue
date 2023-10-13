@@ -6,5 +6,6 @@ definePageMeta({
 </script>
 
 <template>
-  <PageDashboardCalendarios />
+  <PageDashboardCursosNovo />
 </template>
+

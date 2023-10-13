@@ -31,11 +31,11 @@ const {
         </UIButton>
 
         <div v-if="isError">
-          <v-divider class="my-4"></v-divider>
+          <VDivider class="my-4"></VDivider>
 
-          <v-alert class="error-feedback" v-model="isError" closable text="Não foi possível realizar o login."
+          <VAlert class="error-feedback" v-model="isError" closable text="Não foi possível realizar o login."
             type="error">
-          </v-alert>
+          </VAlert>
         </div>
       </div>
     </form>

@@ -19,6 +19,10 @@ const breadcrumbItems = getPageDashboardUsuariosBreadcrumbItems();
 <template>
   <LayoutDashboardPage :breadcrumbItems="breadcrumbItems">
     <LayoutDashboardContainer class="my-8">
+      <PageDashboardUsuariosContentHeader />
+
+      <div class="my-8"></div>
+
       <PageDashboardUsuariosContentSearch />
     </LayoutDashboardContainer>
   </LayoutDashboardPage>

@@ -1,26 +1,26 @@
 <template>
-  <v-app class="app">
-    <v-layout class="layout">
-      <v-app-bar :elevation="1" color="surface">
+  <VApp class="app">
+    <VLayout class="layout">
+      <VAppBar :elevation="1" color="surface">
         <div class="px-4">
           <NuxtLink to="/">
             <LogoSisgha class="logo" />
           </NuxtLink>
         </div>
 
-        <v-spacer></v-spacer>
+        <VSpacer></VSpacer>
 
         <template v-slot:append>
           <UIMenuThemeStyleButton />
           <UIMenuAccountButton />
         </template>
-      </v-app-bar>
+      </VAppBar>
 
-      <v-main class="main">
+      <VMain class="main">
         <slot></slot>
-      </v-main>
-    </v-layout>
-  </v-app>
+      </VMain>
+    </VLayout>
+  </VApp>
 </template>
 
 <style scoped>

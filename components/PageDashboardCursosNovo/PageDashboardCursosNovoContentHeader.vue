@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <PageDashboardUsuariosContentSearchInputQuery />
-    <PageDashboardUsuariosContentSearchResultTable />
+  <div class="content-header">
+    <h1>Novo Curso</h1>
   </div>
 </template>
 
 <style scoped>
-.view-header {
+.content-header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -14,7 +13,7 @@
   gap: 1rem
 }
 
-.view-header-spacer {
+.content-header h1 {
   flex: 1;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="progress-container">
-    <v-progress-circular indeterminate :size="50" :width="4" />
+    <VProgressCircular indeterminate :size="50" :width="4" />
   </div>
 </template>
 

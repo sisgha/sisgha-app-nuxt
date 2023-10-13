@@ -1,4 +1,4 @@
 export type IInternalSearchStateSortBy = {
   key: string;
-  order: string;
+  order?: boolean | "asc" | "desc";
 };

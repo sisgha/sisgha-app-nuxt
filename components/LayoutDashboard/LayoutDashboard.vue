@@ -41,6 +41,21 @@ const blocks = reactive([
     header: "Ensino",
     items: [
       {
+        label: "Cursos",
+        href: "/dashboard/cursos",
+        icon: "mdi-school",
+        exact: false,
+      },
+
+    ]
+  },
+
+  {
+    key: 'institucional',
+    header: "Institucional",
+    items: [
+
+      {
         label: "Modalidades",
         href: '/dashboard/modalidades',
         icon: "mdi-strategy",

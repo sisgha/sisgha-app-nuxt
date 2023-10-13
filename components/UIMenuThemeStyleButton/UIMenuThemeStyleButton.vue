@@ -13,5 +13,5 @@ const alt = computed(() => {
 </script>
 
 <template>
-  <v-btn @click="invertTheme()" :icon="icon" :title="alt"></v-btn>
+  <VBtn @click="invertTheme()" :icon="icon" :title="alt"></VBtn>
 </template>

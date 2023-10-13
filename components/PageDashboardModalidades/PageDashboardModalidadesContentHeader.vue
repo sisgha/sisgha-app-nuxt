@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <PageDashboardUsuariosContentSearchInputQuery />
-    <PageDashboardUsuariosContentSearchResultTable />
+  <div class="view-header">
+    <h1>Modalidades de Ensino</h1>
   </div>
 </template>
 
