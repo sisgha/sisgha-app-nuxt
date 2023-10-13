@@ -83,7 +83,7 @@ const blocks = ([
 <template>
   <LayoutDashboardGuard>
     <VApp>
-      <VLayout>
+      <VLayout class="layout-dashboard-layout">
         <VAppBar color="surface">
           <VAppBarNavIcon variant="text" @click.stop="drawer = !drawer"></VAppBarNavIcon>
 
@@ -120,7 +120,7 @@ const blocks = ([
 
         </VNavigationDrawer>
 
-        <VMain>
+        <VMain class="layout-dashboard-main">
           <slot></slot>
         </VMain>
       </VLayout>
@@ -145,5 +145,14 @@ const blocks = ([
 
   font-size: 1rem;
   line-height: 1.4;
+}
+
+
+.layout-dashboard-main {
+  overflow: auto;
+}
+
+.layout-dashboard-layout {
+  height: 100vh;
 }
 </style>
