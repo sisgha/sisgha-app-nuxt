@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { HeadTitleContext } from '../../infrastructure/app-utils';
+import { HeadTitleContext } from '../../infrastructure';
 
 useAppHeadTitle("Novo Usuário", HeadTitleContext.DASHBOARD);
 </script>

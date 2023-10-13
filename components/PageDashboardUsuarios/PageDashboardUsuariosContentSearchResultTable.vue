@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { getCargoLabelBySlug } from '../../infrastructure/app-resources/cargo/getCargoLabelBySlug';
+import { getCargoLabelBySlug } from '../../infrastructure';
 import { useAppContextPageDashboardUsuariosContent } from './hooks/useAppContextPageDashboardUsuariosContent';
 
 const appContextPageDashboardUsuariosContent = await useAppContextPageDashboardUsuariosContent();

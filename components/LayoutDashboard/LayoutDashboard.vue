@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import LogoIfroUrl from "@/assets/logos/ifro.svg?url";
-import { HeadTitleContext } from "../../infrastructure/app-utils";
+import { HeadTitleContext } from "../../infrastructure";
 
 useAppHeadTitle("Início", HeadTitleContext.DASHBOARD);
 
@@ -8,7 +8,7 @@ const route = useRoute();
 
 const drawer = ref(true);
 
-const blocks = reactive([
+const blocks = ([
   {
     key: 'raiz',
     header: null,

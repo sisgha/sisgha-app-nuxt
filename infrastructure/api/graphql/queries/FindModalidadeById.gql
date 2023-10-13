@@ -1,0 +1,13 @@
+query FindModalidadeById($id: Int!) {
+  modalidade: findModalidadeById(dto: { id: $id }) {
+    id
+
+    slug
+    nome
+
+    dateCreated
+    dateUpdated
+    dateDeleted
+    dateSearchSync
+  }
+}

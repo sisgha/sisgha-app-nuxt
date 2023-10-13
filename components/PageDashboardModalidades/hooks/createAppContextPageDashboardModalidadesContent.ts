@@ -1,10 +1,10 @@
 import { useAPISearch } from "~/composables/useAPISearch";
-import { listModalidade } from "../../../infrastructure/api/api-service/resources/modalidade";
+import { APIActionModalidadeList } from "../../../infrastructure/api/api-actions";
 
 export type IPageDashboardModalidadesContentContext = Awaited<ReturnType<typeof createAppContextPageDashboardModalidadesContent>>;
 
 export const createAppContextPageDashboardModalidadesContent = async () => {
-  const apiSearchModalidades = await useAPISearch(listModalidade, true, "modalidades");
+  const apiSearchModalidades = await useAPISearch(APIActionModalidadeList, true, "modalidades");
 
   return {
     apiSearchModalidades,

@@ -1,5 +1,5 @@
 query ListCargo($dto: GenericListInput!) {
-  listCargo(dto: $dto) {
+  list: listCargo(dto: $dto) {
     total
 
     offset

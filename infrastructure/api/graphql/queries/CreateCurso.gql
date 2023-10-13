@@ -1,5 +1,5 @@
 mutation CreateCurso($dto: CreateCursoInput!) {
-  createCurso(dto: $dto) {
+  curso: createCurso(dto: $dto) {
     id
   }
 }

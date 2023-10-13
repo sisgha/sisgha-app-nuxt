@@ -1,23 +1,47 @@
-import { api } from "../../infrastructure";
-import { IAPIServiceInvokeAction } from "../../infrastructure/api/api-service/domain/IAPIServiceInvokeAction";
+import { useQueryClient } from "@tanstack/vue-query";
+import castArray from "lodash-es/castArray";
+import { BaseAPIActionConstructor } from "../../infrastructure/api/api-actions/BaseAPIAction";
 
 export type IAppContextAPI = Awaited<ReturnType<typeof createAppContextAPI>>;
 
 export const createAppContextAPI = () => {
   const gql = useGql();
+  const queryClient = useQueryClient();
 
-  const contextRef = computed((): api.IAPIServiceInvokeContext => ({ gql }));
+  const invoke = async <InputDto, Result>(
+    apiActionConstructor: BaseAPIActionConstructor<InputDto, Result>,
+    inputDto: InputDto
+  ) => {
+    const apiAction = new apiActionConstructor(appContextAPI);
 
-  const invoke = async <InputDto, Result>(action: IAPIServiceInvokeAction<InputDto, Result>, inputDto: InputDto) => {
-    const context = unref(contextRef);
-
-    const result = await action(context, inputDto);
+    const result = await apiAction.invoke(inputDto);
 
     return result;
   };
 
-  return {
-    invoke,
-    contextRef,
+  const buildSchema = <InputDto, Result>(apiActionConstructor: BaseAPIActionConstructor<InputDto, Result>) => {
+    const apiAction = new apiActionConstructor(appContextAPI);
+    const schema = apiAction.buildSchema();
+    return schema;
   };
+
+  const invalidateQueries = async (keys: string | string[]) => {
+    await queryClient.invalidateQueries({
+      queryKey: [
+        // ...
+        ...castArray(keys),
+      ],
+    });
+  };
+
+  const appContextAPI = {
+    gql,
+
+    invoke,
+    buildSchema,
+
+    invalidateQueries,
+  } as const;
+
+  return appContextAPI;
 };

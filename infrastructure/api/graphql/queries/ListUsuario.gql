@@ -1,5 +1,5 @@
 query ListUsuario($dto: GenericListInput!) {
-  listUsuario(dto: $dto) {
+  list: listUsuario(dto: $dto) {
     total
 
     offset

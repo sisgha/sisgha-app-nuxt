@@ -1,19 +1,12 @@
 <script lang="ts" setup>
-import { useQueryClient } from "@tanstack/vue-query";
 import { useForm } from '@vorms/core';
-import { api } from '../../infrastructure';
-import { useAPIAllCargos } from '../../infrastructure/api/api-service/resources/cargo/useAPIAllCargos';
-import { getCargoLabelBySlug } from '../../infrastructure/app-resources/cargo/getCargoLabelBySlug';
-import { zodResolver } from '../../infrastructure/app-utils/fixtures';
+import { APIActionUsuarioCreate, IAPIActionUsuarioCreateDto, getCargoLabelBySlug, useAPIActionHookCargoGetAllActive } from '../../infrastructure';
+import { zodResolver } from '../../infrastructure/utils/fixtures';
 import { getPageDashboardUsuariosNovoBreadcrumbItems } from './hooks/getPageDashboardUsuariosBreadcrumbItems';
 
-const { contextRef } = useAppContextAPI();
+const appContextAPI = useAppContextAPI();
 
-const queryClient = useQueryClient()
-
-const schema = api.buildCreateUsuarioZodSchema(contextRef)
-
-const form = useForm<api.IAPICreateUsuarioDto>({
+const form = useForm<IAPIActionUsuarioCreateDto>({
   validateMode: 'submit',
   reValidateMode: 'blur',
 
@@ -24,16 +17,15 @@ const form = useForm<api.IAPICreateUsuarioDto>({
     cargoIds: []
   },
 
-  validate: zodResolver(schema),
+  validate: zodResolver(appContextAPI.buildSchema(APIActionUsuarioCreate)),
 
   onSubmit(data, { setSubmitting }) {
     new Promise<void>(async (resolve) => {
       setSubmitting(true);
 
-      const context = contextRef.value;
-      await api.createUsuario(context, data);
+      await appContextAPI.invoke(APIActionUsuarioCreate, data)
+      await appContextAPI.invalidateQueries("usuarios");
 
-      await queryClient.invalidateQueries({ queryKey: ["usuarios"] })
       await navigateTo("/dashboard/usuarios")
 
       setSubmitting(false);
@@ -52,7 +44,7 @@ const { value: cargoIds, attrs: cargoIdsFieldAttrs } = register('cargoIds')
 const isBusy = computed(() => form.isSubmitting.value);
 const canSubmit = computed(() => form.dirty.value && !form.isValidating.value && !isBusy.value);
 
-const { isLoading: cargosQueryPending, items: cargos } = useAPIAllCargos();
+const { isLoading: cargosQueryPending, items: cargos } = useAPIActionHookCargoGetAllActive();
 
 const cargosSelectItems = computed(() => cargos.value.map(cargo => {
   return {
@@ -108,13 +100,13 @@ const breadcrumbItems = getPageDashboardUsuariosNovoBreadcrumbItems();
             </div>
 
             <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 0.5rem">
-              <VBtn :disabled="isBusy" prepend-icon="mdi-cancel" to="/dashboard/usuarios" type="button"
-                variant="tonal">Cancelar</VBtn>
+              <VBtn :disabled="isBusy" prepend-icon="mdi-cancel" to="/dashboard/usuarios" type="button" variant="tonal">
+                Cancelar</VBtn>
 
               <div style="flex: 1"></div>
 
-              <VBtn :disabled="!canSubmit" prepend-icon="mdi-check" type="submit" variant="flat"
-                color="success">Cadastrar</VBtn>
+              <VBtn :disabled="!canSubmit" prepend-icon="mdi-check" type="submit" variant="flat" color="success">Cadastrar
+              </VBtn>
             </div>
           </form>
         </div>

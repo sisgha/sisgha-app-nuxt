@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useAppContextPageDashboardCursosNovoContent } from './hooks/context/useAppContextPageDashboardCursosNovoContent';
+import { useAppContextPageDashboardCursosNovoContent } from './hooks';
 
 // 
 

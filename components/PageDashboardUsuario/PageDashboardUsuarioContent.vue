@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { getCargoLabelBySlug } from '../../infrastructure/app-resources/cargo/getCargoLabelBySlug';
+import { getCargoLabelBySlug } from '../../infrastructure';
 import { createAppContextPageDashboardUsuarioContent } from './hooks/createAppContextPageDashboardUsuarioContent';
 import { getPageDashboardUsuarioBreadcrumbItems } from './hooks/getPageDashboardUsuarioBreadcrumbItems';
 import { APP_CONTEXT_PAGE_DASHBOARD_USUARIO_CONTENT } from './hooks/useAppContextPageDashboardUsuarioContent';

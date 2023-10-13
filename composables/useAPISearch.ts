@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/vue-query";
-import { IAPIServiceInvokeActionGenericList } from "../infrastructure/api";
+import { BaseAPIActionListConstructor } from "../infrastructure/api/api-actions/BaseAPIActionList";
 import { getGenericListInputFromInternalSearchState } from "../infrastructure/internal-search-state";
 
 export const useAPISearch = async <Result extends { items: any[] }>(
-  listAction: IAPIServiceInvokeActionGenericList<Result>,
+  apiActionList: BaseAPIActionListConstructor<Result>,
   shouldSuspense = true,
-  searchKeyPrefix = listAction.name
+  searchKeyPrefix = apiActionList.name
 ) => {
   const appContextAPI = useAppContextAPI();
 
@@ -18,9 +18,11 @@ export const useAPISearch = async <Result extends { items: any[] }>(
     [searchKeyPrefix, searchKey],
     async () => {
       const dto = dtoRef.value;
-      return appContextAPI.invoke(listAction, dto);
+      return appContextAPI.invoke(apiActionList, dto);
     },
-    { keepPreviousData: true }
+    {
+      keepPreviousData: true,
+    }
   );
 
   if (shouldSuspense) {

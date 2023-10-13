@@ -1,29 +1,11 @@
 <script lang="ts" setup>
-import { listModalidade } from '../../infrastructure/api/api-service/resources/modalidade';
-import { useAppContextPageDashboardCursosNovoContent } from './hooks/context/useAppContextPageDashboardCursosNovoContent';
+import { useQuery } from '@tanstack/vue-query';
+import { APIActionModalidadeFindById, APIActionModalidadeList } from '../../infrastructure/api/api-actions';
+import { useAppContextPageDashboardCursosNovoContent } from './hooks';
 
 // 
 
 const appContextPageDashboardCursosNovoContent = await useAppContextPageDashboardCursosNovoContent();
-
-
-//
-
-const apiSearchModalidade = await useAPISearch(listModalidade, false);
-
-const {
-  isLoading: apiSearchModalidadeIsLoading,
-  searchState: apiSearchModalidadeSearchState
-} = apiSearchModalidade;
-
-const apiSearchModalidadeResults = computed(() => apiSearchModalidade.items.value);
-
-//
-
-const items = computed(() => apiSearchModalidadeResults.value.map(item => ({
-  value: item.id,
-  label: item.nome,
-})));
 
 //
 
@@ -43,6 +25,8 @@ const value = computed({
   },
 })
 
+const hasValue = computed(() => value.value !== null)
+
 //
 
 const modalidadeIdErrors = computed(() => form.errors.value.modalidadeId ?? null)
@@ -51,6 +35,49 @@ const hasErrors = computed(() => modalidadeIdErrors.value != null)
 //
 
 const { isBusy } = appContextPageDashboardCursosNovoContent;
+
+
+//
+
+const appContextAPI = useAppContextAPI();
+const apiSearchModalidade = await useAPISearch(APIActionModalidadeList, false);
+
+const {
+  isLoading: apiSearchModalidadeIsLoading,
+  searchState: apiSearchModalidadeSearchState
+} = apiSearchModalidade;
+
+const apiSearchModalidadeResults = computed(() => apiSearchModalidade.items.value);
+
+const selectedModalidadeQuery = useQuery(
+  ["modalidades", computed(() => `modalidade::id::${value.value}`)],
+  async () => {
+    const modalidadeId = value.value;
+
+    if (hasValue.value) {
+      return appContextAPI.invoke(APIActionModalidadeFindById, { id: modalidadeId })
+    }
+
+    return null;
+  }, {
+  enabled: hasValue, keepPreviousData: true
+});
+
+
+const allUsefulModalidades = computed(() => {
+  const selectedModalidade = selectedModalidadeQuery.data.value;
+  const searchModalidades = apiSearchModalidadeResults.value;
+
+  return [
+    ...selectedModalidade ? [selectedModalidade] : [],
+    ...searchModalidades.filter(result => result.id !== selectedModalidade?.id)
+  ];
+})
+
+const items = computed(() => allUsefulModalidades.value.map(item => ({
+  value: item.id,
+  label: item.nome,
+})));
 
 </script>
 

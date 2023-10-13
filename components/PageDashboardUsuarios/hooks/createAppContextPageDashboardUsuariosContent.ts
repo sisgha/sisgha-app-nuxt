@@ -1,10 +1,10 @@
 import { useAPISearch } from "~/composables/useAPISearch";
-import { listUsuario } from "../../../infrastructure/api";
+import { APIActionUsuarioList } from "../../../infrastructure/api/api-actions";
 
 export type IPageDashboardUsuariosContentContext = Awaited<ReturnType<typeof createAppContextPageDashboardUsuariosContent>>;
 
 export const createAppContextPageDashboardUsuariosContent = async () => {
-  const apiSearchUsuarios = await useAPISearch(listUsuario, true, "usuarios");
+  const apiSearchUsuarios = await useAPISearch(APIActionUsuarioList, true, "usuarios");
 
   return {
     apiSearchUsuarios,

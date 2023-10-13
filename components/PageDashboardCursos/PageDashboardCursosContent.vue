@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { createAppContextPageDashboardCursosContent } from './hooks/createAppContextPageDashboardCursosContent';
-import { getPageDashboardCursosBreadcrumbItems } from './hooks/getPageDashboardCursosBreadcrumbItems';
-import { APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT } from './hooks/useAppContextPageDashboardCursosContent';
+import {
+  createAppContextPageDashboardCursosContent,
+  getPageDashboardCursosBreadcrumbItems,
+} from './hooks';
 
 
 //
 
-const appContextPageDashboardCursosContent = await createAppContextPageDashboardCursosContent();
-provide(APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT, appContextPageDashboardCursosContent)
+await createAppContextPageDashboardCursosContent();
 
 //
 
@@ -24,7 +24,9 @@ const breadcrumbItems = getPageDashboardCursosBreadcrumbItems();
 
       <div class="my-8"></div>
 
-      <PageDashboardCursosContentSearch />
+      <div>
+        WIP
+      </div>
     </LayoutDashboardContainer>
   </LayoutDashboardPage>
 </template>

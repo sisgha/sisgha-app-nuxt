@@ -1,5 +1,5 @@
 mutation CreateUsuario($dto: CreateUsuarioInput!) {
-  createUsuario(dto: $dto) {
+  usuario: createUsuario(dto: $dto) {
     id
   }
 }

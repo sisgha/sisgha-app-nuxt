@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { createAppContextPageDashboardCursosNovoContent } from './hooks/context/createAppContextPageDashboardCursosNovoContent';
-import { getPageDashboardCursosNovoBreadcrumbItems } from './hooks/getPageDashboardCursosNovoBreadcrumbItems';
+import {
+  createAppContextPageDashboardCursosNovoContent,
+  getPageDashboardCursosNovoBreadcrumbItems
+} from './hooks';
 
 //
 

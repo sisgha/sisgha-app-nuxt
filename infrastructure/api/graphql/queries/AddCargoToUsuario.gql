@@ -1,5 +1,5 @@
 mutation AddCargoToUsuario($dto: AddCargoToUsuarioInput!) {
-  addCargoToUsuario(dto: $dto) {
+  usuarioCargo: addCargoToUsuario(dto: $dto) {
     id
   }
 }
