@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-import { CheckUsuarioAuthorizationsInputCheck } from '../../.nuxt/gql/default';
+import { IAPIActionUsuarioCheckAuthorizationDto } from '../../infrastructure';
+
+
+const appContextAuth = useAppContextAuth();
 
 const props = defineProps({
   recurso: {
@@ -16,24 +19,22 @@ const props = defineProps({
   }
 });
 
-const appContextAuth = await useAppContextAuth();
-
 const verbo = props.verbo;
 const recurso = props.recurso;
 const entityId = props.entityId ?? null;
 
-const check: Omit<CheckUsuarioAuthorizationsInputCheck, "usuarioId"> = {
+const check: Omit<IAPIActionUsuarioCheckAuthorizationDto, "usuarioId"> = {
   verbo,
   recurso,
   entityId,
 }
 
-const { can: isAllowed, isBusy } = await appContextAuth.useAuthorizationCheck(check);
+const { can: isAllowed, isLoading } = await appContextAuth.useCheckAuthorization(check);
 
 </script>
 
 <template>
-  <div v-if="isBusy">
+  <div v-if="isLoading">
     <UILoading />
   </div>
 

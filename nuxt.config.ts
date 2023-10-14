@@ -47,7 +47,7 @@ export default defineNuxtConfig({
   auth: {
     // defaultProvider: "sisgha-sso",
     origin: AUTH_ORIGIN,
-    enableSessionRefreshPeriodically: 28 * 1000,
+    enableSessionRefreshPeriodically: 50 * 1000,
     enableSessionRefreshOnWindowFocus: true,
   },
 

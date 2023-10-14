@@ -1,4 +1,16 @@
-import { CheckUsuarioAuthorizationsInputCheck, CheckUsuarioAuthorizationsQueryVariables, GetAuthedUsuarioQuery } from "#gql";
+import { GetAuthedUsuarioQuery } from "#gql";
+import { useQuery } from "@tanstack/vue-query";
+import { callWithNuxt } from "nuxt/app";
+import {
+  APIActionGetAuthedUsuario,
+  APIActionUsuarioCheckAuthorization,
+  APIActionUsuarioCheckCargo,
+  APP_QUERY_SUSPENSE_BEHAVIOUR,
+  IAPIActionUsuarioCheckAuthorizationDto,
+  IAPIActionUsuarioCheckCargoDto,
+  handleQuerySuspenseBehaviour,
+} from "../../infrastructure";
+import { IAppContextAPI } from "./createAppContextAPI";
 
 type IAppAuthContextGetAuthedUsuarioQueryUsuario = GetAuthedUsuarioQuery["usuario"];
 
@@ -8,66 +20,77 @@ type IAppAuthContextGetUsuarioResult<Strict extends boolean> = Strict extends tr
 
 export type IAppContextAuth = Awaited<ReturnType<typeof createAppContextAuth>>;
 
-export const createAppContextAuth = async () => {
-  const gql = useGql();
+export const createAppContextAuth = async (
+  appContextAPI: IAppContextAPI = useAppContextAPI(),
+  suspenseBehaviour = APP_QUERY_SUSPENSE_BEHAVIOUR.ALWAYS
+) => {
+  const app = useNuxtApp();
+  const route = useRoute();
 
   const authState = useAuthState();
 
-  const queryUsuario = await useAsyncGql({
-    operation: "GetAuthedUsuario",
-    variables: {},
-    options: {
-      immediate: authState.status.value === "authenticated",
+  const usuarioQuery = useQuery(
+    ["usuario::authed"],
+    async () => {
+      const authStateStatus = authState.status.value;
+
+      if (authStateStatus === "authenticated") {
+        return appContextAPI.invoke(APIActionGetAuthedUsuario, null);
+      }
+
+      return null;
     },
+    {
+      keepPreviousData: true,
+    }
+  );
+
+  await handleQuerySuspenseBehaviour(suspenseBehaviour, usuarioQuery);
+
+  const keyUserId = computed(() => authState.data.value?.user?.id ?? null);
+  const keyAccessToken = computed(() => authState.data.value?.accessToken ?? null);
+
+  watch(
+    [
+      //
+      authState.status,
+      keyUserId,
+      keyAccessToken,
+    ],
+    () => {
+      usuarioQuery.refetch();
+    }
+  );
+
+  const hasAuthError = computed(() => {
+    if (authState.data.value?.error || usuarioQuery.error.value) {
+      return true;
+    }
+
+    return false;
   });
 
-  const isBusy = computed(() => unref(queryUsuario.pending) || unref(authState.loading));
-
-  const usuario = ref<null | IAppAuthContextGetAuthedUsuarioQueryUsuario>(null);
-
-  const handleAuthStateStatus = async () => {
-    const status = unref(authState.status);
-
-    switch (status) {
-      case "authenticated": {
-        const query_usuario_data = unref(queryUsuario.data);
-        const query_usuario_is_pending = unref(queryUsuario.pending);
-
-        if (!query_usuario_data && !query_usuario_is_pending) {
-          await queryUsuario.execute();
-        }
-
-        break;
-      }
-
-      case "unauthenticated": {
-        usuario.value = null;
-        break;
-      }
+  watch([hasAuthError], ([hasAuthError]) => {
+    if (hasAuthError) {
+      callWithNuxt(app, () => navigateTo(route.fullPath, { external: true }));
     }
-  };
+  });
 
-  const handleQueryUsuario = () => {
-    const is_busy_value = unref(isBusy);
-    const query_usuario_data = unref(queryUsuario.data);
+  const isBusy = computed(() => usuarioQuery.isLoading.value || authState.loading.value);
 
-    if (!is_busy_value) {
-      let usuarioValue = null;
+  const usuario = computed(() => usuarioQuery.data.value ?? null);
 
-      if (query_usuario_data) {
-        usuarioValue = query_usuario_data.usuario;
-      }
+  const usuarioIdRef = computed(() => {
+    const usuario_value = unref(usuario);
+    return usuario_value?.id ?? null;
+  });
 
-      usuario.value = usuarioValue;
-    }
-  };
+  const hasUsuario = computed(() => usuarioIdRef.value !== null);
 
   const waitForIdleState = () =>
     new Promise<void>((resolve) => {
       const handleTick = () => {
-        const is_busy_value = unref(isBusy);
-
-        if (!is_busy_value) {
+        if (!isBusy.value) {
           resolve();
           unwatch();
         }
@@ -78,38 +101,13 @@ export const createAppContextAuth = async () => {
       handleTick();
     });
 
-  watch(
-    // ...
-    [authState.status],
-    handleAuthStateStatus,
-    { immediate: true }
-  );
-
-  watch(
-    // ...
-    [queryUsuario.pending, queryUsuario.data, queryUsuario.error, isBusy],
-    handleQueryUsuario,
-    { immediate: true }
-  );
-
-  const checkCargo = async (cargoSlug: string) => {
-    const usuario = await waitForUsuario();
-
-    const data = await gql("CheckUsuarioHasCargoByUsuarioIdAndCargoSlug", {
-      cargoSlug,
-      usuarioId: usuario.id,
-    });
-
-    return data.resultado;
-  };
-
   const getUsuario = <Strict extends boolean, Usuario extends IAppAuthContextGetUsuarioResult<Strict>>(strict: Strict) => {
     const usuario_value: unknown = unref(usuario);
     return <Usuario>usuario_value;
   };
 
   const getUsuarioRef = <Strict extends boolean, Usuario extends IAppAuthContextGetUsuarioResult<Strict>>(strict: Strict) => {
-    const usuario_ref: unknown = <Ref<Usuario>>usuario;
+    const usuario_ref = <ComputedRef<Usuario>>usuario;
     return usuario_ref;
   };
 
@@ -130,108 +128,146 @@ export const createAppContextAuth = async () => {
       handleTick();
     });
 
-  const checkAuthorization = async (authorizationCheckStatement: Omit<CheckUsuarioAuthorizationsInputCheck, "usuarioId">) => {
-    const usuario = await waitForUsuario();
+  const useCheckCargo = async (cargoSlug: MaybeRef<string>, suspenseBehaviour = APP_QUERY_SUSPENSE_BEHAVIOUR.ALWAYS) => {
+    const dtoRef = computed(
+      (): IAPIActionUsuarioCheckCargoDto => ({
+        usuarioId: unref(usuario)?.id ?? -1,
+        cargoSlug: unref(cargoSlug),
+      })
+    );
 
-    const data = await gql("CheckUsuarioAuthorizations", {
-      dto: {
-        checks: [
-          {
-            usuarioId: usuario.id,
-            ...authorizationCheckStatement,
-          },
-        ],
+    const query = useQuery(
+      [
+        //
+        "usuario_cargo::check",
+        computed(() => `usuario_cargo::check::dto::${JSON.stringify(unref(dtoRef))}`),
+      ],
+      async () => {
+        const usuario = await waitForUsuario();
+
+        return appContextAPI.invoke(APIActionUsuarioCheckCargo, {
+          usuarioId: usuario.id,
+          cargoSlug: unref(cargoSlug),
+        });
       },
-    });
+      {
+        keepPreviousData: true,
+      }
+    );
 
-    const checks = data.checkUsuarioAuthorizations.checks;
-    const checkResult = checks[0];
-    const can = checkResult.can;
+    await handleQuerySuspenseBehaviour(suspenseBehaviour, query);
+
+    const result = computed(() => query.data?.value);
+    const isLoading = computed(() => query.isLoading?.value);
+
+    return {
+      result,
+      //
+      query,
+      //
+      isLoading,
+    };
+  };
+
+  const checkCargo = async (cargoSlug: string) => {
+    const { query } = await useCheckCargo(cargoSlug);
+    const querySuspended = await query.suspense();
+
+    const { data = null, error } = querySuspended;
+
+    if (data === null || error) {
+      throw error ?? new Error("Can not check cargo");
+    }
+
+    return data;
+  };
+
+  const useCheckAuthorization = async (
+    partialDtoRef: MaybeRef<Omit<IAPIActionUsuarioCheckAuthorizationDto, "usuarioId">>,
+    suspenseBehaviour = APP_QUERY_SUSPENSE_BEHAVIOUR.ALWAYS
+  ) => {
+    const appContextAPI = useAppContextAPI();
+
+    const dtoRef = computed(
+      (): IAPIActionUsuarioCheckAuthorizationDto => ({
+        usuarioId: unref(usuario)?.id ?? -1,
+        ...unref(partialDtoRef),
+      })
+    );
+
+    const query = useQuery(
+      [
+        // ...
+        "usuarios",
+        "usuario::authorization::check",
+        computed(() => `usuario::by-id::${unref(dtoRef).usuarioId}`),
+        computed(() => `usuario::authorization::check::dto::${JSON.stringify(unref(dtoRef))}`),
+      ],
+      async () => {
+        const usuario = await waitForUsuario();
+
+        const dto: IAPIActionUsuarioCheckAuthorizationDto = {
+          usuarioId: usuario.id,
+          ...unref(partialDtoRef),
+        };
+
+        return appContextAPI.invoke(APIActionUsuarioCheckAuthorization, dto);
+      },
+      {
+        keepPreviousData: true,
+      }
+    );
+
+    await handleQuerySuspenseBehaviour(suspenseBehaviour, query);
+
+    const isLoading = computed(() => query.isLoading?.value);
+
+    const can = computed(() => query.data?.value ?? null);
+
+    return {
+      can,
+      //
+      query,
+      //
+      isLoading,
+    };
+  };
+
+  const checkAuthorization = async (partialDtoRef: MaybeRef<Omit<IAPIActionUsuarioCheckAuthorizationDto, "usuarioId">>) => {
+    const { query } = await useCheckAuthorization(partialDtoRef);
+
+    const querySuspended = await query.suspense();
+
+    const { data, error } = querySuspended;
+
+    const can = data ?? null;
+
+    if (can === null || error) {
+      throw error ?? new Error("Can not check authorization");
+    }
 
     return can;
   };
 
-  const usuarioIdRef = computed(() => {
-    const usuario_value = unref(usuario);
-    return usuario_value?.id ?? null;
-  });
-
-  const useAuthorizationCheck = async (authorizationCheckStatement: Omit<CheckUsuarioAuthorizationsInputCheck, "usuarioId">) => {
-    const dtoCheckRef = computed((): CheckUsuarioAuthorizationsInputCheck | null => {
-      const usuario_id_value = unref(usuarioIdRef);
-
-      if (usuario_id_value) {
-        return {
-          usuarioId: usuario_id_value,
-          ...authorizationCheckStatement,
-        };
-      }
-
-      return null;
-    });
-
-    const dtoRef = computed((): CheckUsuarioAuthorizationsQueryVariables["dto"] => {
-      const dto_check_value = unref(dtoCheckRef);
-
-      if (dto_check_value) {
-        return {
-          checks: [dto_check_value],
-        };
-      }
-
-      return {
-        checks: [],
-      };
-    });
-
-    const authorizationCheck = await useAsyncGql("CheckUsuarioAuthorizations", {
-      dto: dtoRef,
-    });
-
-    const results = computed(() => authorizationCheck.data.value?.checkUsuarioAuthorizations.checks ?? []);
-
-    const result = computed(() => {
-      const results_value = unref(results);
-
-      if (results_value.length === 1) {
-        return results_value[0];
-      }
-
-      return null;
-    });
-
-    const can = computed(() => {
-      const result_value = unref(result);
-
-      if (result_value) {
-        return result_value.can;
-      }
-
-      return false;
-    });
-
-    const isBusy = computed(() => authorizationCheck.pending.value);
-
-    return {
-      can,
-      result,
-      isBusy,
-    };
-  };
-
   return {
     //
+
     isBusy,
-    queryUsuario,
+    hasUsuario,
 
     //
 
-    checkCargo,
+    useCheckAuthorization,
     checkAuthorization,
+
+    useCheckCargo,
+    checkCargo,
 
     //
 
     usuario,
+    usuarioIdRef,
+    usuarioQuery,
 
     //
 
@@ -242,9 +278,5 @@ export const createAppContextAuth = async () => {
 
     waitForUsuario,
     waitForIdleState,
-
-    //
-
-    useAuthorizationCheck,
   };
 };

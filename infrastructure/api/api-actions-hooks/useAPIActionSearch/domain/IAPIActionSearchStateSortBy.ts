@@ -1,4 +1,4 @@
-export type IInternalSearchStateSortBy = {
+export type IAPIActionSearchStateSortBy = {
   key: string;
   order?: boolean | "asc" | "desc";
 };

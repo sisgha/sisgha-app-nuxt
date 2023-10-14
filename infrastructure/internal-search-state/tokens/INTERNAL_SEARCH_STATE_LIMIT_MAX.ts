@@ -1,1 +1,0 @@
-export const INTERNAL_SEARCH_STATE_LIMIT_MAX = 100;

@@ -42,7 +42,7 @@ provide(APP_CONTEXT_API, appContextAPI);
 
 //
 
-const appContextAuth = await createAppContextAuth();
+const appContextAuth = await createAppContextAuth(appContextAPI);
 provide(APP_CONTEXT_AUTH, appContextAuth);
 
 //

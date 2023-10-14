@@ -3,7 +3,7 @@ import { callWithNuxt } from 'nuxt/app';
 
 const authState = useAuthState();
 
-const appContextAuth = await useAppContextAuth()
+const appContextAuth = useAppContextAuth()
 
 const { status } = authState;
 const app = useNuxtApp()

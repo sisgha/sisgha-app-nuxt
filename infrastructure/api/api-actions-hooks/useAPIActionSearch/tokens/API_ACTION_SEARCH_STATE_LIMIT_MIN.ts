@@ -1,0 +1,1 @@
+export const API_ACTION_SEARCH_STATE_LIMIT_MIN = 10;
