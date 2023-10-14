@@ -7,6 +7,8 @@
   --sisgha-theme-primary: 57, 160, 72;
   --sisgha-theme-primary-text: 255, 255, 255;
 
+  --sisgha-theme-primary-half: 156, 207, 163;
+
   --sisgha-theme-divider: 0, 0, 0;
 }
 
@@ -18,6 +20,8 @@
 
   --sisgha-theme-primary: 56, 161, 72;
   --sisgha-theme-primary-text: 255, 255, 255;
+
+  --sisgha-theme-primary-half: 37, 90, 45;
 
   --sisgha-theme-divider: 255, 255, 255;
 }

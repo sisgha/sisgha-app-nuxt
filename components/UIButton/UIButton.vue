@@ -31,7 +31,7 @@
 }
 
 .ui-button:disabled {
-  opacity: 0.5;
+  background-color: rgb(var(--sisgha-theme-primary-half));
   cursor: not-allowed;
 }
 
