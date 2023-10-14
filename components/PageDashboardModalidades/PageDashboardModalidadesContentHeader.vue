@@ -1,6 +1,6 @@
 <template>
   <div class="view-header">
-    <h1>Modalidades de Ensino</h1>
+    <h1>Modalidades</h1>
   </div>
 </template>
 
