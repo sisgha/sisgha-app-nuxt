@@ -149,7 +149,8 @@ const blocks = ([
 
 
 .layout-dashboard-main {
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: scroll;
 }
 
 .layout-dashboard-layout {

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { wait } from "../../utils";
 import { BaseAPIAction } from "./BaseAPIAction";
 import { IdZod } from "./validation/id.zod";
 
@@ -42,6 +43,7 @@ export class APIActionCursoCreate extends BaseAPIAction<IAPIActionCursoCreateDto
         const curso = result.curso;
 
         if (curso) {
+          await wait(250);
           return curso.id;
         }
       }

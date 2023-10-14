@@ -3,3 +3,4 @@ export * from "./buildHeadTitle";
 export * from "./cargo";
 export * from "./minmax";
 export * from "./query";
+export * from "./wait";

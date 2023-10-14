@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useQuery } from '@tanstack/vue-query';
-import { useAPIActionSearch } from '../../infrastructure';
+import { APP_QUERY_SUSPENSE_BEHAVIOUR, useAPIActionSearch } from '../../infrastructure';
 import { APIActionModalidadeFindById, APIActionModalidadeList } from '../../infrastructure/api/api-actions';
 import { useAppContextPageDashboardCursosNovoContent } from './hooks';
 
@@ -41,7 +41,7 @@ const { isBusy } = appContextPageDashboardCursosNovoContent;
 //
 
 const appContextAPI = useAppContextAPI();
-const apiSearchModalidade = await useAPIActionSearch(APIActionModalidadeList, false, "modalidades");
+const apiSearchModalidade = await useAPIActionSearch(APIActionModalidadeList, "modalidades", APP_QUERY_SUSPENSE_BEHAVIOUR.DISABLED);
 
 const {
   isLoading: apiSearchModalidadeIsLoading,

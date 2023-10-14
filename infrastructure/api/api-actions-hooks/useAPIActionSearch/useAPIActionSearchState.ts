@@ -8,7 +8,7 @@ export const useAPIActionSearchState = () => {
     search: "",
     sortBy: [],
     itemsPerPage: API_ACTION_SEARCH_STATE_LIMIT_DEFAULT,
-    filterDateDeleted: IAPIActionSearchStateDateDeletedFilter.ALL,
+    filterDateDeleted: IAPIActionSearchStateDateDeletedFilter.ONLY_NOT_DELETED,
   });
 
   const { isDebouncePending, debouncedReactiveState: debouncedSearchState } = useDebouncedReactive(searchState, 75, {

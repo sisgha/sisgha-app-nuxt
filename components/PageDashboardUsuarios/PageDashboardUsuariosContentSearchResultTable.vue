@@ -7,7 +7,7 @@ const appContextPageDashboardUsuariosContent = await useAppContextPageDashboardU
 const { apiSearchUsuarios } = appContextPageDashboardUsuariosContent;
 const { searchState, items, total, isLoading } = apiSearchUsuarios;
 
-const headers = reactive([
+const headers = [
   {
     key: 'nome',
     title: 'Nome',
@@ -35,7 +35,7 @@ const headers = reactive([
     align: 'start',
     sortable: false,
   },
-]);
+] as const
 
 
 const isLoadingDebounced = refDebounced(isLoading, 130);

@@ -1,0 +1,28 @@
+query ListCurso($dto: GenericListInput!) {
+  list: listCurso(dto: $dto) {
+    total
+
+    offset
+
+    limit
+
+    items {
+      id
+
+      nome
+      nomeAbreviado
+
+      modalidade {
+        id
+
+        nome
+        slug
+      }
+
+      dateCreated
+      dateUpdated
+      dateDeleted
+      dateSearchSync
+    }
+  }
+}

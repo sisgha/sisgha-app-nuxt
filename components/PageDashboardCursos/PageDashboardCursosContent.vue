@@ -3,11 +3,13 @@ import {
   createAppContextPageDashboardCursosContent,
   getPageDashboardCursosBreadcrumbItems,
 } from './hooks';
+import { APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT } from './hooks/context/tokens/APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT';
 
 
 //
 
-await createAppContextPageDashboardCursosContent();
+const appContextPageDashboardCursosContent = await createAppContextPageDashboardCursosContent();
+provide(APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT, appContextPageDashboardCursosContent);
 
 //
 
@@ -24,9 +26,7 @@ const breadcrumbItems = getPageDashboardCursosBreadcrumbItems();
 
       <div class="my-8"></div>
 
-      <div>
-        WIP
-      </div>
+      <PageDashboardCursosContentSearch />
     </LayoutDashboardContainer>
   </LayoutDashboardPage>
 </template>

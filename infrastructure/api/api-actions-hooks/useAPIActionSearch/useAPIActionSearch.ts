@@ -1,12 +1,14 @@
-import { useQuery } from "@tanstack/vue-query";
+import { UseQueryOptions, useQuery } from "@tanstack/vue-query";
+import { APP_QUERY_SUSPENSE_BEHAVIOUR, handleQuerySuspenseBehaviour } from "../../../utils";
 import { BaseAPIActionListConstructor } from "../../api-actions/BaseAPIActionList";
 import { useAPIActionSearchState } from "./useAPIActionSearchState";
 import { buildGenericListInputFromAPIActionSearchState } from "./utils";
 
 export const useAPIActionSearch = async <Result extends { items: any[] }>(
   apiActionList: BaseAPIActionListConstructor<Result>,
-  shouldSuspense = true,
-  searchKeyPrefix = apiActionList.name
+  searchKeyPrefix = apiActionList.name,
+  suspenseBehaviour = APP_QUERY_SUSPENSE_BEHAVIOUR.SERVER_SIDE_ONLY,
+  queryOptions?: Omit<UseQueryOptions<Result, any, any, any>, "queryKey" | "queryFn" | "initialData">
 ) => {
   const appContextAPI = useAppContextAPI();
 
@@ -23,14 +25,12 @@ export const useAPIActionSearch = async <Result extends { items: any[] }>(
     },
     {
       keepPreviousData: true,
+      staleTime: 2 * 60 * 1000,
+      ...queryOptions,
     }
   );
 
-  if (shouldSuspense) {
-    onServerPrefetch(async () => {
-      await searchQuery.suspense();
-    });
-  }
+  await handleQuerySuspenseBehaviour(suspenseBehaviour, searchQuery);
 
   const data = computed(() => searchQuery.data.value);
   const items = computed((): Result["items"] => data.value?.items ?? []);

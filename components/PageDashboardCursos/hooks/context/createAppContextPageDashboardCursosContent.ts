@@ -1,13 +1,13 @@
-import { APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT } from "./tokens/APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT";
+import { APIActionCursoList, useAPIActionSearch } from "../../../../infrastructure";
 
 export type IPageDashboardCursosContentContext = Awaited<ReturnType<typeof createAppContextPageDashboardCursosContent>>;
 
-export const createAppContextPageDashboardCursosContent = async (shouldProvide = true) => {
-  const appContextPageDashboardCursosContent = {};
+export const createAppContextPageDashboardCursosContent = async () => {
+  const apiActionSearchCursos = await useAPIActionSearch(APIActionCursoList, "cursos");
 
-  if (shouldProvide) {
-    provide(APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT, appContextPageDashboardCursosContent);
-  }
+  const appContextPageDashboardCursosContent = {
+    apiActionSearchCursos,
+  };
 
   return appContextPageDashboardCursosContent;
 };

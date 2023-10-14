@@ -17,7 +17,7 @@ export const handleQuerySuspenseBehaviour = async (
       });
     }
 
-    case APP_QUERY_SUSPENSE_BEHAVIOUR.NEVER:
+    case APP_QUERY_SUSPENSE_BEHAVIOUR.DISABLED:
     default: {
       break;
     }
