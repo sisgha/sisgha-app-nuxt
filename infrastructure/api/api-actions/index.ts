@@ -11,6 +11,7 @@ export * from "./APIActionUsuarioCheckCargo";
 export * from "./APIActionUsuarioCheckIsEmailAvailable";
 export * from "./APIActionUsuarioCheckIsMatriculaSiapeAvailable";
 export * from "./APIActionUsuarioCreate";
+export * from "./APIActionUsuarioFindById";
 export * from "./APIActionUsuarioList";
 export * from "./BaseAPIAction";
 export * from "./BaseAPIActionFindById";

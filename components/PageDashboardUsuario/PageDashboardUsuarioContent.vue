@@ -11,14 +11,23 @@ provide(APP_CONTEXT_PAGE_DASHBOARD_USUARIO_CONTENT, appContextPageDashboardUsuar
 
 //
 
-const { result, isErrorNotFound } = appContextPageDashboardUsuarioContent.apiUsuarioInfo;
+const { apiActionUsuarioFindById } = appContextPageDashboardUsuarioContent;
+
+const { result, isLoading, isErrorNotFound } = apiActionUsuarioFindById;
+
 const breadcrumbItems = getPageDashboardUsuarioBreadcrumbItems();
 
 //
 </script>
 
 <template>
-  <PageDashboardUsuarioFallbackNotFound v-if="isErrorNotFound" />
+  <LayoutDashboardPage v-if="isLoading" :breadcrumbItems="breadcrumbItems">
+    <LayoutDashboardContainer class="my-8">
+      <UILoading />
+    </LayoutDashboardContainer>
+  </LayoutDashboardPage>
+
+  <PageDashboardUsuarioFallbackNotFound v-else-if="isErrorNotFound" />
 
   <LayoutDashboardPage v-else-if="result" :breadcrumbItems="breadcrumbItems">
     <LayoutDashboardContainer class="my-8">

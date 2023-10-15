@@ -1,4 +1,4 @@
-query FindUsuarioById($id: Int!) {
+query UsuarioFindById($id: Int!) {
   usuario: findUsuarioById(dto: { id: $id }) {
     id
 
