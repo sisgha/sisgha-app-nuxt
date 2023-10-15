@@ -61,7 +61,8 @@ const selectedModalidadeQuery = useQuery(
 
     return null;
   }, {
-  enabled: hasValue, keepPreviousData: true
+  enabled: hasValue,
+  keepPreviousData: true
 });
 
 

@@ -2,7 +2,10 @@ import { useQuery } from "@tanstack/vue-query";
 import { APP_QUERY_SUSPENSE_BEHAVIOUR, handleQuerySuspenseBehaviour } from "../../../utils";
 import { BaseAPIActionFindByIdConstructor } from "../../api-actions/BaseAPIActionFindById";
 
-export const useAPIActionFindById = async <Result, APIActionFindByIdConstructor extends BaseAPIActionFindByIdConstructor<Result>>(
+export const useAPIActionFindById = async <
+  Result,
+  APIActionFindByIdConstructor extends BaseAPIActionFindByIdConstructor<Result> = BaseAPIActionFindByIdConstructor<Result>
+>(
   apiActionFindByIdConstructor: APIActionFindByIdConstructor,
   idRef: MaybeRef<number>,
   queryKeyBase: MaybeRef<string> = apiActionFindByIdConstructor.name,

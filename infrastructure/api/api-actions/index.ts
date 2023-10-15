@@ -1,5 +1,6 @@
 export * from "./APIActionCargoGetAllActive";
 export * from "./APIActionCursoCreate";
+export * from "./APIActionCursoFindById";
 export * from "./APIActionCursoList";
 export * from "./APIActionGetAuthedUsuario";
 export * from "./APIActionModalidadeFindById";

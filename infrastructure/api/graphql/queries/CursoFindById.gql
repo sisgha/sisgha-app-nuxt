@@ -1,0 +1,20 @@
+query CursoFindById($id: Int!) {
+  curso: findCursoById(dto: { id: $id }) {
+    id
+
+    nome
+    nomeAbreviado
+
+    modalidade {
+      id
+
+      nome
+      slug
+    }
+
+    dateCreated
+    dateUpdated
+    dateDeleted
+    dateSearchSync
+  }
+}

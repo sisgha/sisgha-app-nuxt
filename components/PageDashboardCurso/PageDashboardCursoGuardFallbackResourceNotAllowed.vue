@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { getPageDashboardUsuarioBreadcrumbItems } from './hooks';
+import { getPageDashboardCursoBreadcrumbItems } from './hooks';
 
 //
 
-const breadcrumbItems = getPageDashboardUsuarioBreadcrumbItems();
+const breadcrumbItems = getPageDashboardCursoBreadcrumbItems();
 
 //
 </script>
@@ -12,7 +12,7 @@ const breadcrumbItems = getPageDashboardUsuarioBreadcrumbItems();
   <LayoutDashboardPage :breadcrumbItems="breadcrumbItems">
     <LayoutDashboardContainer class="my-8">
       <VAlert type="error">
-        O identificador do usuário é inválido.
+        Você não tem permissão para visualizar este curso.
       </VAlert>
     </LayoutDashboardContainer>
   </LayoutDashboardPage>

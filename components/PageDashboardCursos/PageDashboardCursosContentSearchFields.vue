@@ -17,10 +17,10 @@
 }
 
 .search-field-query {
-  flex: 9 1 10rem;
+  flex: 10 1 10rem;
 }
 
 .search-field-delete-situation {
-  flex: 1 0 8rem;
+  flex: 1 0 6rem;
 }
 </style>

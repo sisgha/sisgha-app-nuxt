@@ -31,6 +31,13 @@ const headers = [
     align: 'start',
     sortable: false,
   },
+
+  {
+    key: 'v-acoes',
+    title: 'Ações',
+    align: 'start',
+    sortable: false,
+  },
 ] as const;
 
 const isLoadingDebounced = refDebounced(isLoading, 130);
@@ -51,6 +58,11 @@ const isLoadingSmooth = computed(() => isLoading.value && isLoadingDebounced.val
       <template v-slot:item.v-situacao="{ item }">
         <VChip v-if="item.raw.dateDeleted === null">Ativo</VChip>
         <VChip v-else>Inativo</VChip>
+      </template>
+
+      <template v-slot:item.v-acoes="{ item }">
+        <VBtn icon="mdi-eye" variant="plain" class="my-1" :to="`/dashboard/cursos/${item.raw.id}`"
+          title="Visualizar este curso."></VBtn>
       </template>
 
       <template v-slot:tfoot>

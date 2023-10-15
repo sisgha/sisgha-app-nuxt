@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import {
+  APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT,
   createAppContextPageDashboardCursosContent,
   getPageDashboardCursosBreadcrumbItems,
 } from './hooks';
-import { APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT } from './hooks/context/tokens/APP_CONTEXT_PAGE_DASHBOARD_CURSOS_CONTENT';
 
 
 //
