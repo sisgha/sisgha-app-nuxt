@@ -1,4 +1,4 @@
-import { APIActionUsuarioFindById, useAPIActionFindById } from "../../../infrastructure";
+import { APIActionUsuarioFindById, IAPIActionUsuarioFindByIdResult, useAPIActionFindById } from "../../../../infrastructure";
 
 export type IPageDashboardUsuarioContentContext = Awaited<ReturnType<typeof createAppContextPageDashboardUsuarioContent>>;
 
@@ -9,7 +9,12 @@ export const createAppContextPageDashboardUsuarioContent = async () => {
     throw new Error("id_usuario was not provied");
   }
 
-  const apiActionUsuarioFindById = await useAPIActionFindById(APIActionUsuarioFindById, idUsuario, "usuarios", "usuario::id");
+  const apiActionUsuarioFindById = await useAPIActionFindById<IAPIActionUsuarioFindByIdResult>(
+    APIActionUsuarioFindById,
+    idUsuario,
+    "usuarios",
+    "usuario::id"
+  );
 
   return {
     idUsuario,

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { HeadTitleContext } from '../../infrastructure';
 
-
 useAppHeadTitle("Usuário", HeadTitleContext.DASHBOARD);
 
 const route = useRoute();

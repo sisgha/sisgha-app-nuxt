@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { getCargoLabelBySlug } from '../../infrastructure';
-import { createAppContextPageDashboardUsuarioContent } from './hooks/createAppContextPageDashboardUsuarioContent';
-import { getPageDashboardUsuarioBreadcrumbItems } from './hooks/getPageDashboardUsuarioBreadcrumbItems';
-import { APP_CONTEXT_PAGE_DASHBOARD_USUARIO_CONTENT } from './hooks/useAppContextPageDashboardUsuarioContent';
+import { APP_CONTEXT_PAGE_DASHBOARD_USUARIO_CONTENT, createAppContextPageDashboardUsuarioContent, getPageDashboardUsuarioBreadcrumbItems } from './hooks';
 
 //
 
@@ -14,6 +12,8 @@ provide(APP_CONTEXT_PAGE_DASHBOARD_USUARIO_CONTENT, appContextPageDashboardUsuar
 const { apiActionUsuarioFindById } = appContextPageDashboardUsuarioContent;
 
 const { result, isLoading, isErrorNotFound } = apiActionUsuarioFindById;
+
+//
 
 const breadcrumbItems = getPageDashboardUsuarioBreadcrumbItems();
 

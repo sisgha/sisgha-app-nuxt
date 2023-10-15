@@ -1,6 +1,5 @@
 import { IPageDashboardUsuarioContentContext } from "./createAppContextPageDashboardUsuarioContent";
-
-export const APP_CONTEXT_PAGE_DASHBOARD_USUARIO_CONTENT = Symbol();
+import { APP_CONTEXT_PAGE_DASHBOARD_USUARIO_CONTENT } from "./tokens/APP_CONTEXT_PAGE_DASHBOARD_USUARIO_CONTENT";
 
 export const useAppContextPageDashboardUsuarioContent = async () => {
   const appContextPageDashboardUsuarioContent = inject<IPageDashboardUsuarioContentContext>(
