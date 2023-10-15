@@ -13,4 +13,5 @@ export * from "./APIActionUsuarioCheckIsMatriculaSiapeAvailable";
 export * from "./APIActionUsuarioCreate";
 export * from "./APIActionUsuarioList";
 export * from "./BaseAPIAction";
+export * from "./BaseAPIActionFindById";
 export * from "./BaseAPIActionList";

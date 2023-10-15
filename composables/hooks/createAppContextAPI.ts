@@ -13,9 +13,7 @@ export const createAppContextAPI = () => {
     inputDto: InputDto
   ) => {
     const apiAction = new apiActionConstructor(appContextAPI);
-
     const result = await apiAction.invoke(inputDto);
-
     return result;
   };
 
