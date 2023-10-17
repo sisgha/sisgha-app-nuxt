@@ -13,6 +13,7 @@
     "@nuxtjs/dayjs": "^1.4.1",
     "@sidebase/nuxt-auth": "^0.5.0-rc.0",
     "@tanstack/vue-query": "^4.36.2",
+    "@types/jsonwebtoken": "^9.0.3",
     "@types/lodash-es": "^4.17.9",
     "@vorms/core": "^1.1.0",
     "@vorms/resolvers": "^1.1.0",
@@ -27,5 +28,8 @@
     "vite-svg-loader": "^4.0.0",
     "vuetify": "^3.3.15",
     "zod": "^3.22.2"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2"
   }
 }

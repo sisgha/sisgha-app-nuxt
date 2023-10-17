@@ -1,4 +1,5 @@
 import { NuxtAuthHandler } from "#auth";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import type ICredentialsProvider from "next-auth/providers/credentials";
 import CredentialsProviderModule from "next-auth/providers/credentials";
 import type IKeycloakProvider from "next-auth/providers/keycloak";
@@ -53,12 +54,18 @@ export default NuxtAuthHandler({
               scope: "openid profile",
             });
 
-            const userinfo = await openidClient.userinfo(token);
+            const accessToken = token.access_token;
 
-            return {
-              id: userinfo.sub,
-              token,
-            };
+            const data = <JwtPayload | null>(accessToken ? jwt.decode(accessToken) : null);
+
+            const sub = data?.sub;
+
+            if (sub) {
+              return {
+                id: sub,
+                token,
+              };
+            }
           } catch (error) {
             return null;
           }
