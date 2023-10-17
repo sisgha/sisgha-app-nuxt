@@ -1,4 +1,4 @@
-query ListCurso($dto: GenericListInput!) {
+query CursoList($dto: GenericListInput!) {
   list: listCurso(dto: $dto) {
     total
 

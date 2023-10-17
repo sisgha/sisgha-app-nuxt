@@ -11,6 +11,6 @@ const { searchState } = apiActionSearchCursos;
 <template>
   <div>
     <VTextField v-model="searchState.search" label="Pesquisar" placeholder="Procurar por um curso..." variant="outlined"
-      persistent-clear clearable hide-details />
+      persistent-clear clearable hide-details @click:clear="searchState.search = ''" />
   </div>
 </template>

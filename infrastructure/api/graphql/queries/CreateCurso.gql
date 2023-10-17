@@ -1,5 +1,0 @@
-mutation CreateCurso($dto: CreateCursoInput!) {
-  curso: createCurso(dto: $dto) {
-    id
-  }
-}

@@ -32,7 +32,7 @@ export class APIActionCursoCreate extends BaseAPIAction<IAPIActionCursoCreateDto
       if (validationResult.success) {
         const dto = validationResult.data;
 
-        const result = await this.appContextAPI.gql("CreateCurso", {
+        const result = await this.appContextAPI.gql("CursoCreate", {
           dto: {
             nome: dto.nome,
             nomeAbreviado: dto.nomeAbreviado,

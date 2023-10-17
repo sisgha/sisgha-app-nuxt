@@ -25,15 +25,19 @@ export const useAPIActionFindById = async <
     async () => {
       const id = unref(idRef);
 
-      try {
-        const r = await appContextAPI.invoke(apiActionFindByIdConstructor, { id });
-        return r;
-      } catch (e: any) {
-        if (isReactive(e)) {
-          throw toRaw(e);
-        } else {
-          throw e;
+      if (id > 0) {
+        try {
+          const r = await appContextAPI.invoke(apiActionFindByIdConstructor, { id });
+          return r;
+        } catch (e: any) {
+          if (isReactive(e)) {
+            throw toRaw(e);
+          } else {
+            throw e;
+          }
         }
+      } else {
+        throw new Error("Invalid identifier");
       }
     },
     {
