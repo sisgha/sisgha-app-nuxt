@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-const isDark = useAppThemePalleteIsDark();
-const invertTheme = useAppThemePalleteInvertTheme();
+import { useAppContextTheme } from "~/composables/hooks";
+
+const { isDark, invertTheme } = useAppContextTheme();
 
 const icon = computed(() => {
   return isDark.value ? "mdi-weather-sunny" : "mdi-weather-night"

@@ -1,5 +1,5 @@
-import { APP_CONTEXT_AUTH } from "./hooks/APP_CONTEXT_AUTH";
-import { IAppContextAuth } from "./hooks/createAppContextAuth";
+import { APP_CONTEXT_AUTH } from "./APP_CONTEXT_AUTH";
+import { IAppContextAuth } from "./createAppContextAuth";
 
 export const useAppContextAuth = () => {
   const appContextAuth = inject<IAppContextAuth>(APP_CONTEXT_AUTH);

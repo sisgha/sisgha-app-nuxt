@@ -1,39 +1,11 @@
 <script lang="ts" setup>
-import { useTheme } from "vuetify";
-import { APP_CONTEXT_API } from "./composables/hooks/APP_CONTEXT_API";
-import { APP_CONTEXT_AUTH } from "./composables/hooks/APP_CONTEXT_AUTH";
-import { createAppContextAPI } from "./composables/hooks/createAppContextAPI";
-import { createAppContextAuth } from "./composables/hooks/createAppContextAuth";
-
-const appThemePallete = ref("dark");
 
 //
 
-const theme = useTheme();
 
-const applyAppThemePalleteToVuetify = () => {
-  theme.global.name.value = appThemePallete.value;
-};
+const appContextTheme = await createAppContextTheme();
+provide(APP_CONTEXT_THEME, appContextTheme);
 
-applyAppThemePalleteToVuetify();
-watch(appThemePallete, applyAppThemePalleteToVuetify);
-onMounted(applyAppThemePalleteToVuetify);
-
-//
-
-const colorMode = useColorMode();
-
-const loadAppThemePalleteFromColorMode = () => {
-  appThemePallete.value = colorMode.value;
-};
-
-watch(colorMode, loadAppThemePalleteFromColorMode);
-onMounted(loadAppThemePalleteFromColorMode);
-
-//
-
-const appThemePalleteGetter = computed(() => appThemePallete.value)
-provide("appThemePalleteGetter", appThemePalleteGetter);
 
 //
 
@@ -46,6 +18,7 @@ const appContextAuth = await createAppContextAuth(appContextAPI);
 provide(APP_CONTEXT_AUTH, appContextAuth);
 
 //
+
 </script>
 
 <template>
@@ -56,7 +29,7 @@ provide(APP_CONTEXT_AUTH, appContextAuth);
       rel="stylesheet" />
   </Head>
 
-  <div :class="`app ${appThemePallete === 'dark' ? 'dark' : 'light'}`">
+  <div class="app">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

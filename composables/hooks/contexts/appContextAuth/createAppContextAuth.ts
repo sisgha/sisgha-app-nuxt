@@ -9,8 +9,8 @@ import {
   IAPIActionUsuarioCheckAuthorizationDto,
   IAPIActionUsuarioCheckCargoDto,
   handleQuerySuspenseBehaviour,
-} from "../../infrastructure";
-import { IAppContextAPI } from "./createAppContextAPI";
+} from "../../../../infrastructure";
+import { IAppContextAPI } from "../appContextAPI/createAppContextAPI";
 
 type IAppAuthContextGetAuthedUsuarioQueryUsuario = GetAuthedUsuarioQuery["usuario"];
 

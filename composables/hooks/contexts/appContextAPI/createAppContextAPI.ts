@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/vue-query";
 import castArray from "lodash-es/castArray";
-import { BaseAPIActionConstructor } from "../../infrastructure/api/api-actions/BaseAPIAction";
+import { BaseAPIActionConstructor } from "../../../../infrastructure/api/api-actions/BaseAPIAction";
 
 export type IAppContextAPI = Awaited<ReturnType<typeof createAppContextAPI>>;
 

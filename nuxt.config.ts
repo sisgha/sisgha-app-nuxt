@@ -10,7 +10,7 @@ const environmentConfigService = new EnvironmentConfigService();
 
 const RUNTIME_URL = environmentConfigService.getRuntimeURL();
 const AUTH_ORIGIN = RUNTIME_URL ?? process.env.AUTH_ORIGIN;
-const GQL_HOST = process.env.GQL_HOST ?? "https://sisgha.jipalab.dev/endpoint/graphql";
+const GQL_HOST = process.env.GQL_HOST!;
 
 //
 
@@ -29,9 +29,8 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     async (options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
-        if (config.plugins) {
-          config.plugins.push(vuetify());
-        }
+        config.plugins ||= [];
+        config.plugins.push(vuetify());
       });
     },
   ],
@@ -52,6 +51,13 @@ export default defineNuxtConfig({
 
   build: {
     transpile: ["vuetify"],
+  },
+
+  colorMode: {
+    preference: "system", // default value of $colorMode.preference
+    fallback: "dark", // fallback value if not system preference found
+    classSuffix: "",
+    classPrefix: "app-color-mode-",
   },
 
   auth: {

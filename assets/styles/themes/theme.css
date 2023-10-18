@@ -1,4 +1,4 @@
-.light {
+.app-color-mode-light {
   --sisgha-theme-text: 0, 0, 0;
 
   --sisgha-theme-surface: 255, 255, 255;
@@ -12,7 +12,7 @@
   --sisgha-theme-divider: 0, 0, 0;
 }
 
-.dark {
+.app-color-mode-dark {
   --sisgha-theme-text: 255, 255, 255;
 
   --sisgha-theme-background: 18, 18, 18;
