@@ -19,17 +19,16 @@
     "@vorms/resolvers": "^1.1.0",
     "@vueuse/core": "^10.5.0",
     "@vueuse/nuxt": "^10.5.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash-es": "^4.17.21",
     "next-auth": "^4.21.1",
     "nuxt": "^3.3.1",
     "nuxt-graphql-client": "^0.2.27",
     "openid-client": "^5.6.1",
     "ufo": "^1.1.1",
+    "vite-plugin-vuetify": "^1.0.2",
     "vite-svg-loader": "^4.0.0",
     "vuetify": "^3.3.15",
     "zod": "^3.22.2"
-  },
-  "dependencies": {
-    "jsonwebtoken": "^9.0.2"
   }
 }

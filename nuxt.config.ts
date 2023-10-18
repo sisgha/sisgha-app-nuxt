@@ -1,15 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+import vuetify from "vite-plugin-vuetify";
 import svgLoader from "vite-svg-loader";
 import { EnvironmentConfigService } from "./server/infrastructure/config/environment-config";
+
+//
 
 const environmentConfigService = new EnvironmentConfigService();
 
 const RUNTIME_URL = environmentConfigService.getRuntimeURL();
-
 const AUTH_ORIGIN = RUNTIME_URL ?? process.env.AUTH_ORIGIN;
-
 const GQL_HOST = process.env.GQL_HOST ?? "https://sisgha.jipalab.dev/endpoint/graphql";
+
+//
 
 export default defineNuxtConfig({
   runtimeConfig: {
@@ -24,6 +27,13 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-auth",
     "@nuxtjs/color-mode",
     "@vueuse/nuxt",
+    async (options, nuxt) => {
+      nuxt.hooks.hook("vite:extendConfig", (config) => {
+        if (config.plugins) {
+          config.plugins.push(vuetify());
+        }
+      });
+    },
   ],
 
   vite: {
