@@ -14,7 +14,7 @@ export const getPageDashboardUsuariosBreadcrumbItems = () => {
       {
         title: "Usuários",
         disabled: route.name === "dashboard-usuarios",
-        to: "/dashboard/usuarios/",
+        to: { name: "dashboard-usuarios" },
       },
     ];
   });

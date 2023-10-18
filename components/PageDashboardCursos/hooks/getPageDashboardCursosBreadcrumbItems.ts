@@ -14,7 +14,7 @@ export const getPageDashboardCursosBreadcrumbItems = () => {
       {
         title: "Cursos",
         disabled: route.name === "dashboard-cursos",
-        to: "/dashboard/cursos/",
+        to: { name: "dashboard-cursos" },
       },
     ];
   });

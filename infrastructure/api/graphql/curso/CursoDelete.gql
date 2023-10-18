@@ -1,0 +1,3 @@
+mutation CursoDelete($id: Int!) {
+  result: deleteCurso(dto: { id: $id })
+}

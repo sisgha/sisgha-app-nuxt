@@ -14,7 +14,7 @@ export const getPageDashboardCalendariosBreadcrumbItems = () => {
       {
         title: "Calendários",
         disabled: route.name === "dashboard-calendarios",
-        to: "/dashboard/calendarios/",
+        to: { name: "dashboard-calendarios" },
       },
     ];
   });

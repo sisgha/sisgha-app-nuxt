@@ -33,7 +33,6 @@ const headers = [
     align: 'start',
     sortable: false,
   },
-
   {
     key: 'v-acoes',
     title: 'Ações',

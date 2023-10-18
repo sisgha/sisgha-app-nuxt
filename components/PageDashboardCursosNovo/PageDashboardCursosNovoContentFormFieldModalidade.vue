@@ -35,11 +35,6 @@ const hasErrors = computed(() => modalidadeIdErrors.value != null)
 
 //
 
-const { isBusy } = appContextPageDashboardCursosNovoContent;
-
-
-//
-
 const appContextAPI = useAppContextAPI();
 const apiSearchModalidade = await useAPIActionSearch(APIActionModalidadeList, "modalidades", APP_QUERY_SUSPENSE_BEHAVIOUR.DISABLED);
 
@@ -60,10 +55,12 @@ const selectedModalidadeQuery = useQuery(
     }
 
     return null;
-  }, {
-  enabled: hasValue,
-  keepPreviousData: true
-});
+  },
+  {
+    enabled: hasValue,
+    keepPreviousData: true
+  }
+);
 
 
 const allUsefulModalidades = computed(() => {
@@ -81,13 +78,19 @@ const items = computed(() => allUsefulModalidades.value.map(item => ({
   label: item.nome,
 })));
 
+//
+
+const { isBusy } = appContextPageDashboardCursosNovoContent;
+
+const isLoadingDebounced = refDebounced(apiSearchModalidadeIsLoading, 145);
+const isLoadingSmooth = computed(() => apiSearchModalidadeIsLoading.value && isLoadingDebounced.value);
 </script>
 
 <template>
   <div class="my-3">
-    <VAutocomplete label="Modalidade" v-model="value" v-model:search="apiSearchModalidadeSearchState.search" no-filter
-      clearable :loading="apiSearchModalidadeIsLoading" :disabled="isBusy" :items="items" item-value="value"
-      item-title="label" :error="hasErrors" variant="outlined" />
+    <VAutocomplete no-filter clearable label="Modalidade" v-model="value"
+      v-model:search="apiSearchModalidadeSearchState.search" :loading="isLoadingSmooth" :disabled="isBusy" :items="items"
+      item-value="value" item-title="label" :error="hasErrors" variant="outlined" />
 
     <VAlert v-if="hasErrors && modalidadeIdErrors !== null" class="mb-7" type="error" variant="tonal"
       :text="modalidadeIdErrors" />

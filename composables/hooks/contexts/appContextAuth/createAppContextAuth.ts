@@ -80,14 +80,6 @@ export const createAppContextAuth = async (
     }
   );
 
-  watch(
-    [accessTokenExpires],
-    ([accessTokenExpires]) => {
-      console.debug("accessTokenExpires", new Date(accessTokenExpires!));
-    },
-    { immediate: true }
-  );
-
   const authState = useAuthState();
 
   const usuarioQuery = useQuery(

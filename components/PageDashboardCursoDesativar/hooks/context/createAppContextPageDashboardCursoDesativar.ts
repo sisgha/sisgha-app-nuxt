@@ -1,8 +1,6 @@
-import { useAPIACtionCursoFindById } from "../../../../composables";
+export type IPageDashboardCursoDesativarContext = Awaited<ReturnType<typeof createAppContextPageDashboardCursoDesativar>>;
 
-export type IPageDashboardCursoContentContext = Awaited<ReturnType<typeof createAppContextPageDashboardCursoContent>>;
-
-export const createAppContextPageDashboardCursoContent = async () => {
+export const createAppContextPageDashboardCursoDesativar = async () => {
   const idCurso = inject<ComputedRef<number>>("id_curso");
 
   if (!idCurso) {

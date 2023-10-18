@@ -14,7 +14,7 @@ export const getPageDashboardModalidadesBreadcrumbItems = () => {
       {
         title: "Modalidades de Ensino",
         disabled: route.name === "dashboard-modalidades",
-        to: "/dashboard/modalidades/",
+        to: { name: "dashboard-modalidades" },
       },
     ];
   });

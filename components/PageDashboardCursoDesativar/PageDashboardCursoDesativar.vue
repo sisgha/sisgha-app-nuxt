@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { HeadTitleContext } from '../../infrastructure';
-import { getPageDashboardCursoBreadcrumbItems } from './hooks';
+import { getPageDashboardCursoDesativarBreadcrumbItems } from './hooks';
 
 useAppHeadTitle("Curso", HeadTitleContext.DASHBOARD);
 
@@ -20,26 +20,44 @@ const idCurso = computed(() => {
   return -1;
 });
 
-provide("id_curso", idCurso);
+provide("id_curso", idCurso)
 
 //
 
-const breadcrumbItems = getPageDashboardCursoBreadcrumbItems();
+const breadcrumbItems = getPageDashboardCursoDesativarBreadcrumbItems();
 
+//
 </script>
 
 <template>
-  <PageDashboardCursoGuard>
+  <PageDashboardCursoDesativarGuard>
     <LayoutDashboardPage :breadcrumbItems="breadcrumbItems">
       <LayoutDashboardContainer class="my-8">
-        <PageDashboardCursoHeader />
+        <PageDashboardCursoDesativarHeader />
 
         <div class="my-8"></div>
 
         <ResourceHandlerCurso :resourceId="idCurso">
-          <PageDashboardCursoContent />
+          <ResourceHandlerCursoActivatedGuard>
+            <template #allowed>
+              <PageDashboardCursoDesativarContent />
+            </template>
+          </ResourceHandlerCursoActivatedGuard>
         </ResourceHandlerCurso>
       </LayoutDashboardContainer>
     </LayoutDashboardPage>
-  </PageDashboardCursoGuard>
+  </PageDashboardCursoDesativarGuard>
 </template>
+
+<style scoped>
+.acoes {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.acoes .acoes-espaco {
+  flex: 1;
+}
+</style>

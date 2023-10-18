@@ -9,9 +9,9 @@ provide(APP_CONTEXT_RESOURCE_HANDLER_CURSO_DISPLAY, appContextResourceHandlerCur
 //
 
 
-const { apiActionUsuarioFindById } = appContextResourceHandlerCursoDisplay;
+const { apiActionCursoFindById } = appContextResourceHandlerCursoDisplay;
 
-const { result } = apiActionUsuarioFindById;
+const { result } = apiActionCursoFindById;
 
 </script>
 

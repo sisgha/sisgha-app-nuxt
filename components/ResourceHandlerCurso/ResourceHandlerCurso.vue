@@ -35,9 +35,9 @@ provide(APP_CONTEXT_RESOURCE_HANDLER_CURSO, appContextResourceHandlerCurso);
 
 //
 
-const { apiActionUsuarioFindById } = appContextResourceHandlerCurso;
+const { apiActionCursoFindById } = appContextResourceHandlerCurso;
 
-const { isErrorNotFound } = apiActionUsuarioFindById
+const { isErrorNotFound } = apiActionCursoFindById
 
 //
 
