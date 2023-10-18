@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { VDataTableServer } from 'vuetify/labs/VDataTable';
+
 import { useAppContextPageDashboardCursosContent } from './hooks';
 
 const appContextPageDashboardCursosContent = await useAppContextPageDashboardCursosContent();

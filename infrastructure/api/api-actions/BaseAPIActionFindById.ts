@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { IAppContextAPI } from "../../../composables/hooks/createAppContextAPI";
+import { IAppContextAPI } from "../../../composables/hooks/contexts/appContextAPI/createAppContextAPI";
 import { BaseAPIAction } from "./BaseAPIAction";
 import { IdZod } from "./validation/id.zod";
 

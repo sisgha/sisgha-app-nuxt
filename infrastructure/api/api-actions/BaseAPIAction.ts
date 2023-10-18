@@ -1,4 +1,4 @@
-import { IAppContextAPI } from "../../../composables/hooks/createAppContextAPI";
+import { IAppContextAPI } from "../../../composables/hooks/contexts/appContextAPI/createAppContextAPI";
 
 export interface BaseAPIActionConstructor<Dto, Result> {
   new (appContextAPI: IAppContextAPI): BaseAPIAction<Dto, Result>;

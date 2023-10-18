@@ -1,7 +1,12 @@
 <script lang="ts" setup>
-import { getPageDashboardUsuarioBreadcrumbItems } from './hooks/getPageDashboardUsuarioBreadcrumbItems';
+import { getPageDashboardUsuarioBreadcrumbItems } from './hooks';
+
+//
 
 const breadcrumbItems = getPageDashboardUsuarioBreadcrumbItems();
+
+//
+
 </script>
 
 <template>

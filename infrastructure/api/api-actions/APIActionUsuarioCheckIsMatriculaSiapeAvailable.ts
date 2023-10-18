@@ -12,7 +12,7 @@ export class APIActionUsuarioCheckIsMatriculaSiapeAvailable extends BaseAPIActio
 > {
   buildSchema() {
     return z.object({
-      matriculaSiape: z.string().min(1, "A matrícula SIAPE do usuário deve ser informada."),
+      matriculaSiape: z.string().trim().min(1, "A matrícula SIAPE do usuário deve ser informada."),
       usuarioId: z.number().int().positive().nullable().default(null),
     });
   }

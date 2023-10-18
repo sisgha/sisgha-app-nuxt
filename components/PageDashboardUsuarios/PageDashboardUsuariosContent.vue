@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { createAppContextPageDashboardUsuariosContent } from "./hooks/createAppContextPageDashboardUsuariosContent";
-import { getPageDashboardUsuariosBreadcrumbItems } from "./hooks/getPageDashboardUsuariosBreadcrumbItems";
-import { APP_CONTEXT_PAGE_DASHBOARD_USUARIOS_CONTENT } from "./hooks/useAppContextPageDashboardUsuariosContent";
+import { APP_CONTEXT_PAGE_DASHBOARD_USUARIOS_CONTENT, createAppContextPageDashboardUsuariosContent, getPageDashboardUsuariosBreadcrumbItems } from "./hooks";
 
 //
 

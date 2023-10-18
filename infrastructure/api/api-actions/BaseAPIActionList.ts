@@ -1,5 +1,5 @@
 import { GenericListInput } from "../../../.nuxt/gql/default";
-import { IAppContextAPI } from "../../../composables/hooks/createAppContextAPI";
+import { IAppContextAPI } from "../../../composables/hooks/contexts/appContextAPI/createAppContextAPI";
 import { BaseAPIAction } from "./BaseAPIAction";
 
 export interface BaseAPIActionListConstructor<Result, Dto extends GenericListInput = GenericListInput> {

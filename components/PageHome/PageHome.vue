@@ -1,12 +1,20 @@
 <script lang="ts" setup>
 import { callWithNuxt } from 'nuxt/app';
 
-const authState = useAuthState();
+//
+
+const app = useNuxtApp()
+
+//
 
 const appContextAuth = useAppContextAuth()
 
+//
+
+const authState = useAuthState();
 const { status } = authState;
-const app = useNuxtApp()
+
+//
 
 const handleStatus = async () => {
   const status_value = unref(status)

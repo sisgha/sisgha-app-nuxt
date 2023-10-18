@@ -11,7 +11,7 @@ const idUsuarioRef = inject<ComputedRef<number>>("id_usuario");
     </template>
 
     <template #forbidden>
-      <PageDashboardUsuarioGuardFallbackNotAllowed />
+      <PageDashboardUsuarioGuardFallbackResourceNotAllowed />
     </template>
   </AppAuthorizationGuard>
 </template>

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+import { VDataTableServer } from 'vuetify/labs/VDataTable';
 import { getCargoLabelBySlug } from '../../infrastructure';
-import { useAppContextPageDashboardUsuariosContent } from './hooks/useAppContextPageDashboardUsuariosContent';
+import { useAppContextPageDashboardUsuariosContent } from './hooks';
 
 const appContextPageDashboardUsuariosContent = await useAppContextPageDashboardUsuariosContent();
 

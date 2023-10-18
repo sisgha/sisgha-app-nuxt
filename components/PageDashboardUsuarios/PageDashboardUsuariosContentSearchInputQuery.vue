@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useAppContextPageDashboardUsuariosContent } from './hooks/useAppContextPageDashboardUsuariosContent';
+import { useAppContextPageDashboardUsuariosContent } from './hooks';
 
 const appContextPageDashboardUsuariosContent = await useAppContextPageDashboardUsuariosContent();
 
