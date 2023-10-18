@@ -1,0 +1,1 @@
+export const ACCESS_TOKEN_EXPIRATION_TRIM = 0.5 * 60 * 1000;

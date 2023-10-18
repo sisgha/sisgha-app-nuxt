@@ -4,6 +4,7 @@ import type ICredentialsProvider from "next-auth/providers/credentials";
 import CredentialsProviderModule from "next-auth/providers/credentials";
 import type IKeycloakProvider from "next-auth/providers/keycloak";
 import KeycloakProviderModule from "next-auth/providers/keycloak";
+import { ACCESS_TOKEN_EXPIRATION_TRIM } from "../../../infrastructure";
 import { EnvironmentConfigService } from "../../infrastructure/config/environment-config";
 import { OIDCClientService } from "../../infrastructure/oidc-client/oidc-client.service";
 import { OIDCClientProvider } from "../../infrastructure/oidc-client/providers/oidc-client.provider";
@@ -113,8 +114,11 @@ export default NuxtAuthHandler({
         };
       }
 
+      const msNow = Date.now();
+      const msExpires = <number>token.accessTokenExpires;
+
       // Return previous token if the access token has not expired yet
-      if (Date.now() < <number>token.accessTokenExpires) {
+      if (msExpires - msNow > ACCESS_TOKEN_EXPIRATION_TRIM) {
         return token;
       }
 
@@ -125,7 +129,9 @@ export default NuxtAuthHandler({
     async session({ session, token }) {
       session.user = token.user;
       session.error = token.error;
+
       session.accessToken = token.accessToken;
+      session.accessTokenExpires = <number>token.accessTokenExpires;
 
       return session;
     },

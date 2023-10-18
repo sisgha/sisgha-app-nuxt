@@ -1,6 +1,7 @@
 import { GetAuthedUsuarioQuery } from "#gql";
-import { useQuery } from "@tanstack/vue-query";
+import { useMutation, useQuery } from "@tanstack/vue-query";
 import { callWithNuxt } from "nuxt/app";
+import { ACCESS_TOKEN_EXPIRATION_TRIM } from "~/infrastructure";
 import {
   APIActionGetAuthedUsuario,
   APIActionUsuarioCheckAuthorization,
@@ -26,6 +27,66 @@ export const createAppContextAuth = async (
 ) => {
   const app = useNuxtApp();
   const route = useRoute();
+
+  const { data } = useAuthState();
+  const { getSession } = useAuth();
+
+  const timestamp = useTimestamp({ offset: 0 });
+
+  const accessTokenExpires = computed(() => data.value?.accessTokenExpires ?? null);
+
+  const isTokenNearToExpire = computed(() => {
+    const msNow = timestamp.value;
+    const msExpires = accessTokenExpires.value;
+
+    if (msExpires) {
+      if (msExpires - msNow < ACCESS_TOKEN_EXPIRATION_TRIM) {
+        return true;
+      }
+    }
+
+    return false;
+  });
+
+  const mutationTokenRefresh = useMutation({
+    mutationFn: async () => {
+      console.debug("[debug] refreshing access token");
+      await getSession();
+    },
+    retry: true,
+    retryDelay: 1000,
+  });
+
+  const handleExpiredToken = async () => {
+    if (mutationTokenRefresh.isIdle) {
+      mutationTokenRefresh.mutate();
+    }
+  };
+
+  const handleIsTokenNearToExpireState = async () => {
+    if (isTokenNearToExpire.value) {
+      console.debug("[debug] access token is near to expire");
+      await handleExpiredToken();
+    }
+  };
+
+  watch(
+    [isTokenNearToExpire],
+    () => {
+      handleIsTokenNearToExpireState();
+    },
+    {
+      immediate: true,
+    }
+  );
+
+  watch(
+    [accessTokenExpires],
+    ([accessTokenExpires]) => {
+      console.debug("accessTokenExpires", new Date(accessTokenExpires!));
+    },
+    { immediate: true }
+  );
 
   const authState = useAuthState();
 
