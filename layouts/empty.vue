@@ -8,16 +8,19 @@
 
 <style scoped>
 .layout {
-  display: flex;
+  min-height: 100vh;
 
   overflow: hidden;
+
+  display: flex;
 }
 
 .main {
   flex: 1;
 
-  height: 100%;
-
   overflow: auto;
+
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -58,5 +58,5 @@ await handleStatus();
 </script>
 
 <template>
-  <UILoading />
+  <PageLoading />
 </template>

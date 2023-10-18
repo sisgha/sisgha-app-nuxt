@@ -34,9 +34,9 @@ const { can: isAllowed, isLoading } = await appContextAuth.useCheckAuthorization
 </script>
 
 <template>
-  <div v-if="isLoading">
+  <slot name="loading" v-if="isLoading">
     <UILoading />
-  </div>
+  </slot>
 
   <slot name="allowed" v-else-if="isAllowed === true"></slot>
 

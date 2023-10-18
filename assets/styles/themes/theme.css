@@ -29,6 +29,11 @@
 .app {
   background-color: rgb(var(--sisgha-theme-background));
   color: rgb(var(--sisgha-theme-text));
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
 }
 
 input {

@@ -1,5 +1,5 @@
 <template>
-  <VApp class="app">
+  <VApp>
     <VLayout class="layout">
       <VAppBar :elevation="1" color="surface">
         <div class="px-4">
@@ -38,7 +38,9 @@
 }
 
 .main {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+
   overflow: auto;
 }
 </style>
