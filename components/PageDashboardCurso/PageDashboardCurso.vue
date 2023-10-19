@@ -1,45 +1,20 @@
 <script lang="ts" setup>
 import { HeadTitleContext } from '../../infrastructure';
-import { getPageDashboardCursoBreadcrumbItems } from './hooks';
-
-useAppHeadTitle("Curso", HeadTitleContext.DASHBOARD);
-
-const route = useRoute();
-
-const idCurso = computed(() => {
-  const idCursoParam = route.params.id_curso;
-
-  if (typeof idCursoParam === "string") {
-    const asNumber = parseInt(idCursoParam);
-
-    if (!Number.isNaN(asNumber) && asNumber > 0) {
-      return asNumber;
-    }
-  }
-
-  return -1;
-});
-
-provide("id_curso", idCurso);
+import { APP_CONTEXT_PAGE_DASHBOARD_CURSO, createAppContextPageDashboardCurso } from './hooks';
 
 //
 
-const breadcrumbItems = getPageDashboardCursoBreadcrumbItems();
+useAppHeadTitle("Curso", HeadTitleContext.DASHBOARD);
+
+//
+
+const appContextPageDashboardCurso = await createAppContextPageDashboardCurso();
+provide(APP_CONTEXT_PAGE_DASHBOARD_CURSO, appContextPageDashboardCurso);
 
 </script>
 
 <template>
   <PageDashboardCursoGuard>
-    <LayoutDashboardPage :breadcrumbItems="breadcrumbItems">
-      <LayoutDashboardContainer class="my-8">
-        <PageDashboardCursoHeader />
-
-        <div class="my-8"></div>
-
-        <ResourceHandlerCurso :resourceId="idCurso">
-          <PageDashboardCursoContent />
-        </ResourceHandlerCurso>
-      </LayoutDashboardContainer>
-    </LayoutDashboardPage>
+    <PageDashboardCursoContent />
   </PageDashboardCursoGuard>
 </template>

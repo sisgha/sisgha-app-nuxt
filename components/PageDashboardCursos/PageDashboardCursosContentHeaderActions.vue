@@ -1,5 +1,5 @@
 <template>
   <div>
-    <PageDashboardCursosContentHeaderActionNovo />
+    <PageDashboardCursosContentHeaderActionsNovo />
   </div>
 </template>

@@ -1,63 +1,22 @@
 <script lang="ts" setup>
 import { HeadTitleContext } from '../../infrastructure';
-import { getPageDashboardCursoDesativarBreadcrumbItems } from './hooks';
-
-useAppHeadTitle("Curso", HeadTitleContext.DASHBOARD);
-
-const route = useRoute();
-
-const idCurso = computed(() => {
-  const idCursoParam = route.params.id_curso;
-
-  if (typeof idCursoParam === "string") {
-    const asNumber = parseInt(idCursoParam);
-
-    if (!Number.isNaN(asNumber) && asNumber > 0) {
-      return asNumber;
-    }
-  }
-
-  return -1;
-});
-
-provide("id_curso", idCurso)
+import { APP_CONTEXT_PAGE_DASHBOARD_CURSO, createAppContextPageDashboardCurso } from '../PageDashboardCurso/hooks';
 
 //
 
-const breadcrumbItems = getPageDashboardCursoDesativarBreadcrumbItems();
+
+useAppHeadTitle("Desativar Curso", HeadTitleContext.DASHBOARD);
+
+//
+
+const appContextPageDashboardCurso = await createAppContextPageDashboardCurso();
+provide(APP_CONTEXT_PAGE_DASHBOARD_CURSO, appContextPageDashboardCurso);
 
 //
 </script>
 
 <template>
   <PageDashboardCursoDesativarGuard>
-    <LayoutDashboardPage :breadcrumbItems="breadcrumbItems">
-      <LayoutDashboardContainer class="my-8">
-        <PageDashboardCursoDesativarHeader />
-
-        <div class="my-8"></div>
-
-        <ResourceHandlerCurso :resourceId="idCurso">
-          <ResourceHandlerCursoActivatedGuard>
-            <template #allowed>
-              <PageDashboardCursoDesativarContent />
-            </template>
-          </ResourceHandlerCursoActivatedGuard>
-        </ResourceHandlerCurso>
-      </LayoutDashboardContainer>
-    </LayoutDashboardPage>
+    <PageDashboardCursoDesativarContent />
   </PageDashboardCursoDesativarGuard>
 </template>
-
-<style scoped>
-.acoes {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.acoes .acoes-espaco {
-  flex: 1;
-}
-</style>

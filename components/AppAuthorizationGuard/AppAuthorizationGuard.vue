@@ -16,6 +16,14 @@ const props = defineProps({
   entityId: {
     type: Number,
     required: false
+  },
+  showLoadingFallback: {
+    type: Boolean,
+    default: true,
+  },
+  showForbiddenFallback: {
+    type: Boolean,
+    default: true,
   }
 });
 
@@ -31,18 +39,20 @@ const check: Omit<IAPIActionUsuarioCheckAuthorizationDto, "usuarioId"> = {
 
 const { can: isAllowed, isLoading } = await appContextAuth.useCheckAuthorization(check);
 
+const showLoadingFallback = props.showLoadingFallback
+
 </script>
 
 <template>
   <slot name="loading" v-if="isLoading">
-    <UILoading />
+    <UILoading v-if="showLoadingFallback" />
   </slot>
 
   <slot name="allowed" v-else-if="isAllowed === true"></slot>
 
   <div v-else>
     <slot name="forbidden">
-      <VAlert type="error">
+      <VAlert type="error" v-if="showForbiddenFallback">
         <p>Você não tem as permissões necessárias para realizar esta ação.</p>
       </VAlert>
     </slot>

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useParsedResourceId } from '../../composables/hooks/useParsedResourceId';
 import { APP_CONTEXT_RESOURCE_HANDLER_CURSO, createAppContextResourceHandlerCurso } from './hooks';
 
 //
@@ -12,19 +13,7 @@ const props = defineProps({
 
 //
 
-const resourceId = computed(() => {
-  const resourceId = props.resourceId;
-
-  if (typeof resourceId === "string" || typeof resourceId === "number") {
-    const asNumber = parseInt(String(resourceId));
-
-    if (!Number.isNaN(asNumber) && asNumber > 0) {
-      return asNumber;
-    }
-  }
-
-  return -1;
-});
+const resourceId = useParsedResourceId(computed(() => props.resourceId));
 
 const isValidIdentifier = computed(() => resourceId.value !== -1);
 

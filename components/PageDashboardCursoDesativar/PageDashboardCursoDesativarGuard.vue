@@ -1,5 +1,35 @@
+<script lang="ts" setup>
+import { useAppContextPageDashboardCurso } from '../PageDashboardCurso/hooks';
+
+//
+
+const { idCurso } = useAppContextPageDashboardCurso();
+
+//
+
+</script>
+
 <template>
   <PageDashboardCursosGuard>
-    <slot></slot>
+    <ResourceHandlerGuardValidIdentifier :resourceId="idCurso">
+      <template #valid>
+        <AppAuthorizationGuard verbo="delete" recurso="curso" :entityId="idCurso">
+          <template #allowed>
+            <slot></slot>
+          </template>
+
+          <template #forbidden>
+            <PageDashboardCursoDesativarGuardFallbackNotAllowed />
+          </template>
+        </AppAuthorizationGuard>
+      </template>
+
+      <template #invalid>
+        <PageDashboardCursoLayout>
+          <ResourceHandlerCursoGuardFallbackInvalidIdentifier />
+        </PageDashboardCursoLayout>
+      </template>
+    </ResourceHandlerGuardValidIdentifier>
+
   </PageDashboardCursosGuard>
 </template>

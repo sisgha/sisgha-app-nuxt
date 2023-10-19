@@ -26,7 +26,7 @@ const isAllowed = computed(() => isActive.value);
   <div v-else>
     <slot name="forbidden">
       <VAlert type="warning">
-        <p>O curso em questão foi desativado.</p>
+        <p>Este registro foi desativado.</p>
       </VAlert>
     </slot>
   </div>
