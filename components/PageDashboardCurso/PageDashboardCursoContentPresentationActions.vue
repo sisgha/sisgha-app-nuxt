@@ -26,16 +26,17 @@ const { result } = apiActionCursoFindById;
 
 <style scoped>
 .acoes {
-  display: flex;
   gap: 1rem;
-  align-items: center;
+  display: flex;
+
+  align-items: stretch;
+
   flex-wrap: wrap;
 }
 
 @media screen and (max-width: 560px) {
   .acoes {
     flex-direction: column;
-    align-items: stretch;
   }
 }
 </style>

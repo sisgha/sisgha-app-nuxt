@@ -25,9 +25,9 @@ const { idCurso } = useAppContextPageDashboardCurso();
       </template>
 
       <template #invalid>
-        <PageDashboardCursoLayout>
+        <PageDashboardCursoDesativarLayout>
           <ResourceHandlerCursoGuardFallbackInvalidIdentifier />
-        </PageDashboardCursoLayout>
+        </PageDashboardCursoDesativarLayout>
       </template>
     </ResourceHandlerGuardValidIdentifier>
 

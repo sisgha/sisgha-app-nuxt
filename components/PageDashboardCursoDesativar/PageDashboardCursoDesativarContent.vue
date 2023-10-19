@@ -2,7 +2,6 @@
 <script lang="ts" setup>
 import { useAppContextPageDashboardCurso } from '../PageDashboardCurso/hooks';
 
-
 //
 
 const { idCurso } = useAppContextPageDashboardCurso()
