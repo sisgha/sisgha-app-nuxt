@@ -1,8 +1,7 @@
-
 <script lang="ts" setup>
-import { useAppContextPageDashboardCursosNovoContent } from './hooks';
+import { useAppContextResourceHandlerCursoForm } from './hooks';
 
-const { form } = await useAppContextPageDashboardCursosNovoContent();
+const { form } = useAppContextResourceHandlerCursoForm();
 
 const { handleSubmit, handleReset } = form;
 </script>

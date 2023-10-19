@@ -1,18 +1,23 @@
 
 <script lang="ts" setup>
-import { useAppContextPageDashboardCursosNovoContent } from './hooks';
+import { useAppContextResourceHandlerCursoForm } from '../ResourceHandlerCursoForm/hooks';
 
-const { isBusy, canSubmit } = await useAppContextPageDashboardCursosNovoContent();
+//
+
+const { canSubmit, isBusy } = useAppContextResourceHandlerCursoForm();
 </script>
 
 <template>
   <div class="form-footer">
-    <VBtn :disabled="isBusy" prepend-icon="mdi-cancel" to="/dashboard/cursos" type="button" variant="tonal">Cancelar
+    <VBtn :disabled="isBusy" prepend-icon="mdi-cancel" to="/dashboard/cursos" type="button" variant="tonal">
+      Cancelar
     </VBtn>
 
-    <div style="flex: 1"></div>
+    <div class="flex-grow-1"></div>
 
-    <VBtn :disabled="!canSubmit" prepend-icon="mdi-check" type="submit" variant="flat" color="success">Cadastrar</VBtn>
+    <VBtn :disabled="!canSubmit" prepend-icon="mdi-check" type="submit" variant="flat" color="success">
+      Cadastrar
+    </VBtn>
   </div>
 </template>
 

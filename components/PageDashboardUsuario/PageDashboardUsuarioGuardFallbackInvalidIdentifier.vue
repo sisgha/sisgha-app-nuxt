@@ -12,7 +12,7 @@ const breadcrumbItems = getPageDashboardUsuarioBreadcrumbItems();
   <LayoutDashboardPage :breadcrumbItems="breadcrumbItems">
     <LayoutDashboardContainer class="my-8">
       <VAlert type="error">
-        O identificador do usuário é inválido.
+        O identificador fornecido de usuário é inválido.
       </VAlert>
     </LayoutDashboardContainer>
   </LayoutDashboardPage>

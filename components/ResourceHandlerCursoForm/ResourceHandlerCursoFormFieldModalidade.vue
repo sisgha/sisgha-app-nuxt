@@ -2,36 +2,35 @@
 import { useQuery } from '@tanstack/vue-query';
 import { APP_QUERY_SUSPENSE_BEHAVIOUR, useAPIActionSearch } from '../../infrastructure';
 import { APIActionModalidadeFindById, APIActionModalidadeList } from '../../infrastructure/api/api-actions';
-import { useAppContextPageDashboardCursosNovoContent } from './hooks';
+import { useAppContextResourceHandlerCursoForm } from './hooks';
 
 // 
 
-const appContextPageDashboardCursosNovoContent = await useAppContextPageDashboardCursosNovoContent();
+const appContextResourceHandlerCursoForm = useAppContextResourceHandlerCursoForm();
 
 //
 
-const { form } = appContextPageDashboardCursosNovoContent;
+const { useFormField } = appContextResourceHandlerCursoForm;
 
 // 
 
-const { value: formModalidadeId } = form.register('modalidadeId');
+const { formField, errors, hasErrors } = useFormField('modalidadeId');
+
+const { value: formFieldValue, attrs: formFieldAttrs } = formField
 
 const value = computed({
   get() {
-    const modalidadeIdValue = formModalidadeId.value;
-    return modalidadeIdValue > 0 ? modalidadeIdValue : null
+    const modalidadeId = formFieldValue.value;
+
+    return modalidadeId > 0 ? modalidadeId : null
   },
+
   set(value) {
-    formModalidadeId.value = (value !== null && Number.isInteger(value) && value > 0) ? value : -1
+    formFieldValue.value = (value !== null && Number.isInteger(value) && value > 0) ? value : -1
   },
 })
 
 const hasValue = computed(() => value.value !== null)
-
-//
-
-const modalidadeIdErrors = computed(() => form.errors.value.modalidadeId ?? null)
-const hasErrors = computed(() => modalidadeIdErrors.value != null)
 
 //
 
@@ -62,7 +61,6 @@ const selectedModalidadeQuery = useQuery(
   }
 );
 
-
 const allUsefulModalidades = computed(() => {
   const selectedModalidade = selectedModalidadeQuery.data.value;
   const searchModalidades = apiSearchModalidadeResults.value;
@@ -80,7 +78,7 @@ const items = computed(() => allUsefulModalidades.value.map(item => ({
 
 //
 
-const { isBusy } = appContextPageDashboardCursosNovoContent;
+const { isBusy } = appContextResourceHandlerCursoForm;
 
 const isLoadingDebounced = refDebounced(apiSearchModalidadeIsLoading, 145);
 const isLoadingSmooth = computed(() => apiSearchModalidadeIsLoading.value && isLoadingDebounced.value);
@@ -88,11 +86,10 @@ const isLoadingSmooth = computed(() => apiSearchModalidadeIsLoading.value && isL
 
 <template>
   <div class="my-3">
-    <VAutocomplete no-filter clearable label="Modalidade" v-model="value"
+    <VAutocomplete no-filter clearable label="Modalidade" v-model="value" v-bind="formFieldAttrs"
       v-model:search="apiSearchModalidadeSearchState.search" :loading="isLoadingSmooth" :disabled="isBusy" :items="items"
       item-value="value" item-title="label" :error="hasErrors" variant="outlined" />
 
-    <VAlert v-if="hasErrors && modalidadeIdErrors !== null" class="mb-7" type="error" variant="tonal"
-      :text="modalidadeIdErrors" />
+    <VAlert v-for="error in errors" :key="error" class="mb-7" type="error" variant="tonal" :text="error" />
   </div>
 </template>

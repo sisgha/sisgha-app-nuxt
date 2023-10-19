@@ -14,7 +14,6 @@ const props = defineProps({
 //
 
 const resourceId = useParsedResourceId(computed(() => props.resourceId));
-
 const isValidIdentifier = computed(() => resourceId.value !== -1);
 
 //

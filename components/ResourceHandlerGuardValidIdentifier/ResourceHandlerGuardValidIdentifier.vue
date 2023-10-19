@@ -21,7 +21,7 @@ const isValidIdentifier = computed(() => resourceId.value !== -1);
   <slot name="valid" v-if="isValidIdentifier"></slot>
   <slot name="invalid" v-else>
     <VAlert type="error">
-      {{ props.message ?? "O identificador do registro é inválido." }}
+      {{ props.message ?? "O identificador fornecido de registro é inválido." }}
     </VAlert>
   </slot>
 </template>

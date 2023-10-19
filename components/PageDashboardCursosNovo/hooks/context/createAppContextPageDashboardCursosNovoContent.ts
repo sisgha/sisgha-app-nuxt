@@ -1,11 +1,10 @@
 import { useForm } from "@vorms/core";
 import { APIActionCursoCreate, IAPIActionCursoCreateDto } from "../../../../infrastructure/api/api-actions/APIActionCursoCreate";
 import { zodResolver } from "../../../../infrastructure/utils/fixtures";
-import { APP_CONTEXT_PAGE_DASHBOARD_CURSOS_NOVO_CONTENT } from "./tokens/APP_CONTEXT_PAGE_DASHBOARD_CURSOS_NOVO_CONTENT";
 
 export type IPageDashboardCursosNovoContentContext = Awaited<ReturnType<typeof createAppContextPageDashboardCursosNovoContent>>;
 
-export const createAppContextPageDashboardCursosNovoContent = async (shouldProvide = true) => {
+export const createAppContextPageDashboardCursosNovoContent = async () => {
   const appContextAPI = useAppContextAPI();
 
   const form = useForm<IAPIActionCursoCreateDto>({
@@ -35,20 +34,7 @@ export const createAppContextPageDashboardCursosNovoContent = async (shouldProvi
     },
   });
 
-  const isBusy = computed(() => form.isSubmitting.value);
-  const canSubmit = computed(() => form.dirty.value && !form.isValidating.value && !isBusy.value);
-
-  const appContextPageDashboardCursosNovoContent = {
+  return {
     form,
-
-    //
-    isBusy,
-    canSubmit,
-  } as const;
-
-  if (shouldProvide) {
-    provide(APP_CONTEXT_PAGE_DASHBOARD_CURSOS_NOVO_CONTENT, appContextPageDashboardCursosNovoContent);
-  }
-
-  return appContextPageDashboardCursosNovoContent;
+  };
 };

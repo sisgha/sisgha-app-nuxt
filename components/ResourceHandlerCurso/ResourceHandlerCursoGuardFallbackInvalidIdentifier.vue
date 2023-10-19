@@ -1,5 +1,5 @@
 <template>
   <VAlert type="error">
-    O identificador do curso é inválido.
+    O identificador fornecido de curso é inválido.
   </VAlert>
 </template>

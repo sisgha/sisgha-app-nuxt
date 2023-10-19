@@ -11,12 +11,16 @@ provide(APP_CONTEXT_RESOURCE_HANDLER_CURSO_DISPLAY, appContextResourceHandlerCur
 
 const { apiActionCursoFindById } = appContextResourceHandlerCursoDisplay;
 
-const { result } = apiActionCursoFindById;
+const { isLoading, result } = apiActionCursoFindById;
 
 </script>
 
 <template>
-  <div v-if="result">
+  <slot v-if="isLoading" name="loading">
+    <UILoading />
+  </slot>
+
+  <div v-else-if="result">
     <div>
       <VDivider class="my-3" />
 
