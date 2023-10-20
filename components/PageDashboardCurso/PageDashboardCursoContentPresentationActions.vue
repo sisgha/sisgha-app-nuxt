@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useAppContextPageDashboardCursoContentPresentation } from './hooks';
+import { useAppContextPageDashboardCursoContentPresentation } from "./hooks";
 
 //
 
@@ -12,15 +12,13 @@ const { result } = apiActionCursoFindById;
 
 <template>
   <div v-if="result" class="acoes">
-    <PageDashboardCursoContentPresentationActionsDeactivate />
-
-    <PageDashboardCursoContentPresentationActionsEdit />
+    <VBtn prepend-icon="mdi-chevron-left" :to="{ name: 'dashboard-cursos' }" variant="outlined" color="success"> Voltar </VBtn>
 
     <div class="flex-grow-1"></div>
 
-    <VBtn prepend-icon="mdi-check" :to="{ name: 'dashboard-cursos' }" variant="flat" color="success">
-      Concluído
-    </VBtn>
+    <PageDashboardCursoContentPresentationActionsDeactivate />
+
+    <PageDashboardCursoContentPresentationActionsEdit />
   </div>
 </template>
 

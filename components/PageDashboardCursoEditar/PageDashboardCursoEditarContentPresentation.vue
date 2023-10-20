@@ -1,8 +1,13 @@
-
 <script lang="ts" setup>
-import { IAPIActionCursoUpdateDto } from '../../infrastructure';
-import { APP_CONTEXT_RESOURCE_HANDLER_CURSO_FORM, createAppContextResourceHandlerCursoForm } from '../ResourceHandlerCursoForm/hooks';
-import { APP_CONTEXT_PAGE_DASHBOARD_CURSO_EDITAR_CONTENT_PRESENTATION, createAppContextPageDashboardCursoEditarContentPresentation } from './hooks';
+import { IAPIActionCursoUpdateDto } from "../../infrastructure";
+import {
+  APP_CONTEXT_RESOURCE_HANDLER_CURSO_FORM,
+  createAppContextResourceHandlerCursoForm,
+} from "../ResourceHandlerCursoForm/hooks";
+import {
+  APP_CONTEXT_PAGE_DASHBOARD_CURSO_EDITAR_CONTENT_PRESENTATION,
+  createAppContextPageDashboardCursoEditarContentPresentation,
+} from "./hooks";
 
 //
 
@@ -15,21 +20,18 @@ const { form, apiActionCursoFindById } = appContextPageDashboardCursoEditarPrese
 
 //
 
-
 const appContextResourceHandlerCursoForm = await createAppContextResourceHandlerCursoForm<IAPIActionCursoUpdateDto>(form);
-provide(APP_CONTEXT_RESOURCE_HANDLER_CURSO_FORM, appContextResourceHandlerCursoForm)
+provide(APP_CONTEXT_RESOURCE_HANDLER_CURSO_FORM, appContextResourceHandlerCursoForm);
 
 //
 
 const { isLoading, result } = apiActionCursoFindById;
-
 </script>
 
 <template>
   <UILoading v-if="isLoading" />
 
   <div v-else-if="result">
-
     <ResourceHandlerCursoForm>
       <ResourceHandlerCursoFormFieldsDefault />
 

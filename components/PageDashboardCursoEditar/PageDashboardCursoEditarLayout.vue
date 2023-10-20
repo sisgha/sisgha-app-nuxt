@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { getPageDashboardCursoEditarBreadcrumbItems } from './hooks';
+import { getPageDashboardCursoEditarBreadcrumbItems } from "./hooks";
 
 //
 
 const breadcrumbItems = getPageDashboardCursoEditarBreadcrumbItems();
-
 </script>
 
 <template>
