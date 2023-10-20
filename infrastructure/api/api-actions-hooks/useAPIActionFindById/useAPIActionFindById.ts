@@ -25,7 +25,7 @@ export const useAPIActionFindById = async <
     async () => {
       const id = unref(idRef);
 
-      if (id > 0) {
+      if (Number.isInteger(id) && id > 0) {
         try {
           const r = await appContextAPI.invoke(apiActionFindByIdConstructor, { id });
           return r;
@@ -50,6 +50,10 @@ export const useAPIActionFindById = async <
   //
 
   const result = computed((): Result | null => query.data.value ?? null);
+
+  const resultColdJSON = computed(() => JSON.stringify(unref(result)));
+
+  const resultCold = computed((): Result | null => JSON.parse(unref(resultColdJSON)));
 
   //
 
@@ -82,12 +86,20 @@ export const useAPIActionFindById = async <
   await handleQuerySuspenseBehaviour(suspenseBehaviour, query);
 
   return {
-    result,
-    isLoading,
+    query,
+
     //
+
+    result,
+    resultCold,
+
+    //
+
     queryError,
+
     //
     isError,
     isErrorNotFound,
+    isLoading,
   };
 };

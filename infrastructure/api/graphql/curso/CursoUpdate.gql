@@ -1,0 +1,5 @@
+mutation CursoUpdate($dto: UpdateCursoInput!) {
+  curso: updateCurso(dto: $dto) {
+    id
+  }
+}

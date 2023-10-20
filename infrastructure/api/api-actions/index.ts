@@ -3,6 +3,7 @@ export * from "./APIActionCursoCreate";
 export * from "./APIActionCursoDeactivate";
 export * from "./APIActionCursoFindById";
 export * from "./APIActionCursoList";
+export * from "./APIActionCursoUpdate";
 export * from "./APIActionGetAuthedUsuario";
 export * from "./APIActionModalidadeFindById";
 export * from "./APIActionModalidadeList";

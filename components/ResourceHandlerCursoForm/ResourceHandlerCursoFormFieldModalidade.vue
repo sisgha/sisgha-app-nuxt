@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { useQuery } from '@tanstack/vue-query';
+import { useAPIACtionModalidadeFindById } from '../../composables/hooks/useAPIActionModalidadeFindById';
 import { APP_QUERY_SUSPENSE_BEHAVIOUR, useAPIActionSearch } from '../../infrastructure';
-import { APIActionModalidadeFindById, APIActionModalidadeList } from '../../infrastructure/api/api-actions';
+import { APIActionModalidadeList } from '../../infrastructure/api/api-actions';
 import { useAppContextResourceHandlerCursoForm } from './hooks';
 
-// 
+//
 
 const appContextResourceHandlerCursoForm = useAppContextResourceHandlerCursoForm();
 
@@ -21,7 +21,6 @@ const { value: formFieldValue, attrs: formFieldAttrs } = formField
 const value = computed({
   get() {
     const modalidadeId = formFieldValue.value;
-
     return modalidadeId > 0 ? modalidadeId : null
   },
 
@@ -30,11 +29,12 @@ const value = computed({
   },
 })
 
-const hasValue = computed(() => value.value !== null)
+//
+
+const hasValue = computed(() => unref(value) !== null);
 
 //
 
-const appContextAPI = useAppContextAPI();
 const apiSearchModalidade = await useAPIActionSearch(APIActionModalidadeList, "modalidades", APP_QUERY_SUSPENSE_BEHAVIOUR.DISABLED);
 
 const {
@@ -44,25 +44,24 @@ const {
 
 const apiSearchModalidadeResults = computed(() => apiSearchModalidade.items.value);
 
-const selectedModalidadeQuery = useQuery(
-  ["modalidades", computed(() => `modalidade::id::${value.value}`)],
-  async () => {
-    const modalidadeId = value.value;
+const { resultCold: selectedModalidadeData, isError: ixE, isLoading: ixL } = await useAPIACtionModalidadeFindById(value, APP_QUERY_SUSPENSE_BEHAVIOUR.ALWAYS)
 
-    if (hasValue.value) {
-      return appContextAPI.invoke(APIActionModalidadeFindById, { id: modalidadeId })
-    }
+//
 
-    return null;
-  },
-  {
-    enabled: hasValue,
-    keepPreviousData: true
-  }
-);
+const isLoadingDebounced = refDebounced(apiSearchModalidadeIsLoading, 145);
+
+const isLoadingSmooth = computed(() => apiSearchModalidadeIsLoading.value && isLoadingDebounced.value);
+
+//
+
+const { isBusy } = appContextResourceHandlerCursoForm;
+
+const isDisabled = computed(() => isBusy.value);
+
+//
 
 const allUsefulModalidades = computed(() => {
-  const selectedModalidade = selectedModalidadeQuery.data.value;
+  const selectedModalidade = selectedModalidadeData.value;
   const searchModalidades = apiSearchModalidadeResults.value;
 
   return [
@@ -78,17 +77,19 @@ const items = computed(() => allUsefulModalidades.value.map(item => ({
 
 //
 
-const { isBusy } = appContextResourceHandlerCursoForm;
+const hasSelectedData = computed(() => unref(allUsefulModalidades).findIndex(i => i.id === unref(value)) !== -1);
 
-const isLoadingDebounced = refDebounced(apiSearchModalidadeIsLoading, 145);
-const isLoadingSmooth = computed(() => apiSearchModalidadeIsLoading.value && isLoadingDebounced.value);
+//
 </script>
 
 <template>
   <div class="my-3">
-    <VAutocomplete no-filter clearable label="Modalidade" v-model="value" v-bind="formFieldAttrs"
-      v-model:search="apiSearchModalidadeSearchState.search" :loading="isLoadingSmooth" :disabled="isBusy" :items="items"
-      item-value="value" item-title="label" :error="hasErrors" variant="outlined" />
+    <VAutocomplete v-if="hasValue && !hasSelectedData" no-filter label="Modalidade" disabled
+      value="Buscando modalidade..." variant="outlined" />
+
+    <VAutocomplete v-else no-filter clearable label="Modalidade" v-model="value" v-bind="formFieldAttrs"
+      v-model:search="apiSearchModalidadeSearchState.search" :loading="isLoadingSmooth" :disabled="isDisabled"
+      :items="items" item-value="value" item-title="label" :error="hasErrors" variant="outlined" />
 
     <VAlert v-for="error in errors" :key="error" class="mb-7" type="error" variant="tonal" :text="error" />
   </div>

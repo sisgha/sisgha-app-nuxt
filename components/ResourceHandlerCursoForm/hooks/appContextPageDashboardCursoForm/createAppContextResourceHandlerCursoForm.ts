@@ -4,14 +4,15 @@ import { castArray } from "lodash-es";
 export type IResourceHandlerCursoContext = Awaited<ReturnType<typeof createAppContextResourceHandlerCursoForm>>;
 
 export type IResourceHandlerCursoFormValues = FormValues & {
-  modalidadeId: number;
-  nome: string;
-  nomeAbreviado: string;
+  id?: number;
+  modalidadeId?: number;
+  nome?: string;
+  nomeAbreviado?: string;
 };
 
 export const createAppContextResourceHandlerCursoForm = async <
   Values extends IResourceHandlerCursoFormValues,
-  Form extends UseFormReturn<Values>
+  Form extends UseFormReturn<Values> = UseFormReturn<Values>
 >(
   form: Form
 ) => {

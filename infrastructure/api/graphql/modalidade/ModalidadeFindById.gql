@@ -1,4 +1,4 @@
-query FindModalidadeById($id: Int!) {
+query ModalidadeFindById($id: Int!) {
   modalidade: findModalidadeById(dto: { id: $id }) {
     id
 

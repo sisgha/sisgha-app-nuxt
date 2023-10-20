@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { IAPIActionCursoCreateDto } from '../../infrastructure';
 import { APP_CONTEXT_RESOURCE_HANDLER_CURSO_FORM, createAppContextResourceHandlerCursoForm } from '../ResourceHandlerCursoForm/hooks';
 import {
   createAppContextPageDashboardCursosNovoContent,
@@ -17,7 +18,7 @@ const { form } = appContextPageDashboardCursosNovoContent
 
 //
 
-const appContextResourceHandlerCursoForm = await createAppContextResourceHandlerCursoForm(form);
+const appContextResourceHandlerCursoForm = await createAppContextResourceHandlerCursoForm<IAPIActionCursoCreateDto>(form);
 provide(APP_CONTEXT_RESOURCE_HANDLER_CURSO_FORM, appContextResourceHandlerCursoForm)
 
 //
