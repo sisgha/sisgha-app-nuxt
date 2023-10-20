@@ -14,6 +14,11 @@ export const useAPIActionFindById = async <
 ) => {
   const appContextAPI = useAppContextAPI();
 
+  const isValidIdentifier = computed(() => {
+    const id = unref(idRef);
+    return Number.isInteger(id) && id > 0;
+  });
+
   const queryKeyResource = computed(() => `${unref(queryKeyResourcePrefix)}::${unref(idRef)}`);
 
   const query = useQuery(
@@ -37,8 +42,10 @@ export const useAPIActionFindById = async <
           }
         }
       } else {
-        throw new Error("Invalid identifier");
+        // throw new Error("Invalid identifier");
       }
+
+      return null;
     },
     {
       retry: false,
@@ -61,7 +68,7 @@ export const useAPIActionFindById = async <
 
   const isLoading = computed(() => query.isLoading.value);
 
-  const isError = computed(() => queryError.value !== null);
+  const isError = computed(() => queryError.value !== null || !isValidIdentifier.value);
 
   const isErrorNotFound = computed(() => {
     const error: any = unref(queryError);
